@@ -1,0 +1,92 @@
+Maven 目錄結構的解析
+1.標準目錄結構:
+src
+
+  -main
+      –bin 指令碼庫
+      –java java原始碼檔案,.java 文件
+      –resources 資源庫,會自動複製到classes目錄裡, 如 spring, hibernate 配置文件
+      –filters 資源過濾檔案
+      –assembly 元件的描述配置(如何打包)
+      –config 配置檔案
+      –webapp web應用的目錄。WEB-INF、css、js等
+  -test
+      –java 單元測試java原始碼檔案
+      –resources 測試需要用的資源庫
+      –filters 測試資源過濾庫
+  -site Site(一些文件)
+target 是有存放專案構建後的檔案和目錄,jar包、war包、編譯的class檔案等。
+target裡的所有內容都是maven構建的時候生成的
+
+LICENSE.txt Project’s license
+README.txt Project’s readme
+
+工程根目錄下就只有src和target兩個目錄
+
+
+參照:http://breath.iteye.com/blog/1005447
+
+++++++++++++++++++++++++++++++++++++++++++++
+
+Maven專案的標準目錄介紹
+
+
+Maven提倡使用一個共同的標準目錄結構,使開發人員能在熟悉了一個Maven工程後,對其他的Maven工程也能清晰瞭解。這樣做也省去了很多設定的麻煩。
+
+以下的文件介紹是Maven希望的目錄結構,並且也是目錄建立工程是採用的目錄結構。Maven推薦大家儘可能的遵守這樣的目錄結構。
+
+src/main/java
+
+Application/Library sources
+
+src/main/resources
+
+Application/Library resources
+
+src/main/filters
+
+Resource filter files
+
+src/main/assembly
+
+Assembly descriptors
+
+src/main/config
+
+Configuration files
+
+src/main/webapps
+
+Web application sources
+
+src/test/java
+
+Test sources
+
+src/test/resources
+
+Test resources
+
+src/test/filters
+
+Test resource filter files
+
+src/site
+
+Site
+
+LICENSE.txt
+
+Project's license
+
+README.txt
+
+Project's readme
+
+在頂級目錄上是工程的描述檔案pom.xml(如果使用Ant則還包括其他屬性檔案,maven.xml或build.xml),另外還包括提供給終端使用者的檔案,如,README.txt,LICENSE.txt等等。
+
+頂級目錄還包括兩個子目錄:src,target。頂級目錄下可能出現的其他目錄僅僅是CVS或.svn和其他多模組工程的工程目錄,最好不要再有其他目錄。
+
+Target目錄是所有工程編譯構建的輸出目錄。
+
+Src目錄包含所有工程的原始碼檔案,配置檔案,資原始檔等等。它下面的子目錄一般包含main(主要的工程原始檔),test(測試檔案),site(專案站點檔案)。
