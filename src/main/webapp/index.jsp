@@ -107,7 +107,6 @@
         </script>
 </head>
 <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="10">
-<div class="container-fluid">
 <nav class="navbar navbar-default navbar-fixed-top">
      <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -130,8 +129,7 @@
         <marquee direction="scroll" id="run">喜歡聊天、玩遊戲、任何興趣交流的同好，歡迎入內參觀~</marquee>
     </div>
 </nav>
-
-</div>
+<div class="container-fluid">
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
     <ol class="carousel-indicators">
@@ -164,6 +162,7 @@
         <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
         <span class="sr-only">Next</span>
     </a>
+</div>
 </div>
 </div>
 <!-- Footer -->

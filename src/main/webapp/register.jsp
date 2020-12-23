@@ -117,7 +117,6 @@
       </script>
   </head>
   <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="10">
-  <div class="container-fluid">
         <nav class="navbar navbar-default navbar-fixed-top">
              <div class="navbar-header">
                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -137,7 +136,7 @@
              </div>
              <marquee direction="scroll" id="run" style="font-size: 20px">喜歡聊天、玩遊戲、任何興趣交流的同好，歡迎入內參觀~</marquee>
         </nav>
-
+<div class="container-fluid">
       <div class="row" style="height: 100px">
           <div class="col-md-12"></div>
       </div>
@@ -145,14 +144,15 @@
       <a class="btn btn-default" role="button" href="index.jsp" style="background-color: #1E88E5">
           <img src="images/back-arrow.jpg" alt="back" class="img-thumbnail" style="width: 50px;height: 30px">
       </a>
-
-       <form class="form-check-inline">
+</div>
+<div class="container">
+       <form>
            <div class="form-group">
                <label for="id">身份證</label>
-               <input type="text" class="form-control" id="id" style="width: 250px">
+               <input type="text" class="form-control" id="id" style="width: 300px">
            </div>
        </form>
-  </div>
+</div>
   <script type="text/javascript">
       //隱藏text block，顯示password block
       function hideShowPsw1(){
