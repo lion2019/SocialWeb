@@ -44,7 +44,7 @@
         /*set srcoll end*/
         #chatframe{
             margin-top: 140px;
-            margin-left: 350px;
+            margin-left: 20px;
             margin-bottom: 50px;
         }
     </style>
@@ -73,10 +73,20 @@
         <div>
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="main.jsp">主頁</a></li>
+                    <li><a href="main.jsp">聊天室</a></li>
                     <li><a href="">社群網站</a></li>
-                    <li><a href="">遊戲</a></li>
-                    <li><a href="">動漫</a></li>
+                    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">遊戲<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#section41">小遊戲</a></li>
+                            <li><a href="#section42">遊戲介紹</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">動漫<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#section41">動畫</a></li>
+                            <li><a href="#section42">漫畫</a></li>
+                        </ul>
+                    </li>
                     <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">旅遊<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="#section41">景點</a></li>
