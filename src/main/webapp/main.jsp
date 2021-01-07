@@ -13,7 +13,7 @@
     <title>主頁</title>
     <style type="text/css">
         .msg_board {
-            width: 500px;
+            width: 400px;
             height: 350px;
             border: solid 1px darkcyan;
             padding: 5px;
@@ -81,12 +81,6 @@
                             <li><a href="#section42">遊戲介紹</a></li>
                         </ul>
                     </li>
-                    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">動漫<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#section41">動畫</a></li>
-                            <li><a href="#section42">漫畫</a></li>
-                        </ul>
-                    </li>
                     <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">旅遊<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="#section41">景點</a></li>
@@ -96,7 +90,11 @@
                     </li>
                     <li><a href="">拍賣網</a></li>
                     <li><a href="">登出</a></li>
-                    <li><a href="">設定</a></li>
+                    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">設定<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#section41">會員資料修改</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
             <div class="row" style="font-size: 20px">
@@ -107,13 +105,13 @@
 </nav>
 <div class="container-fluid" id="chatframe">
     <div class="row">
-        <div class="row-cols-6">
+        <div class="row-cols-5">
             <label>房間名</label>
-            <input id="input_roomName" size="10" maxlength="10">
+            <input id="input_roomName" size="15" maxlength="10">
             <input type="button"  value="進入聊天室" onclick="initWebSocket()" />
             <input type="button" value="退出聊天室" onclick="closeWs()" /><br>
             <div class="msg_board"></div>
-            <input id="input_msg" size="43" maxlength="40">
+            <input id="input_msg" size="40" maxlength="40">
             <input type="button" value="傳送" onclick="send_msg()" />
         </div>
     </div>

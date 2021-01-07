@@ -36,7 +36,7 @@
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="register.jsp">註冊</a></li>
-                <li><a href="main.jsp">登入</a></li>
+                <li><a href="login.jsp">登入</a></li>
                 <li>&nbsp;&nbsp;&nbsp;&nbsp;</li>
             </ul>
         </div>
