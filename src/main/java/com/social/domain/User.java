@@ -45,40 +45,65 @@ public class User {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setName(String name) throws UserException {
+        if(name != null && (name=name.trim()).length() > 0){
+            this.name = name;
+        }else{
+            throw new UserException("姓名欄位必須輸入");
+        }
+
     }
 
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPassword(String password) throws UserException {
+        if(password != null && (password = password.trim()).length() > 0){
+            this.password = password;
+        }else{
+            throw new UserException("密碼欄位必須輸入");
+        }
+
     }
 
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setEmail(String email) throws UserException {
+        if(email != null && (email = email.trim()).length() > 0){
+            this.email = email;
+        }else{
+            throw new UserException("email欄位必須輸入且格式需符合email格式");
+        }
+
     }
 
     public String getPhone() {
         return phone;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setPhone(String phone) throws UserException {
+        if(phone != null && (phone = phone.trim()).length() > 0){
+            this.phone = phone;
+        }else{
+            throw new UserException("手機欄位必須輸入");
+        }
+
     }
 
     public String getAdderss() {
         return adderss;
     }
 
-    public void setAdderss(String adderss) {
-        this.adderss = adderss;
+    public void setAdderss(String adderss) throws UserException {
+        if(adderss != null && (adderss = adderss.trim()).length() > 0){
+            this.adderss = adderss;
+        }else{
+            throw new UserException("地址欄位必須輸入");
+        }
+
     }
 
     public char getGender() {
