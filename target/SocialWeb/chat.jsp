@@ -139,7 +139,7 @@
         if ("WebSocket" in window) {
 //            alert("您的瀏覽器支援 WebSocket!");
             if (webSocket == null) {
-                var url = "ws://localhost:8080/webSocket/chat/" + roomName;
+                var url = "ws://192.168.50.62:900/SocialWeb/webSocket/chat/" + roomName;
                 // 開啟一個 web socket
                 webSocket = new WebSocket(url);
             } else {
@@ -172,12 +172,4 @@
         }
     }
 </script>
-<!-- Footer -->
-<footer class="text-center">
-    <a class="up-arrow" href="#myPage" data-toggle="tooltip" title="TO TOP">
-        <span class="glyphicon glyphicon-chevron-up"></span>
-    </a><br><br>
-    <p>Copyright &COPY; TH SocialMedia</p>
-</footer>
-</body>
-</html>
+<jsp:include page="/WEB-INF/subviews/footer.jsp" />

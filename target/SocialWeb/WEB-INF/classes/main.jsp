@@ -1,3 +1,34 @@
+Skip to content
+Search or jump to…
+
+Pull requests
+Issues
+Marketplace
+Explore
+
+@Lin2266
+Lin2266
+/
+SocialWeb
+1
+01
+Code
+Issues
+Pull requests
+Actions
+Projects
+Wiki
+Security
+Insights
+Settings
+SocialWeb/target/SocialWeb/main.jsp
+@Lin2266
+Lin2266 20210108-:01:38
+Latest commit c18fc9a on 8 Jan
+History
+1 contributor
+191 lines (184 sloc)  7.44 KB
+
 <!DOCTYPE html>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <html>
@@ -118,7 +149,6 @@
 </div>
 <script type="text/javascript">
     var webSocket;
-
     function send_msg() {
         if (webSocket != null) {
             var input_msg = document.getElementById("input_msg").value.trim();
@@ -132,11 +162,9 @@
             alert("您已掉線，請重新進入聊天室...");
         }
     };
-
     function closeWs() {
         webSocket.close();
     };
-
     function initWebSocket() {
         var roomName = document.getElementById("input_roomName").value;
         // 房間名不能為空
@@ -153,11 +181,9 @@
             } else {
                 alert("您已進入聊天室...");
             }
-
             webSocket.onopen = function () {
                 alert("已進入聊天室，暢聊吧...");
             };
-
             webSocket.onmessage = function (evt) {
                 var msg_board = document.getElementsByClassName("msg_board")[0];
                 var received_msg = evt.data;
@@ -166,7 +192,6 @@
                 // 讓滾動塊往下移動
                 msg_board.scrollTop = msg_board.scrollTop + 40;
             };
-
             webSocket.onclose = function () {
                 // 關閉 websocket，清空資訊板
                 alert("連線已關閉...");
@@ -180,12 +205,5 @@
         }
     }
 </script>
-<!-- Footer -->
-<footer class="text-center">
-    <a class="up-arrow" href="#myPage" data-toggle="tooltip" title="TO TOP">
-        <span class="glyphicon glyphicon-chevron-up"></span>
-    </a><br><br>
-    <p>Copyright &COPY; TH SocialMedia</p>
-</footer>
-</body>
-</html>
+<jsp:include page="/WEB-INF/subviews/footer.jsp" />
+
