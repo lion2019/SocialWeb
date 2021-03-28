@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <jsp:include page="/WEB-INF/subviews/header.jsp" >
-    <jsp:param name="subtitle" value="Home"/>
+    <jsp:param name="subtitle" value="首頁"/>
 </jsp:include>
 
 <div id="myCarousel" class="carousel slide" data-ride="carousel">

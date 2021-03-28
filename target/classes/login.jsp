@@ -1,8 +1,27 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <jsp:include page="/WEB-INF/subviews/header.jsp" >
-    <jsp:param name="subtitle" value="Home"/>
+    <jsp:param name="subtitle" value="會員登入"/>
 </jsp:include>
+<script type="text/javascript">
+    $(function (){
+        //隱藏text block，顯示password block
+        function hideShowPsw1(){
+            if (password1.type == "password") {
+                password1.type = "text";
+            }else {
+                password1.type = "password";
+            }
+        }
+        function hideShowPsw2(){
+            if (password2.type == "password") {
+                password2.type = "text";
+            }else {
+                password2.type = "password";
+            }
+        }
+    });
 
+</script>
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <div class="row" style="height: 100px">
         <div class="col-md-12"></div>
@@ -40,22 +59,6 @@
         <div class="col-sm-12"></div>
     </div>
 </div>
-<script type="text/javascript">
-    //隱藏text block，顯示password block
-    function hideShowPsw1(){
-        if (password1.type == "password") {
-            password1.type = "text";
-        }else {
-            password1.type = "password";
-        }
-    }
-    function hideShowPsw2(){
-        if (password2.type == "password") {
-            password2.type = "text";
-        }else {
-            password2.type = "password";
-        }
-    }
-</script>
+
 <jsp:include page="/WEB-INF/subviews/footer.jsp" />
 
