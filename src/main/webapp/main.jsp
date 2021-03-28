@@ -1,47 +1,7 @@
-Skip to content
-Search or jump to…
-
-Pull requests
-Issues
-Marketplace
-Explore
-
-@Lin2266
-Lin2266
-/
-SocialWeb
-1
-01
-Code
-Issues
-Pull requests
-Actions
-Projects
-Wiki
-Security
-Insights
-Settings
-SocialWeb/target/SocialWeb/main.jsp
-@Lin2266
-Lin2266 20210108-:01:38
-Latest commit c18fc9a on 8 Jan
-History
-1 contributor
-191 lines (184 sloc)  7.44 KB
-
-<!DOCTYPE html>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <link href="css/main.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <title>主頁</title>
+<jsp:include page="/WEB-INF/subviews/header.jsp" >
+    <jsp:param name="subtitle" value="Home"/>
+</jsp:include>
     <style type="text/css">
         .msg_board {
             width: 400px;
@@ -79,61 +39,6 @@ History
             margin-bottom: 50px;
         }
     </style>
-    <script>
-        function changeColor(){
-            var color="#f00|#0f0|#00f|#880|#808|#088|yellow|green|blue|gray";
-            color=color.split("|");
-            document.getElementById("run").style.color=color[parseInt(Math.random() * color.length)];
-        }
-        setInterval("changeColor()",200);
-    </script>
-</head>
-<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="50">
-
-<nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <img src="images/Logo.jpg" alt="logo" class="img-thumbnail" style="width: 100px;height: 50px">
-            <a class="navbar-brand" href="index.jsp">TH SocialMedia</a>
-        </div>
-        <div>
-            <div class="collapse navbar-collapse" id="myNavbar">
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="main.jsp">聊天室</a></li>
-                    <li><a href="">社群網站</a></li>
-                    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">遊戲<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#section41">小遊戲</a></li>
-                            <li><a href="#section42">遊戲介紹</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">旅遊<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#section41">景點</a></li>
-                            <li><a href="#section42">美食</a></li>
-                            <li><a href="#section42">飯店</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="">拍賣網</a></li>
-                    <li><a href="">登出</a></li>
-                    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">設定<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#section41">會員資料修改</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-            <div class="row" style="font-size: 20px">
-                <marquee direction="scroll" id="run">歡迎進入聊天室</marquee>
-            </div>
-        </div>
-    </div>
-</nav>
 <div class="container-fluid" id="chatframe">
     <div class="row">
         <div class="row-cols-5">

@@ -1,34 +1,7 @@
-<!DOCTYPE html>
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<html>
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <link href="css/main.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <title>註冊</title>
-
-    <script>
-        function changeColor(){
-            var color="#f00|#0f0|#00f|#880|#808|#088|yellow|green|blue|gray";
-            color=color.split("|");
-            document.getElementById("run").style.color=color[parseInt(Math.random() * color.length)];
-        }
-        setInterval("changeColor()",200);
-    </script>
-</head>
-<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="10">
-<nav class="navbar navbar-default navbar-fixed-top">
-    <div class="navbar-header">
-        <img src="images/Logo.jpg" alt="logo" class="img-thumbnail" style="width: 100px;height: 50px">
-        <a class="navbar-brand" href="index.jsp">TH SocialMedia</a>
-    </div>
-
-    <marquee direction="scroll" id="run" style="font-size: 20px">喜歡聊天、玩遊戲、任何興趣交流的同好，歡迎入內參觀~</marquee>
-</nav>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<jsp:include page="/WEB-INF/subviews/header.jsp" >
+    <jsp:param name="subtitle" value="Home"/>
+</jsp:include>
 
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <div class="row" style="height: 100px">
