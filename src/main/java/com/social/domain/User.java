@@ -2,17 +2,25 @@ package com.social.domain;
 
 import java.util.Date;
 
+import com.social.exception.UserException;
+
 public class User {
     private String id;
     private String name;
     private String password;
     private String email;
     private String phone;
-    private String adderss;
-    private char gender;
+    /** 屬性名稱和資料表欄位名稱不同反射機制出錯 */
+    private String address;
+    /** 基本型別 無法帶入 null 和 資料表結構不符, 盡量別用基本型別 */
+    private Character gender;
     private Date birthDate;
     private BloodType bloodType;
 
+    public User() {
+    	
+    }
+    
     public User(String id, String name, String password, String email) {
         this.id = id;
         this.name = name;
@@ -20,13 +28,13 @@ public class User {
         this.email = email;
     }
 
-    public User(String id, String name, String password, String email, String phone, String adderss) {
+    public User(String id, String name, String password, String email, String phone, String address) {
         this.id = id;
         this.name = name;
         this.password = password;
         this.email = email;
         this.phone = phone;
-        this.adderss = adderss;
+        this.address = address;
     }
 
     public String getId() {
@@ -93,24 +101,24 @@ public class User {
 
     }
 
-    public String getAdderss() {
-        return adderss;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAdderss(String adderss) throws UserException {
-        if(adderss != null && (adderss = adderss.trim()).length() > 0){
-            this.adderss = adderss;
+    public void setAddress(String address) throws UserException {
+        if(address != null && (address = address.trim()).length() > 0){
+            this.address = address;
         }else{
             throw new UserException("地址欄位必須輸入");
         }
 
     }
 
-    public char getGender() {
+    public Character getGender() {
         return gender;
     }
 
-    public void setGender(char gender) {
+    public void setGender(Character gender) {
         this.gender = gender;
     }
 
@@ -129,4 +137,11 @@ public class User {
     public void setBloodType(BloodType bloodType) {
         this.bloodType = bloodType;
     }
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", name=" + name + ", password=" + password + ", email=" + email + ", phone=" + phone
+				+ ", address=" + address + ", gender=" + gender + ", birthDate=" + birthDate + ", bloodType="
+				+ bloodType + "]";
+	}
 }
