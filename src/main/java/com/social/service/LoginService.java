@@ -1,17 +1,31 @@
 package com.social.service;
 
-import java.util.Optional;
-
 import com.social.dao.UserDao;
 import com.social.domain.User;
-
-import net.sf.json.JSONObject;
+import com.social.exception.BaseException;
+import com.social.exception.ResponseEnum;
 
 public class LoginService {
 	private UserDao userDao = new UserDao();
 	
-	public Optional<User> login(User user) {
-		Optional<User> user2 = userDao.findByEmail(user.getEmail());
-		return user2;
+	/**
+	 * @param user
+	 * @return 
+	 * @throws BaseException user.email not found or password error 
+	 */
+	public User login(User user) throws BaseException {
+		User userInfo = userDao.findByEmail(user.getEmail())
+				.orElseThrow(()-> new BaseException(ResponseEnum.user_not_found));
+		
+		if(checkPassword(user, userInfo)) {
+			return userInfo;
+		}else {
+			throw new BaseException(ResponseEnum.password_error);
+		}
+	}
+	
+	
+	public boolean checkPassword(User userRequest, User userInfo) {
+		return userRequest.getPassword().equals(userInfo.getPassword());
 	}
 }
