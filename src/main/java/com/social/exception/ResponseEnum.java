@@ -17,6 +17,7 @@ public enum ResponseEnum implements IResponseEnum {
 	
 	// user login
 	user_not_found(300,"用戶不存在"),
+	password_error(301,"密碼錯誤"),
 	
 	// sql insert error
 	insert_error(201, "insert error!!");
