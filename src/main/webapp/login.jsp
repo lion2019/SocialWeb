@@ -33,19 +33,18 @@
     <div class="row">
         <div class="col-sm-12"></div>
     </div>
-    <form class="form-horizontal">
+    <form class="form-horizontal" action="${pageContext.request.contextPath}/login" method="post">
         <div class="form-group">
-            <label class="col-sm-2" for="id"><span class="star">*&nbsp;&nbsp;</span>會員帳號:</label>
+            <label class="col-sm-2" for="email"><span class="star">*&nbsp;&nbsp;</span>會員帳號:</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" id="id" name="id" required placeholder="請輸入身份證號"
-                       value="<%=request.getParameter("id") ==null ? "":request.getParameter("id")%>">
+                <input type="text" class="form-control" id="email" name="email" required placeholder="請輸入email"
+                       value="<%=request.getParameter("email") ==null ? "":request.getParameter("email")%>">
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-2" for="name"><span class="star">*&nbsp;&nbsp;</span>會員密碼:</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" id="name" name="name" required placeholder="請輸入姓名"
-                       value="<%=request.getParameter("name") ==null ? "":request.getParameter("name")%>">
+                <input type="password" class="form-control" id="password" name="password" required >
             </div>
         </div>
         <div class="form-group">

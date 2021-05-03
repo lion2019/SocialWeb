@@ -10,8 +10,8 @@
   <packaging>war</packaging>
 
   <name>SocialWeb Maven Webapp</name>
-  <!-- FIXME change it to the project's website -->
-  <url>http://www.example.com</url>
+  <!-- FIXME change it to the project's website
+  <url>http://www.example.com</url>-->
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -46,7 +46,12 @@
       <version>3.1.0</version>
       <scope>provided</scope>
     </dependency>
-
+    <dependency>
+      <groupId>javax.websocket</groupId>
+      <artifactId>javax.websocket-api</artifactId>
+      <version>1.0</version>
+      <scope>provided</scope>
+    </dependency>
     <dependency>
       <groupId>net.sf.json-lib</groupId>
       <artifactId>json-lib</artifactId>
@@ -72,7 +77,15 @@
 	    <artifactId>mysql-connector-java</artifactId>
 	    <version>8.0.23</version>
 	</dependency>
-    
+
+    <!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
+    <dependency>
+      <groupId>com.h2database</groupId>
+      <artifactId>h2</artifactId>
+      <version>1.4.200</version>
+      <scope>runtime</scope>
+    </dependency>
+
   </dependencies>
 
   <build>

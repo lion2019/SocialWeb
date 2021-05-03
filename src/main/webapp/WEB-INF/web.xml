@@ -12,6 +12,27 @@
   	<load-on-startup>1</load-on-startup>
   </servlet>
 
+
+	<servlet>
+		<servlet-name>H2Console</servlet-name>
+		<servlet-class>org.h2.server.web.WebServlet</servlet-class>
+		<!--
+        <init-param>
+            <param-name>webAllowOthers</param-name>
+            <param-value></param-value>
+        </init-param>
+        <init-param>
+            <param-name>trace</param-name>
+            <param-value></param-value>
+        </init-param>
+        -->
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>H2Console</servlet-name>
+		<url-pattern>/console/*</url-pattern>
+	</servlet-mapping>
+
   <filter>
   <!-- 編碼 -->
 	<filter-name>Set Character Encoding</filter-name>
@@ -26,16 +47,4 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 	
-	<!-- 此 AuthorityFilter 可移到 class -->
-  <filter>
-  	<description>
-  	</description>
-  	<display-name>AuthorityFilter</display-name>
-  	<filter-name>AuthorityFilter</filter-name>
-  	<filter-class>com.social.filter.AuthorityFilter</filter-class>
-  </filter>
-	<filter-mapping>
-		<filter-name>AuthorityFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
 </web-app>

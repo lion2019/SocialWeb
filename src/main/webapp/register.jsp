@@ -14,14 +14,16 @@
     <div class="row">
         <div class="col-sm-12"></div>
     </div>
-    <form class="form-horizontal">
-        <div class="form-group"><!--required必填欄位-->
+    <form class="form-horizontal" action="${pageContext.request.contextPath}/register" method="post">
+        <!--
+        <div class="form-group">
             <label class="col-sm-2" for="id"><span class="star">*&nbsp;&nbsp;</span>會員帳號:</label>
             <div class="col-sm-5">
                 <input type="text" class="form-control" id="id" name="id" required placeholder="請輸入身份證號"
                        value="<%=request.getParameter("id") ==null ? "":request.getParameter("id")%>">
             </div>
         </div>
+         -->
         <div class="form-group"><!--required必填欄位-->
             <label class="col-sm-2" for="name"><span class="star">*&nbsp;&nbsp;</span>會員姓名:</label>
             <div class="col-sm-5">
@@ -61,7 +63,7 @@
                     <%=request.getParameter("email") == null? "": request.getParameter("email")%>>
             </div>
         </div>
-
+        <button type="submit">送出</button>
     </form>
 </div>
 <script type="text/javascript">

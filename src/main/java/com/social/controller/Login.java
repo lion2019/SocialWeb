@@ -3,20 +3,16 @@ package com.social.controller;
 import java.beans.IntrospectionException;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.nio.charset.StandardCharsets;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.social.domain.User;
 import com.social.exception.BaseException;
 import com.social.exception.ResponseEnum;
 import com.social.service.LoginService;
-
-import net.sf.json.JSONObject;
 
 @WebServlet(urlPatterns = "/login")
 public class Login extends BaseController {
@@ -29,17 +25,18 @@ public class Login extends BaseController {
 			User user = reqParam2Bean(request, User.class)
 					.orElseThrow(()->new BaseException(ResponseEnum.parameter_empty));
 			
-			User userInfo = loginService.login(user);
+			loginService.login(user, request);
 			
-			JSONObject output = JSONObject.fromObject(userInfo);
+//			JSONObject output = JSONObject.fromObject(userInfo);
 			
-			HttpSession session = request.getSession();
-			session.setAttribute("userInfo", output);
+//			HttpSession session = request.getSession();
+//			session.setAttribute("userInfo", output);
 
-			response.setContentType("application/json;");
-			response.setCharacterEncoding(StandardCharsets.UTF_8.name());
+//			response.setContentType("application/json;");
+//			response.setCharacterEncoding(StandardCharsets.UTF_8.name());
 			
-			response.getWriter().println(output);
+//			response.getWriter().println(output);
+			response.sendRedirect(request.getContextPath()+"/main.jsp");
 			
 		} catch (InstantiationException | IllegalAccessException | InvocationTargetException | IOException
 				| ServletException | IntrospectionException e) {
