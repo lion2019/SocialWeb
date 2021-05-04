@@ -42,7 +42,7 @@ public abstract class BaseDao<T> {
 	 * @return
 	 * @throws RuntimeException
 	 */
-	public boolean insert(T t) throws RuntimeException {
+	public boolean insert(T t) throws SQLException {
 //		String tableName = t.getClass().getSimpleName().toLowerCase();
 //		// 取得 private fields
 //		Field[] fields = t.getClass().getDeclaredFields();
@@ -58,9 +58,6 @@ public abstract class BaseDao<T> {
 			System.out.println(sql);
 			setParameter(ps, t);
 			return ps.executeUpdate() == 1;
-		} catch (SQLException e) {
-			e.printStackTrace();
-			throw new RuntimeException(e);
 		}
 	}
 	

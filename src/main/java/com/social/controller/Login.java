@@ -14,7 +14,7 @@ import com.social.exception.BaseException;
 import com.social.exception.ResponseEnum;
 import com.social.service.LoginService;
 
-@WebServlet(urlPatterns = "/login")
+@WebServlet(urlPatterns = "/login.do")
 public class Login extends BaseController {
 	private static final long serialVersionUID = 1L;
 

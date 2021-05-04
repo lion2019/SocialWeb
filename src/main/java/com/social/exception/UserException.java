@@ -15,4 +15,7 @@ public class UserException extends BaseException {
 	public UserException(IResponseEnum responseEnum) {
 		super(responseEnum);
 	}
+    public UserException(int code, String message) {
+        super(code, message);
+    }
 }

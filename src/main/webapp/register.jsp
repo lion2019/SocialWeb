@@ -14,7 +14,7 @@
     <div class="row">
         <div class="col-sm-12"></div>
     </div>
-    <form class="form-horizontal" action="${pageContext.request.contextPath}/register" method="post">
+    <form class="form-horizontal" action="${pageContext.request.contextPath}/register.do" method="post">
         <!--
         <div class="form-group">
             <label class="col-sm-2" for="id"><span class="star">*&nbsp;&nbsp;</span>會員帳號:</label>
@@ -81,6 +81,10 @@
         }else {
             password2.type = "password";
         }
+    }
+    let errMsg = "${requestScope.errorMsg}";
+    if(errMsg){
+        alert(errMsg);
     }
 </script>
 <jsp:include page="/WEB-INF/subviews/footer.jsp" />

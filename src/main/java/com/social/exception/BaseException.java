@@ -13,7 +13,14 @@ public class BaseException extends ServletException {
 	public BaseException(String message) {
         super(message);
     }
-
+	public BaseException(int code, String message) {
+		super(message);
+		this.code = code;
+	}
+	public BaseException(int code, String message, Throwable cause) {
+		super(message, cause);
+		this.code = code;
+	}
     public BaseException(String message, Throwable cause) {
         super(message, cause);
     }
