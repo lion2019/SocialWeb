@@ -14,6 +14,7 @@ public enum ResponseEnum implements IResponseEnum {
 	Illegal_email(103, "email 不合法"),
 	phone_is_empty(104, "手機 不可為空"),
 	address_is_empty(105, "地址 不可為空"),
+	password_not_match(106, "密碼 不一致"),
 	
 	// user login
 	user_not_found(300,"用戶不存在"),

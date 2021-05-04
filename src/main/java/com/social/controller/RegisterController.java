@@ -1,22 +1,21 @@
 package com.social.controller;
 
-import java.beans.IntrospectionException;
-import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-import java.nio.charset.StandardCharsets;
+import com.social.domain.RegisterRequest;
+import com.social.domain.User;
+import com.social.exception.BaseException;
+import com.social.exception.ResponseEnum;
+import com.social.service.RegisterService;
+import net.sf.json.JSONObject;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.social.domain.User;
-import com.social.exception.BaseException;
-import com.social.exception.ResponseEnum;
-import com.social.service.RegisterService;
-
-import net.sf.json.JSONObject;
+import java.beans.IntrospectionException;
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.nio.charset.StandardCharsets;
 
 @MultipartConfig
 @WebServlet(urlPatterns = {"/register"})
@@ -31,9 +30,13 @@ public class RegisterController extends BaseController {
 		System.out.println(getServletName());
 
 		try {
-			User user = reqParam2Bean(req, User.class)
-					.orElseThrow(()->new BaseException(ResponseEnum.parameter_empty));
-			
+			RegisterRequest registerRequest = reqParam2Bean(req, RegisterRequest.class)
+					.orElseThrow(() -> new BaseException(ResponseEnum.parameter_empty));
+
+			registerRequest.valid();
+
+			User user = registerRequest.convert2User();
+
 			if(!registerService.addUser(user)) {
 				throw new BaseException(ResponseEnum.insert_error);
 			}
@@ -45,9 +48,6 @@ public class RegisterController extends BaseController {
 			
 			// FIXME ServletException 內容可調使用 enum  
 //			User output = user.filter(registerService::addUser).orElseThrow(()->new ServletException("user add error!!"));
-			
-			
-			
 			
 //			user.ifPresent(registerService::addUser);
 //			req.setAttribute("userInfo", user);

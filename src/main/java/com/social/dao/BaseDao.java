@@ -118,15 +118,22 @@ public abstract class BaseDao<T> {
 		// 如果沒有 param 一樣會有 Enumeration 物件，非 null
 //	Enumeration<String> parameterNames = req.getParameterNames();
 
-		T obj = rs.next() ? cls.newInstance() : null;
+		T obj = cls.newInstance();
 		Field[] fields = cls.getDeclaredFields();
 		for (Field f : fields) {
 			String value = rs.getString(f.getName());
 
-			PropertyDescriptor propertyDescriptor;
-			propertyDescriptor = new PropertyDescriptor(f.getName(), cls);
+			PropertyDescriptor propertyDescriptor = new PropertyDescriptor(f.getName(), cls);
 			Method writeMethod = propertyDescriptor.getWriteMethod();
-			writeMethod.invoke(obj, value);
+
+
+			if (propertyDescriptor.getPropertyType() == Character.class) {
+				writeMethod.invoke(obj, value.charAt(0));
+//				writeMethod.invoke(obj, req.getParameter(key).charAt(0));
+			} else {
+				writeMethod.invoke(obj, value);
+//				writeMethod.invoke(obj, req.getParameter(key));
+			}
 		}
 
 		System.out.println(obj);

@@ -12,7 +12,7 @@ public class UserDao extends BaseDao<User> {
 	
 	public Optional<User> findByEmail(String email) {
 		String sql = "select * from user where email = ?";
-		Optional<User> user = null;
+		Optional<User> user = Optional.empty();
 		try(Connection conn = dataSource.getConnection();
 				PreparedStatement ps = conn.prepareStatement(sql);){
 			ps.setString(1, email);
