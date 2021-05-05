@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet(urlPatterns = "/logout")
+@WebServlet(urlPatterns = "/logout.do")
 public class Logout extends BaseController {
 	private static final long serialVersionUID = 1L;
 	

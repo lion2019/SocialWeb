@@ -11,11 +11,11 @@ import java.util.Arrays;
  * 攔截器，驗証權限
  * Servlet Filter implementation class AuthorityFilter
  */
-@WebFilter(urlPatterns = {"/*"})
+@WebFilter(urlPatterns = {"*.do","*.jsp"})
 public class AuthorityFilter implements Filter {
 
 	/** 不需登入即可瀏覽的頁面 */
-	private String[] excludeUrlPath = {"/index.jsp","/login.*","/register.*","/logout.jsp","/console","/images/.*"};
+	private String[] excludeUrlPath = {"/index.jsp","/login.*","/register.*","/logout.*"};
 
     /**
      * Default constructor.

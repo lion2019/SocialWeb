@@ -33,7 +33,7 @@
     <div class="row">
         <div class="col-sm-12"></div>
     </div>
-    <form class="form-horizontal" action="${pageContext.request.contextPath}/login" method="post">
+    <form class="form-horizontal" action="${pageContext.request.contextPath}/login.do" method="post">
         <div class="form-group">
             <label class="col-sm-2" for="email"><span class="star">*&nbsp;&nbsp;</span>會員帳號:</label>
             <div class="col-sm-4">
