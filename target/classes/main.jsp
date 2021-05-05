@@ -39,9 +39,18 @@
             margin-bottom: 50px;
         }
     </style>
+<script>
+    $(function (){
+        $(".dropdown-menu li a").click(function (){
+            let frameUrl = $(this).attr("id");
+            $("#frame").attr("src",frameUrl);
+            //$("#frame").load(frameUrl);
+        });
+    });
+</script>
 <div class="container-fluid" id="chatframe">
     <div class="row">
-        <div class="row-cols-5">
+        <div class="row-cols-5" style="width: 35%;height: 100%;border: #bdbdbd 1px solid">
             <label>房間名</label>
             <input id="input_roomName" size="15" maxlength="10">
             <input type="button"  value="進入聊天室" onclick="initWebSocket()" />
@@ -50,6 +59,8 @@
             <input id="input_msg" size="40" maxlength="40">
             <input type="button" value="傳送" onclick="send_msg()" />
         </div>
+<%--        <iframe id="frame" name="frame" height="500px" width="300px"></iframe>--%>
+        <div class="row-cols-5" id="frame" name="frame" style="width: 55%;height: 600px;float: left;border: #bdbdbd 1px solid"></div>
     </div>
 </div>
 <script type="text/javascript">
@@ -109,6 +120,8 @@
             alert("您的瀏覽器不支援 WebSocket!");
         }
     }
+
+
 </script>
 <jsp:include page="/WEB-INF/subviews/footer.jsp" />
 

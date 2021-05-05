@@ -9,35 +9,37 @@
     </div>
 </div>
 <div class="container">
-    <label class="col-sm-9" id="headtext">會員註冊</label>
+    <label class="col-sm-8" id="headtext">會員註冊</label>
 
     <div class="row">
         <div class="col-sm-12"></div>
     </div>
-    <form class="form-horizontal">
-        <div class="form-group"><!--required必填欄位-->
+    <form class="form-horizontal" action="${pageContext.request.contextPath}/register.do" method="post">
+        <!--
+        <div class="form-group">
             <label class="col-sm-2" for="id"><span class="star">*&nbsp;&nbsp;</span>會員帳號:</label>
             <div class="col-sm-5">
                 <input type="text" class="form-control" id="id" name="id" required placeholder="請輸入身份證號"
                        value="<%=request.getParameter("id") ==null ? "":request.getParameter("id")%>">
             </div>
         </div>
+         -->
         <div class="form-group"><!--required必填欄位-->
             <label class="col-sm-2" for="name"><span class="star">*&nbsp;&nbsp;</span>會員姓名:</label>
-            <div class="col-sm-5">
+            <div class="col-sm-4">
                 <input type="text" class="form-control" id="name" name="name" required placeholder="請輸入姓名"
                        value="<%=request.getParameter("name") ==null ? "":request.getParameter("name")%>">
             </div>
         </div>
         <div class="form-group"><!--required必填欄位-->
             <label class="col-sm-2" for="password1"><span class="star">*&nbsp;&nbsp;</span>會員密碼:</label>
-            <div class="col-sm-5">
+            <div class="col-sm-4">
                 <input type="password" class="form-control" id="password1" name="password1" required placeholder="請輸入密碼">
             </div>
         </div>
         <div class="form-group"><!--required必填欄位-->
             <label class="col-sm-2" for="password2"><span class="star">*&nbsp;&nbsp;</span>確認密碼:</label>
-            <div class="col-sm-5">
+            <div class="col-sm-4">
                 <input type="password" class="form-control" id="password2" name="password2" required placeholder="請輸入確認密碼">
             </div>
         </div>
@@ -56,13 +58,22 @@
         </div>
         <div class="form-group"><!--required必填欄位-->
             <label class="col-sm-2"><span class="star">*&nbsp;&nbsp;</span>電子郵件:</label>
-            <div class="col-sm-5">
+            <div class="col-sm-4">
                 <input type="email" class="form-control" id="email" name="email" required placeholder="請輸入電子郵件"
                     <%=request.getParameter("email") == null? "": request.getParameter("email")%>>
             </div>
         </div>
-
+        <div class="row">
+            <div class="col-xs-8">
+                <div class="text-center">
+                    <button type="button" class="btn btn-default btn-lg">送出</button>
+                </div>
+            </div>
+        </div>
     </form>
+    <div class="row" style="width: 100%;height:200px">
+        <div class="col-sm-12"></div>
+    </div>
 </div>
 <script type="text/javascript">
     //隱藏text block，顯示password block
@@ -79,6 +90,10 @@
         }else {
             password2.type = "password";
         }
+    }
+    let errMsg = "${requestScope.errorMsg}";
+    if(errMsg){
+        alert(errMsg);
     }
 </script>
 <jsp:include page="/WEB-INF/subviews/footer.jsp" />

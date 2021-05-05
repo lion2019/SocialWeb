@@ -42,14 +42,16 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-2" for="name"><span class="star">*&nbsp;&nbsp;</span>會員密碼:</label>
+            <label class="col-sm-2" for="password"><span class="star">*&nbsp;&nbsp;</span>會員密碼:</label>
             <div class="col-sm-4">
-                <input type="password" class="form-control" id="password" name="password" required >
+                <input type="password" class="form-control" id="password" name="password" required  placeholder="請輸入密碼">
             </div>
         </div>
-        <div class="form-group">
-            <div class="col-sm-2 col-sm-offset-3">
-                <button type="submit" class="form-control" id="submit" class="btn btn-default">確定</button>
+        <div class="row">
+            <div class="col-xs-8">
+                <div class="text-center">
+                    <button type="button" class="btn btn-default btn-lg">送出</button>
+                </div>
             </div>
         </div>
 

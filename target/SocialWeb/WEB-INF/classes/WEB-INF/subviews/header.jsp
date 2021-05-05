@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
-    <link href="css/main.css" rel="stylesheet" type="text/css">
+    <link href="<%=request.getContextPath()%>/css/main.css" rel="stylesheet" type="text/css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <title>首頁</title>
@@ -38,20 +38,11 @@
                     <li><a href="register.jsp">註冊</a></li>
                     <li><a href="login.jsp">登入</a></li>
                     <li><a href="main.jsp">聊天室</a></li>
-                    <li><a href="">社群網站</a></li>
                     <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">遊戲<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="#section41">小遊戲</a></li>
                         </ul>
                     </li>
-                    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">旅遊<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#section41">景點</a></li>
-                            <li><a href="#section42">美食</a></li>
-                            <li><a href="#section42">飯店</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="">拍賣網</a></li>
                     <li><a href="">登出</a></li>
                     <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">設定<span class="caret"></span></a>
                         <ul class="dropdown-menu">
