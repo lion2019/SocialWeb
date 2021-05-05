@@ -50,7 +50,7 @@
         <div class="row">
             <div class="col-xs-8">
                 <div class="text-center">
-                    <button type="button" class="btn btn-default btn-lg">送出</button>
+                    <button type="submit" class="btn btn-default btn-lg">送出</button>
                 </div>
             </div>
         </div>
