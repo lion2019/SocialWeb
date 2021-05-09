@@ -15,7 +15,7 @@ import java.util.Arrays;
 public class AuthorityFilter implements Filter {
 
 	/** 不需登入即可瀏覽的頁面 */
-	private String[] excludeUrlPath = {"/index.jsp","/login.*","/register.*","/logout.*"};
+	private String[] excludeUrlPath = {"/index.jsp","/login.*","/register.*","/logout.*","/console"};
 
     /**
      * Default constructor.

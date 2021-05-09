@@ -69,7 +69,7 @@ public class RegisterRequest {
         this.gender = gender;
     }
 
-    public User convert2User(){
+    public User convert2Entity(){
         User user = new User();
         user.setEmail(email);
         user.setPassword(password1);
