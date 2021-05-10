@@ -2,8 +2,12 @@ package com.social.domain;
 
 import com.social.exception.UserException;
 
+/**
+ * 會員
+ */
 public class User {
     //    private String id;
+    private String nickname;
     private String name;
     private String password;
     private String email;
@@ -43,6 +47,14 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
     public String getPassword() {

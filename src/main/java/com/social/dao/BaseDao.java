@@ -6,10 +6,7 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.Arrays;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -19,6 +16,7 @@ import java.util.stream.Stream;
 import javax.servlet.ServletException;
 import javax.sql.DataSource;
 
+import com.social.domain.Id;
 import org.junit.platform.commons.function.Try;
 
 import com.social.datasource.ConnectionPool;
@@ -84,8 +82,7 @@ public abstract class BaseDao<T> {
 				PropertyDescriptor propertyDescriptor = new PropertyDescriptor(fields[i].getName(), obj.getClass());
 				Method method = propertyDescriptor.getReadMethod();
 				Object value = method.invoke(obj);
-				// 有些值是 null 需防呆??
-				if(value == null)
+				if(fields[i].isAnnotationPresent(Id.class) || value == null)
 					ps.setNull(i+1, java.sql.Types.NULL);
 				else
 					ps.setObject(i+1, value);

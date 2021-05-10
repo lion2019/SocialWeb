@@ -60,7 +60,7 @@
             <input type="button" value="傳送" onclick="send_msg()" />
         </div>
 <%--        <iframe id="frame" name="frame" height="500px" width="300px"></iframe>--%>
-        <div class="row-cols-5" id="frame" name="frame" style="width: 55%;height: 600px;float: left;border: #bdbdbd 1px solid"></div>
+<%--        <div class="row-cols-5" id="frame" name="frame" style="width: 55%;height: 600px;float: left;border: #bdbdbd 1px solid"></div>--%>
     </div>
 </div>
 <script type="text/javascript">

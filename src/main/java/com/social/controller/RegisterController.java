@@ -4,10 +4,8 @@ import com.social.domain.RegisterRequest;
 import com.social.domain.User;
 import com.social.exception.BaseException;
 import com.social.exception.ResponseEnum;
-import com.social.exception.UserException;
 import com.social.service.LoginService;
 import com.social.service.RegisterService;
-import net.sf.json.JSONObject;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -17,8 +15,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.beans.IntrospectionException;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.nio.charset.StandardCharsets;
-import java.sql.SQLException;
 
 @MultipartConfig
 @WebServlet(urlPatterns = {"/register.do"})
@@ -39,7 +35,7 @@ public class RegisterController extends BaseController {
 
 			registerRequest.valid();
 
-			User user = registerRequest.convert2User();
+			User user = registerRequest.convert2Entity();
 
 			if(!registerService.addUser(user)) {
 				throw new BaseException(ResponseEnum.insert_error);
