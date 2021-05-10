@@ -44,6 +44,13 @@
             </div>
         </div>
         <div class="form-group"><!--required必填欄位-->
+            <label class="col-sm-2" for="nickname"><span class="star">*&nbsp;&nbsp;</span>會員暱名:</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" id="nickname" name="nickname" required placeholder="請輸入暱名"
+                       value="<%=request.getParameter("nickname") ==null ? "":request.getParameter("nickname")%>">
+            </div>
+        </div>
+        <div class="form-group"><!--required必填欄位-->
             <label class="col-sm-2"><span class="star">*&nbsp;&nbsp;</span>會員性別:</label>
             <label class="col-sm-1">
                 <input type="radio" id="male" name="gender" value="M" required

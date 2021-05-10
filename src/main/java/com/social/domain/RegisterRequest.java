@@ -7,6 +7,7 @@ import com.social.exception.ValidException;
 public class RegisterRequest {
 
     private String name;
+    private String nickname;
     private String password1;
     private String password2;
     private String email;
@@ -22,6 +23,18 @@ public class RegisterRequest {
             this.name = name;
         }else{
             throw new UserException("姓名欄位必須輸入");
+        }
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) throws UserException {
+        if(nickname != null && (nickname=nickname.trim()).length() > 0){
+            this.nickname = nickname;
+        }else{
+            throw new UserException("暱名欄位必須輸入");
         }
     }
 
@@ -75,6 +88,7 @@ public class RegisterRequest {
         user.setPassword(password1);
         user.setName(name);
         user.setGender(gender);
+        user.setNickname(nickname);
         return user;
     }
 
