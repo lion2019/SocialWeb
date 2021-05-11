@@ -22,6 +22,7 @@ public class LoginService {
                 .orElseThrow(() -> new BaseException(ResponseEnum.user_not_found));
 
         if (checkPassword(user, userInfo)) {
+            // 密碼驗証成功後將 userInfo 存入 session
             HttpSession session = request.getSession();
             session.setAttribute("userInfo", userInfo);
 

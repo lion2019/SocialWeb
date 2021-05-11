@@ -21,7 +21,8 @@ public class InitServlet extends HttpServlet {
 		try {
 			System.out.println("InitServlet.init");
 			Properties properties = new Properties();
-			
+
+			// 讀取 application.properties
 			InputStream is = getServletContext().getResourceAsStream("/WEB-INF/application.properties");
 			properties.load(is);
 			
@@ -34,7 +35,8 @@ public class InitServlet extends HttpServlet {
 //			String driver = config.getInitParameter("driver-class-name");
 //			String userName = config.getInitParameter("userName");
 //			String password = config.getInitParameter("password");
-			
+
+			// 設定 連線池
 			HikariDataSource hikariDataSource = new HikariDataSource();
 			hikariDataSource.setUsername(userName);
 			hikariDataSource.setPassword(password);
