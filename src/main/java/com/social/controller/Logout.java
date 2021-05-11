@@ -16,7 +16,7 @@ public class Logout extends BaseController {
 		HttpSession session = request.getSession();
 		session.invalidate();
 		
-		response.sendRedirect("/login.jsp");
+		response.sendRedirect(request.getContextPath()+"/login.jsp");
 	}
 	
 	protected void dopost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

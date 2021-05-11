@@ -40,13 +40,13 @@
         }
     </style>
 <script>
-    $(function (){
-        $(".dropdown-menu li a").click(function (){
-            let frameUrl = $(this).attr("id");
-            $("#frame").attr("src",frameUrl);
-            //$("#frame").load(frameUrl);
-        });
-    });
+    // $(function (){
+    //     $(".dropdown-menu li a").click(function (){
+    //         let frameUrl = $(this).attr("id");
+    //         $("#frame").attr("src",frameUrl);
+    //         //$("#frame").load(frameUrl);
+    //     });
+    // });
 </script>
 <div class="container-fluid" id="chatframe">
     <div class="row">
@@ -64,6 +64,7 @@
     </div>
 </div>
 <script type="text/javascript">
+    let nickname = "${sessionScope.userInfo.nickname}";
     var webSocket;
     function send_msg() {
         if (webSocket != null) {
@@ -102,7 +103,7 @@
             };
             webSocket.onmessage = function (evt) {
                 var msg_board = document.getElementsByClassName("msg_board")[0];
-                var received_msg = evt.data;
+                var received_msg = nickname + ":" +evt.data;
                 var old_msg = msg_board.innerHTML;
                 msg_board.innerHTML = old_msg + received_msg + "<br>";
                 // 讓滾動塊往下移動

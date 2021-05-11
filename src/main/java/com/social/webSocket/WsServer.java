@@ -44,7 +44,7 @@ public class WsServer {
     public void receiveMsg(@PathParam("roomName") String roomName,
                            String msg, Session session) throws Exception {
         // 此處應該有html過濾
-        msg = session.getId() + ":" + msg;
+        //msg = session.getId() + ":" + msg;
         System.out.println(msg);
         // 接收到資訊後進行廣播
         broadcast(roomName, msg);

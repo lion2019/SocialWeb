@@ -3,23 +3,23 @@
     <jsp:param name="subtitle" value="會員登入"/>
 </jsp:include>
 <script type="text/javascript">
-    $(function (){
-        //隱藏text block，顯示password block
-        function hideShowPsw1(){
-            if (password1.type == "password") {
-                password1.type = "text";
-            }else {
-                password1.type = "password";
-            }
-        }
-        function hideShowPsw2(){
-            if (password2.type == "password") {
-                password2.type = "text";
-            }else {
-                password2.type = "password";
-            }
-        }
-    });
+    // $(function (){
+    //     //隱藏text block，顯示password block
+    //     function hideShowPsw1(){
+    //         if (password1.type == "password") {
+    //             password1.type = "text";
+    //         }else {
+    //             password1.type = "password";
+    //         }
+    //     }
+    //     function hideShowPsw2(){
+    //         if (password2.type == "password") {
+    //             password2.type = "text";
+    //         }else {
+    //             password2.type = "password";
+    //         }
+    //     }
+    // });
 
 </script>
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -50,7 +50,7 @@
         <div class="row">
             <div class="col-xs-8">
                 <div class="text-center">
-                    <button type="button" class="btn btn-default btn-lg">送出</button>
+                    <button type="submit" class="btn btn-default btn-lg">送出</button>
                 </div>
             </div>
         </div>

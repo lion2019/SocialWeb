@@ -105,7 +105,8 @@ public abstract class BaseDao<T> {
 //			}
 //		});;
 	}
-	
+
+
 	protected Optional<T> resultSet2Bean(ResultSet rs, Class<T> cls)
 			throws IOException, ServletException, IntrospectionException, InstantiationException,
 			IllegalAccessException, InvocationTargetException, SQLException {
