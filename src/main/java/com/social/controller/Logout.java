@@ -14,6 +14,7 @@ public class Logout extends BaseController {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
+		// 銷毀 session
 		session.invalidate();
 		
 		response.sendRedirect("/login.jsp");

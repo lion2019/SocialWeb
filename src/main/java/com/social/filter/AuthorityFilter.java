@@ -65,6 +65,7 @@ public class AuthorityFilter implements Filter {
 		return Arrays.stream(excludeUrlPath).anyMatch(k -> servletPath.matches(k));
 	}
 
+	// 用 session -> userInfo 判斷是否已登入
 	private boolean isLogin(HttpServletRequest req) {
 		Object userInfo = req.getSession().getAttribute("userInfo");
 		return userInfo != null;
