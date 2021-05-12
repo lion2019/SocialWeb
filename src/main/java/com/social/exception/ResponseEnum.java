@@ -1,5 +1,8 @@
 package com.social.exception;
 
+/**
+ * 定義 返回碼和訊息
+ */
 public enum ResponseEnum implements IResponseEnum {
 	
 	OK(0,"success"),

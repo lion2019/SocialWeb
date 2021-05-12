@@ -46,6 +46,10 @@ public class BoardRequest {
 //        this.create_date = create_date;
 //    }
 
+    /**
+     * request bean convert to entity
+     * @return
+     */
     public Board convert2Entity() {
         Board board = new Board();
         board.setMessage(message);

@@ -82,6 +82,10 @@ public class RegisterRequest {
         this.gender = gender;
     }
 
+    /**
+     * request bean convert to entity
+     * @return
+     */
     public User convert2Entity(){
         User user = new User();
         user.setEmail(email);
