@@ -1,8 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <jsp:include page="/WEB-INF/subviews/header.jsp" >
-    <jsp:param name="subtitle" value="會員註冊"/>
+    <jsp:param name="subtitle" value="主頁"/>
 </jsp:include>
-
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <div class="row" style="height: 100px">
         <div class="col-md-12"></div>
@@ -15,15 +14,6 @@
         <div class="col-sm-12"></div>
     </div>
     <form class="form-horizontal" action="${pageContext.request.contextPath}/register.do" method="post">
-        <!--
-        <div class="form-group">
-            <label class="col-sm-2" for="id"><span class="star">*&nbsp;&nbsp;</span>會員帳號:</label>
-            <div class="col-sm-5">
-                <input type="text" class="form-control" id="id" name="id" required placeholder="請輸入身份證號"
-                       value="<%=request.getParameter("id") ==null ? "":request.getParameter("id")%>">
-            </div>
-        </div>
-         -->
         <div class="form-group"><!--required必填欄位-->
             <label class="col-sm-2" for="name"><span class="star">*&nbsp;&nbsp;</span>會員姓名:</label>
             <div class="col-sm-4">
@@ -64,7 +54,7 @@
             </label>
         </div>
         <div class="form-group"><!--required必填欄位-->
-            <label class="col-sm-2"><span class="star">*&nbsp;&nbsp;</span>電子郵件:</label>
+            <label class="col-sm-2" for="email"><span class="star">*&nbsp;&nbsp;</span>電子郵件:</label>
             <div class="col-sm-4">
                 <input type="email" class="form-control" id="email" name="email" required placeholder="請輸入電子郵件"
                     <%=request.getParameter("email") == null? "": request.getParameter("email")%>>
@@ -78,30 +68,28 @@
             </div>
         </div>
     </form>
-    <div class="row" style="width: 100%;height:200px">
-        <div class="col-sm-12"></div>
-    </div>
 </div>
 <script type="text/javascript">
     //隱藏text block，顯示password block
-    function hideShowPsw1(){
-        if (password1.type == "password") {
-            password1.type = "text";
-        }else {
-            password1.type = "password";
-        }
-    }
-    function hideShowPsw2(){
-        if (password2.type == "password") {
-            password2.type = "text";
-        }else {
-            password2.type = "password";
-        }
-    }
+    // function hideShowPsw1(){
+    //     if (password1.type == "password") {
+    //         password1.type = "text";
+    //     }else {
+    //         password1.type = "password";
+    //     }
+    // }
+    // function hideShowPsw2(){
+    //     if (password2.type == "password") {
+    //         password2.type = "text";
+    //     }else {
+    //         password2.type = "password";
+    //     }
+    // }
     let errMsg = "${requestScope.errorMsg}";
     if(errMsg){
         alert(errMsg);
     }
 </script>
+
 <jsp:include page="/WEB-INF/subviews/footer.jsp" />
 

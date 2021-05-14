@@ -5,22 +5,33 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
     <link href="${pageContext.request.contextPath}/css/main.css" rel="stylesheet" type="text/css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <!--引用dataTables.js-->
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/webSocket.js"></script>
+
     <title>首頁</title>
     <%
         User user = (User)session.getAttribute("userInfo");
     %>
     <script>
+
+        //跑馬燈
         function changeColor(){
             var color="#f00|#0f0|#00f|#880|#808|#088|yellow|green|blue|gray";
             color=color.split("|");
             document.getElementById("run").style.color=color[parseInt(Math.random() * color.length)];
         }
         setInterval("changeColor()",200);
+
+        let nickname = "${sessionScope.userInfo.nickname}";
+        $(".msg_board").css("color","white");
+
     </script>
 </head>
 <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="10">
@@ -34,7 +45,7 @@
                 <span class="icon-bar"></span>
             </button>
             <img src="images/Logo.jpg" alt="logo" class="img-thumbnail" style="width: 100px;height: 50px">
-            <a class="navbar-brand" href="index.jsp">TH SocialMedia</a>
+            <a class="navbar-brand" href="index.jsp">TH Chatroom</a>
         </div>
         <div>
             <div class="collapse navbar-collapse" id="myNavbar">
@@ -43,13 +54,9 @@
                     <li><a href="register.jsp">註冊</a></li>
                     <li><a href="login.jsp">登入</a></li>
                     <%}else{%>
+                    <li><a href="${pageContext.request.contextPath}/main.jsp">聊天室</a></li>
                     <li><a href="${pageContext.request.contextPath}/logout.do">登出</a></li>
                     <%}%>
-<%--                    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">遊戲<span class="caret"></span></a>--%>
-<%--                        <ul class="dropdown-menu">--%>
-<%--                            <li><a href="#section41">小遊戲</a></li>--%>
-<%--                        </ul>--%>
-<%--                    </li>--%>
                 </ul>
             </div>
             <div class="row" style="font-size: 20px">
