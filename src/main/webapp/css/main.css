@@ -64,6 +64,7 @@ footer a:hover {
     font-size: 20px;
     text-align: right;
 }
+/*------------------------------------*/
 
 /*聊天室對話框*/
 .msg_board1,.msg_board2{
@@ -95,4 +96,5 @@ word-break: break-all;
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
     background-color: #89D7F7;
 }
-/*聊天室對話框*/
+/*------------------------------------*/
+

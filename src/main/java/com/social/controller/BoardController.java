@@ -35,7 +35,7 @@ public class BoardController extends BaseController {
 
             boardService.addBoard(board);
 
-//            resp.sendRedirect(req.getContextPath()+"/main.jsp");
+            response.sendRedirect(request.getContextPath()+"/main.jsp");
 
             // FIXME ServletException 內容可調使用 enum
 //			User output = user.filter(registerService::addUser).orElseThrow(()->new ServletException("user add error!!"));

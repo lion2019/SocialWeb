@@ -1,7 +1,19 @@
+<%@ page import="java.util.Date" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <jsp:include page="/WEB-INF/subviews/header.jsp" >
     <jsp:param name="subtitle" value="主頁"/>
 </jsp:include>
+<style>
+    /*input type=number裏上下箭頭隱藏*/
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+    }
+    input[type="number"]{
+        -moz-appearance: textfield;
+    }
+    /*------------------------------------*/
+</style>
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <div class="row" style="height: 100px">
         <div class="col-md-12"></div>
@@ -16,41 +28,56 @@
 <div class="tab-content">
     <div id="home" class="tab-pane fade in active">
         <br>
-        <div class="form-group">
-            <div class="col-sm-12">
-                <label for="message">訊息:</label>
-                <input id="message" name="message" size="80%" maxlength="100" required placeholder="請輸入訊息">
-                <input type="button" value="新增留言" onclick="" /><br>
+        <div class="container-fluid">
+        <form class="form-horizontal" action="${pageContext.request.contextPath}/board.do" method="post">
+            <div class="form-group">
+                <div class="col-sm-3">
+                    <label for="room_number">房號:</label>
+                    <input type="number" id="room_number" name="room_number" size="10%">
+                </div>
+                <div class="col-sm-8">
+                    <label for="message">訊息:</label>
+                    <input id="message" name="message" size="70%" maxlength="100" required placeholder="請輸入留言訊息">
+                    <input type="submit" value="新增留言"/><br>
+                </div>
             </div>
+        </form>
         </div>
         <div class="container-fluid">
-        <table id="myTable" class="display">
-        <thead>
-        <tr>
-            <th>編號</th>
-            <th>暱名</th>
-            <th>留言</th>
-            <th>日期</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>Row 1 Data 1</td>
-            <td>Row 1 Data 2</td>
-            <td>Row 1 Data 3</td>
-            <td>Row 1 Data 4</td>
-        </tr>
-        <tr>
-            <td>Row 2 Data 1</td>
-            <td>Row 2 Data 2</td>
-            <td>Row 2 Data 3</td>
-            <td>Row 2 Data 4</td>
-        </tr>
-        </tbody>
-        </table>
+            <table id="board" class="display">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>暱名</th>
+                        <th>房號</th>
+                        <th>訊息</th>
+                        <th>編輯</th>
+                        <th>日期</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>lin</td>
+                        <td>1</td>
+                        <td>111111111111111111111111111111111111111111111111111111111111111111111</td>
+                        <td>&nbsp;</td>
+                        <td><%= new Date()%></td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>cc</td>
+                        <td>2</td>
+                        <td>2222222222222222222222222222222222222222222222222222222222222222222222</td>
+                        <td>&nbsp;</td>
+                        <td><%= new Date()%></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-    </div>
-    <br><br>
+    <br>
+
     <div id="menu1" class="tab-pane fade">
         <div class="container-fluid">
             <div class="row">
@@ -70,6 +97,7 @@
             </div>
         </div>
     </div>
+
     <div id="menu2" class="tab-pane fade">
         <div class="container-fluid">
             <div class="row">
@@ -98,9 +126,72 @@
             </div>
         </div>
     </div>
-    <div id="menu3" class="tab-pane fade">
-        <h3>頁籤 3</h3>
-        <p>相對一點帶來樂隊房間那天以前大盤效率感覺到東莞部門家電，種類污染說明事實上放心當時性質同一我，除了於是是指組合搜索追求收入也許都，機構三星緩緩主流幾乎人員優惠少女評估一把字幕，協助設為不需要聯賽網頁那些因而論壇此處老。</p>
+
+        <div id="menu3" class="tab-pane fade">
+            <table align="center" width="90%">
+                <tr>
+                    <td width="45%">&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td width="45%" align="center">
+                        <form class="form-horizontal" action="${pageContext.request.contextPath}/friend.do" method="post">
+                            <div class="form-group">
+                                <input id="insert_friend" name="insert_friend" size="30%" maxlength="20" required placeholder="請輸入好友暱名">
+                                <input type="submit" value="新增好友"/><br>
+                            </div>
+                        </form>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <table id="login_member" class="display">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>線上會員</th>
+                                    <th>登入時間</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>aa</td>
+                                    <td><%=new Date()%></td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>bb</td>
+                                    <td><%=new Date()%></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                        <td>&nbsp;</td>
+                        <td>
+                            <table id="friend" class="display">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>好友</th>
+                                        <th>登入時間</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>cc</td>
+                                        <td><%=new Date()%></td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>dd</td>
+                                        <td><%=new Date()%></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+            </table>
+        </div>
     </div>
 </div>
 

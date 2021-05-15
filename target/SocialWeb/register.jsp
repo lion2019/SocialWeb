@@ -17,27 +17,20 @@
         <div class="form-group"><!--required必填欄位-->
             <label class="col-sm-2" for="name"><span class="star">*&nbsp;&nbsp;</span>會員姓名:</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" id="name" name="name" required placeholder="請輸入姓名"
+                <input type="text" class="form-control" id="name" name="name" maxlength="20" required placeholder="請輸入姓名"
                        value="<%=request.getParameter("name") ==null ? "":request.getParameter("name")%>">
             </div>
         </div>
         <div class="form-group"><!--required必填欄位-->
             <label class="col-sm-2" for="password1"><span class="star">*&nbsp;&nbsp;</span>會員密碼:</label>
             <div class="col-sm-4">
-                <input type="password" class="form-control" id="password1" name="password1" required placeholder="請輸入密碼">
+                <input type="password" class="form-control" id="password1" name="password1" maxlength="20" required placeholder="請輸入密碼">
             </div>
         </div>
         <div class="form-group"><!--required必填欄位-->
             <label class="col-sm-2" for="password2"><span class="star">*&nbsp;&nbsp;</span>確認密碼:</label>
             <div class="col-sm-4">
-                <input type="password" class="form-control" id="password2" name="password2" required placeholder="請輸入確認密碼">
-            </div>
-        </div>
-        <div class="form-group"><!--required必填欄位-->
-            <label class="col-sm-2" for="nickname"><span class="star">*&nbsp;&nbsp;</span>會員暱名:</label>
-            <div class="col-sm-4">
-                <input type="text" class="form-control" id="nickname" name="nickname" required placeholder="請輸入暱名"
-                       value="<%=request.getParameter("nickname") ==null ? "":request.getParameter("nickname")%>">
+                <input type="password" class="form-control" id="password2" name="password2" maxlength="20" required placeholder="請輸入確認密碼">
             </div>
         </div>
         <div class="form-group"><!--required必填欄位-->
@@ -60,6 +53,14 @@
                     <%=request.getParameter("email") == null? "": request.getParameter("email")%>>
             </div>
         </div>
+        <div class="form-group"><!--required必填欄位-->
+            <label class="col-sm-2" for="nickname"><span class="star">*&nbsp;&nbsp;</span>會員暱名:</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" id="nickname" name="nickname" maxlength="20" required placeholder="請輸入聊天室用暱名"
+                       value="<%=request.getParameter("nickname") ==null ? "":request.getParameter("nickname")%>">
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-xs-8">
                 <div class="text-center">
@@ -70,21 +71,7 @@
     </form>
 </div>
 <script type="text/javascript">
-    //隱藏text block，顯示password block
-    // function hideShowPsw1(){
-    //     if (password1.type == "password") {
-    //         password1.type = "text";
-    //     }else {
-    //         password1.type = "password";
-    //     }
-    // }
-    // function hideShowPsw2(){
-    //     if (password2.type == "password") {
-    //         password2.type = "text";
-    //     }else {
-    //         password2.type = "password";
-    //     }
-    // }
+
     let errMsg = "${requestScope.errorMsg}";
     if(errMsg){
         alert(errMsg);
