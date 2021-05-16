@@ -29,6 +29,7 @@ create table BOARD
     ID          INT auto_increment,
     NICKNAME    VARCHAR(20),
     MESSAGE     VARCHAR(100),
+    room_number     int(5),
     CREATE_DATE TIMESTAMP,
     constraint BOARD_PK
         primary key (ID),
@@ -39,5 +40,6 @@ comment on table BOARD is '留言板';
 comment on column BOARD.ID is '留言ID';
 comment on column BOARD.NICKNAME is '暱名';
 comment on column BOARD.MESSAGE is '訊息';
+comment on column BOARD.room_number is '聊天室房號';
 comment on column BOARD.CREATE_DATE is '訊息建立時間';
 

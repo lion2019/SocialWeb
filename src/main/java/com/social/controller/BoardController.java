@@ -7,6 +7,8 @@ import com.social.domain.User;
 import com.social.exception.BaseException;
 import com.social.exception.ResponseEnum;
 import com.social.service.BoardService;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,12 +18,20 @@ import java.beans.IntrospectionException;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
+import java.util.List;
 
 @WebServlet(urlPatterns = {"/board.do"})
 public class BoardController extends BaseController {
 
     private BoardService boardService = new BoardService();
 
+    /**
+     * 新增留言
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -61,6 +71,25 @@ public class BoardController extends BaseController {
                 | IntrospectionException | InvocationTargetException e) {
             e.printStackTrace();
             throw new ServletException(e);
+        }
+    }
+
+    /**
+     * 留言板清單
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        try {
+            List<Board> list = boardService.findAll();
+            JSONArray jsonObject = JSONArray.fromObject(list);
+            response.setContentType("application/json;charset=utf-8");
+            response.getWriter().print(jsonObject.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

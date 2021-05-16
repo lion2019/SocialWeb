@@ -3,11 +3,12 @@ package com.social.dao;
 import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;
 import java.io.IOException;
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
+import java.lang.reflect.*;
 import java.sql.*;
+import java.sql.Array;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -17,6 +18,7 @@ import javax.servlet.ServletException;
 import javax.sql.DataSource;
 
 import com.social.domain.Id;
+import com.social.domain.User;
 import org.junit.platform.commons.function.Try;
 
 import com.social.datasource.ConnectionPool;
@@ -29,7 +31,7 @@ import com.social.datasource.ConnectionPool;
  */
 public abstract class BaseDao<T> {
 	protected DataSource dataSource;
-	
+//	private Class<T> cls;
 	public BaseDao() {
 		this.dataSource = ConnectionPool.getDataSource();
 	}
@@ -135,7 +137,7 @@ public abstract class BaseDao<T> {
 	}
 
 	/**
-	 *
+	 * JDBC ResultSet 轉換成 Java Bean
 	 * @param rs
 	 * @param cls
 	 */
@@ -145,7 +147,7 @@ public abstract class BaseDao<T> {
 
 		// 動態生成 object
 		T obj = cls.newInstance();
-
+//		T obj =  t.getClass().newInstance();
 		/*
 		返回一個Field對像數組，該數組反映由該Class對象表示的類或接口聲明的所有字段。
 		這包括公共，受保護，默認（程序包）訪問和私有字段，但不包括繼承的字段。
@@ -160,23 +162,68 @@ public abstract class BaseDao<T> {
 			// 獲取應該用於寫入屬性值的方法。
 			Method writeMethod = propertyDescriptor.getWriteMethod();
 
-			if (propertyDescriptor.getPropertyType() == Character.class) {
-				/*
-                invoke
-                在具有指定參數的指定對像上，調用此Method對象表示的基礎方法。
-                各個參數將自動解包以匹配原始形式參數，並且原始參數和引用參數都必鬚根據需要進行方法調用轉換。
-                如果該方法正常完成，則將其返回的值返回給invoke的調用者；否則，返回false。
-                 */
-				writeMethod.invoke(obj, value.charAt(0));
-//				writeMethod.invoke(obj, req.getParameter(key).charAt(0));
-			} else {
-				writeMethod.invoke(obj, value);
-//				writeMethod.invoke(obj, req.getParameter(key));
+			try {
+				if (propertyDescriptor.getPropertyType() == Character.class) {
+					/*
+					invoke
+					在具有指定參數的指定對像上，調用此Method對象表示的基礎方法。
+					各個參數將自動解包以匹配原始形式參數，並且原始參數和引用參數都必鬚根據需要進行方法調用轉換。
+					如果該方法正常完成，則將其返回的值返回給invoke的調用者；否則，返回false。
+					 */
+					writeMethod.invoke(obj, value.charAt(0));
+				} else if (propertyDescriptor.getPropertyType() == Integer.class){
+					writeMethod.invoke(obj, value==null?null:Integer.parseInt(value));
+				} else if (propertyDescriptor.getPropertyType() == Timestamp.class){
+					writeMethod.invoke(obj, value==null?null:Timestamp.valueOf(value));
+				} else {
+					writeMethod.invoke(obj, value);
+				}
+			} catch (IllegalArgumentException e) {
+				System.err.println("key:"+f+"; value:"+value);
+				throw e;
 			}
 		}
 
 		System.out.println(obj);
 
 		return Optional.ofNullable(obj);
+	}
+
+	/**
+	 * find all
+	 */
+	public List<T> findAll() throws InstantiationException, IllegalAccessException, SQLException {
+
+//		Object o = t.getClass().newInstance();
+		List<T> list = new ArrayList<>();
+
+		ParameterizedType genericSuperclass = (ParameterizedType) getClass().getGenericSuperclass();
+		Class<T> cls = (Class<T>)genericSuperclass.getActualTypeArguments()[0];
+
+		String tableName = cls.getSimpleName().toLowerCase();
+		System.out.println(tableName);
+
+//		String tableName = cls.getSimpleName().toLowerCase();
+		String sql = "select * from "+ tableName;
+		try(Connection conn = dataSource.getConnection();
+			PreparedStatement ps = conn.prepareStatement(sql);){
+			System.out.println(sql);
+
+			ResultSet resultSet = ps.executeQuery();
+
+			while(resultSet.next()){
+				list.add(resultSet2Bean(resultSet, cls).get());
+			}
+			return list;
+		} catch (ServletException e) {
+			e.printStackTrace();
+		} catch (IntrospectionException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			e.printStackTrace();
+		}
+		return list;
 	}
 }
