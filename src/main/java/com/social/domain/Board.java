@@ -11,6 +11,7 @@ public class Board {
     private String nickname;
     private String message;
     private Timestamp create_date;
+    private Integer room_number;
 
     public Integer getId() {
         return id;
@@ -44,13 +45,22 @@ public class Board {
         this.create_date = create_date;
     }
 
+    public Integer getRoom_number() {
+        return room_number;
+    }
+
+    public void setRoom_number(Integer room_number) {
+        this.room_number = room_number;
+    }
+
     @Override
     public String toString() {
         return "Board{" +
                 "id=" + id +
                 ", nickname='" + nickname + '\'' +
                 ", message='" + message + '\'' +
-                ", create_date='" + create_date + '\'' +
+                ", create_date=" + create_date +
+                ", room_number=" + room_number +
                 '}';
     }
 }

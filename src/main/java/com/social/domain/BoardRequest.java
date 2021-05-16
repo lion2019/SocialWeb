@@ -12,6 +12,8 @@ public class BoardRequest {
     //    private Integer id;
     private String nickname;
     private String message;
+    private String room_number;
+
 //    private String create_date;
 
 //    public Integer getId() {
@@ -38,6 +40,13 @@ public class BoardRequest {
         this.message = message;
     }
 
+    public String getRoom_number() {
+        return room_number;
+    }
+
+    public void setRoom_number(String room_number) {
+        this.room_number = room_number;
+    }
 //    public String getCreate_date() {
 //        return create_date;
 //    }
@@ -54,6 +63,7 @@ public class BoardRequest {
         Board board = new Board();
         board.setMessage(message);
         board.setNickname(nickname);
+        board.setRoom_number(room_number==null?null:Integer.parseInt(room_number));
         board.setCreate_date(Timestamp.valueOf(LocalDateTime.now()));
         return board;
     }
@@ -64,11 +74,10 @@ public class BoardRequest {
 
     @Override
     public String toString() {
-        return "Board{" +
-//                "id=" + id +
+        return "BoardRequest{" +
                 "nickname='" + nickname + '\'' +
                 ", message='" + message + '\'' +
-//                ", create_date='" + create_date + '\'' +
+                ", room_number=" + room_number +
                 '}';
     }
 }

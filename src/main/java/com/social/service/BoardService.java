@@ -6,6 +6,7 @@ import com.social.exception.BaseException;
 import com.social.exception.ResponseEnum;
 
 import java.sql.SQLException;
+import java.util.List;
 
 public class BoardService {
 
@@ -15,6 +16,16 @@ public class BoardService {
         try{
             return dao.insert(board);
         }catch (SQLException e){
+            throw e;
+        }
+    }
+
+    public List<Board> findAll() throws Exception {
+        try{
+            return dao.findAll();
+//        }catch (SQLException e){
+//            throw e;
+        } catch (Exception e) {
             throw e;
         }
     }
