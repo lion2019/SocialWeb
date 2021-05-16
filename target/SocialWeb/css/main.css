@@ -11,36 +11,6 @@ body {
     margin-top: 90px;
 }
 
-/*.nav-tabs li a {*/
-/*    color: #777;*/
-/*}*/
-/*.navbar {*/
-/*    font-family: Montserrat, sans-serif;*/
-/*    margin-bottom: 0;*/
-/*    background-color: #2d2d30;*/
-/*    border: 0;*/
-/*    font-size: 11px !important;*/
-/*    letter-spacing: 4px;*/
-/*}*/
-/*.navbar li a, .navbar .navbar-brand {*/
-/*    color: #fff !important;*/
-/*}*/
-/*.navbar a:hover {*/
-/*    color: royalblue !important;*/
-/*}*/
-/*.navbar-nav li.active a {*/
-/*    color: #fff !important;*/
-/*    background-color: #29292c !important;*/
-/*}*/
-
-/*.dropdown-menu li a {*/
-/*    color: #fff !important;*/
-/*    background-color: #29292c !important;*/
-/*}*/
-/*.dropdown-menu li a:hover {*/
-/*    background-color: darkgray !important;*/
-/*}*/
-
 footer {
     background-color: #2d2d30;
     color: #f5f5f5;
@@ -73,7 +43,8 @@ footer a:hover {
     border: solid 1px darkcyan;
     padding: 5px;
     overflow-y: scroll;
-// 文字長度大於div寬度時換行顯示
+    background-color: white;
+ /*文字長度大於div寬度時換行顯示*/
 word-break: break-all;
 }
 /*set srcoll start*/

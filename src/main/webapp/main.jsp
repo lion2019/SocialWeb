@@ -36,7 +36,8 @@
             <div class="form-group">
                 <div class="col-sm-3">
                     <label for="room_number">房號:</label>
-                    <input type="number" id="room_number" name="room_number" size="10%">
+                    <input type="number" id="room_number" name="room_number" size="10%"
+                           oninput="if(value.length>5)value=value.slice(0,5)" placeholder="請輸入數字-限制5碼">
                 </div>
                 <div class="col-sm-8">
                     <label for="message">訊息:</label>
@@ -61,11 +62,11 @@
                 <tbody>
                     <tr>
                         <td>1</td>
-                        <td>c大</td>
+                        <td>會員a</td>
                         <td>1</td>
-                        <td>111111111111111111111111111111111111111111111111111111111111111111111</td>
+                        <td>聊聊台灣新冠肺炎疫情怎麼了</td>
                         <td>
-                            <c:if test="${sessionScope.userInfo.nickname == 'c大'}">
+                            <c:if test="${sessionScope.userInfo.nickname == '會員a'}">
                                 <input type = 'button' id = 'updata' value = '修改'>
                                 <input type = 'button' id = 'delete' value = '刪除'>
                             </c:if>
@@ -74,11 +75,11 @@
                     </tr>
                     <tr>
                         <td>2</td>
-                        <td>aa</td>
+                        <td>會員b</td>
                         <td>2</td>
-                        <td>2222222222222222222222222222222222222222222222222222222222222222222222</td>
+                        <td>bootstrap RWD技術交流</td>
                         <td>
-                            <c:if test="${sessionScope.userInfo.nickname eq 'aa'}">
+                            <c:if test="${sessionScope.userInfo.nickname eq '會員b'}">
                                 <input type = 'button' id = 'updata' value = '修改'>
                                 <input type = 'button' id = 'delete' value = '刪除'>
                             </c:if>
@@ -115,9 +116,10 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="form-group">
-                    <div class="col-sm-12">
-                        <label>房間名:</label>
-                        <input id="input_roomName" size="80%" maxlength="40">
+                    <div class="col-sm-8">
+                        <label for="input_roomName">房號:</label>
+                        <input type="number" id="input_roomName" name="input_roomName" size="10%"
+                               oninput="if(value.length>5)value=value.slice(0,5)" placeholder="請輸入數字-限制5碼">
                         <input type="button"  value="進入聊天室" onclick="initWebSocket2()" />
                         <input type="button" value="退出聊天室" onclick="closeWs()" /><br>
                     </div>
