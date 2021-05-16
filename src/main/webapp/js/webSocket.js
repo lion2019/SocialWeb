@@ -131,17 +131,17 @@ $(document).ready(function() {
         order: [[ 1, 'asc' ], [ 2, 'asc' ]],
 
         // 鎖定行//給table內自定義按鈕
-        columnDefs: [{
-            // targets用於指定操作的列，從第0列開始，-1為最後一列，這裡第六列
-            targets: [4],
-            // return後邊是我們希望在指定列填入的按鈕程式碼
-            render: function ( data, type, full, meta ) {
-                return "<input type = 'button' id = 'updata' value = '修改'>" +
-                       "<input type = 'button' id = 'delete' value = '刪除'>"
-            },
-            // 禁止排序
-            orderable: false,
-        }],
+        // columnDefs: [{
+        //     // targets用於指定操作的列，從第0列開始，-1為最後一列，這裡第六列
+        //     targets: [4],
+        //     // return後邊是我們希望在指定列填入的按鈕程式碼
+        //     render: function ( data, type, full, meta ) {
+        //         return "<input type = 'button' id = 'updata' value = '修改'>" +
+        //                "<input type = 'button' id = 'delete' value = '刪除'>"
+        //     },
+        //     // 禁止排序
+        //     orderable: false,
+        // }],
 
         //給列賦值，這裡的列名需要和data的資料名對應
         //注意這裡第六列資料指定為null，用來存放我們加入的按鈕

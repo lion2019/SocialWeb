@@ -30,7 +30,6 @@
         setInterval("changeColor()",200);
 
         let nickname = "${sessionScope.userInfo.nickname}";
-        $(".msg_board").css("color","white");
 
     </script>
 </head>

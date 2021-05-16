@@ -1,8 +1,12 @@
 <%@ page import="java.util.Date" %>
+<%@ page import="com.social.domain.User" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <jsp:include page="/WEB-INF/subviews/header.jsp" >
     <jsp:param name="subtitle" value="主頁"/>
 </jsp:include>
+<%
+    User user = (User)session.getAttribute("userInfo");
+%>
 <style>
     /*input type=number裏上下箭頭隱藏*/
     input::-webkit-outer-spin-button,
@@ -58,18 +62,28 @@
                 <tbody>
                     <tr>
                         <td>1</td>
-                        <td>lin</td>
+                        <td>c大</td>
                         <td>1</td>
                         <td>111111111111111111111111111111111111111111111111111111111111111111111</td>
-                        <td>&nbsp;</td>
+                        <td>
+                            <%if(user.getNickname().equals("c大")){%>
+                            <input type = 'button' id = 'updata' value = '修改'>
+                            <input type = 'button' id = 'delete' value = '刪除'>
+                            <%}%>
+                        </td>
                         <td><%= new Date()%></td>
                     </tr>
                     <tr>
                         <td>2</td>
-                        <td>cc</td>
+                        <td>aa</td>
                         <td>2</td>
                         <td>2222222222222222222222222222222222222222222222222222222222222222222222</td>
-                        <td>&nbsp;</td>
+                        <td>
+                            <%if(user.getNickname().equals("aa")){%>
+                            <input type = 'button' id = 'updata' value = '修改'>
+                            <input type = 'button' id = 'delete' value = '刪除'>
+                            <%}%>
+                        </td>
                         <td><%= new Date()%></td>
                     </tr>
                 </tbody>
@@ -147,7 +161,7 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>線上會員</th>
+                                    <th>上線成員</th>
                                     <th>登入時間</th>
                                 </tr>
                             </thead>
@@ -196,4 +210,3 @@
 </div>
 
 <jsp:include page="/WEB-INF/subviews/footer.jsp" />
-
