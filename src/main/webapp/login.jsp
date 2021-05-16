@@ -37,12 +37,6 @@
 
     </form>
 </div>
-<script type="text/javascript">
 
-    let errMsg = "${requestScope.errorMsg}";
-    if(errMsg){
-        alert(errMsg);
-    }
-</script>
 <jsp:include page="/WEB-INF/subviews/footer.jsp" />
 

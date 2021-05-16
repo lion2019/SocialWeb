@@ -1,12 +1,11 @@
-<%@ page import="java.util.Date" %>
-<%@ page import="com.social.domain.User" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<jsp:useBean id="date" class="java.util.Date" />
 <jsp:include page="/WEB-INF/subviews/header.jsp" >
     <jsp:param name="subtitle" value="主頁"/>
 </jsp:include>
-<%
-    User user = (User)session.getAttribute("userInfo");
-%>
+<fmt:formatDate type="both" value="${date}" var="nowDate"/>
 <style>
     /*input type=number裏上下箭頭隱藏*/
     input::-webkit-outer-spin-button,
@@ -66,12 +65,12 @@
                         <td>1</td>
                         <td>111111111111111111111111111111111111111111111111111111111111111111111</td>
                         <td>
-                            <%if(user.getNickname().equals("c大")){%>
-                            <input type = 'button' id = 'updata' value = '修改'>
-                            <input type = 'button' id = 'delete' value = '刪除'>
-                            <%}%>
+                            <c:if test="${sessionScope.userInfo.nickname == 'c大'}">
+                                <input type = 'button' id = 'updata' value = '修改'>
+                                <input type = 'button' id = 'delete' value = '刪除'>
+                            </c:if>
                         </td>
-                        <td><%= new Date()%></td>
+                        <td>${nowDate}</td>
                     </tr>
                     <tr>
                         <td>2</td>
@@ -79,12 +78,12 @@
                         <td>2</td>
                         <td>2222222222222222222222222222222222222222222222222222222222222222222222</td>
                         <td>
-                            <%if(user.getNickname().equals("aa")){%>
-                            <input type = 'button' id = 'updata' value = '修改'>
-                            <input type = 'button' id = 'delete' value = '刪除'>
-                            <%}%>
+                            <c:if test="${sessionScope.userInfo.nickname eq 'aa'}">
+                                <input type = 'button' id = 'updata' value = '修改'>
+                                <input type = 'button' id = 'delete' value = '刪除'>
+                            </c:if>
                         </td>
-                        <td><%= new Date()%></td>
+                        <td>${nowDate}</td>
                     </tr>
                 </tbody>
             </table>
@@ -169,12 +168,12 @@
                                 <tr>
                                     <td>1</td>
                                     <td>aa</td>
-                                    <td><%=new Date()%></td>
+                                    <td>${nowDate}</td>
                                 </tr>
                                 <tr>
                                     <td>2</td>
                                     <td>bb</td>
-                                    <td><%=new Date()%></td>
+                                    <td>${nowDate}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -193,12 +192,12 @@
                                     <tr>
                                         <td>1</td>
                                         <td>cc</td>
-                                        <td><%=new Date()%></td>
+                                        <td>${nowDate}</td>
                                     </tr>
                                     <tr>
                                         <td>2</td>
                                         <td>dd</td>
-                                        <td><%=new Date()%></td>
+                                        <td>${nowDate}</td>
                                     </tr>
                                 </tbody>
                             </table>
