@@ -42,6 +42,9 @@ public class Login extends BaseController {
 				| ServletException | IntrospectionException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			request.setAttribute("errorMsg", e.getMessage());
+			request.getRequestDispatcher("/login.jsp").forward(request, response);
+			return;
 		}
 	}
 
