@@ -13,7 +13,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <!--引用dataTables.js-->
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-    <script src="${pageContext.request.contextPath}/js/webSocket.js"></script>
+    <script src="${pageContext.request.contextPath}/js/main.js"></script>
 
     <title>首頁</title>
     <script>
