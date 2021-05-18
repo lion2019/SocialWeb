@@ -9,10 +9,6 @@ body {
     width: 80px;
     height: 40px;
 }
-.carousel-inner img {
-    width: 100%; /* Set width to 100% */
-    height: 100%;
-}
 
 footer {
     background-color: #2d2d30;
@@ -42,7 +38,7 @@ footer a:hover {
 /*聊天室對話框*/
 .msg_board1,.msg_board2{
     width: 100%;
-    height: 200px;
+    height: 250px;
     border: solid 1px darkcyan;
     padding: 5px;
     overflow-y: scroll;
@@ -71,4 +67,5 @@ word-break: break-all;
     background-color: #89D7F7;
 }
 /*------------------------------------*/
+
 

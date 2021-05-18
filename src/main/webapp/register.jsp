@@ -63,7 +63,7 @@
         </div>
     </form>
 </div>
-<div class="row" style="height:80px">
+<div class="row" style="height:10px">
 </div>
 <jsp:include page="/WEB-INF/subviews/footer.jsp" />
 

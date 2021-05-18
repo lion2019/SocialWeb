@@ -18,8 +18,6 @@
     /*------------------------------------*/
 </style>
 <script>
-    //從後端取得錯誤訊息
-
 
     function insert(){
         let room_number = $("#room_number").val();
@@ -40,7 +38,7 @@
             dataType:'json',
             success:function (response){
                 //0為新增成功
-                if(response == 0){
+                if(response.code == 0){
                     alert('新增成功')
                 }else{
                     //300用戶不存在.201新增error
@@ -56,8 +54,8 @@
 
 <ul class="nav nav-tabs">
     <li class="active"><a data-toggle="tab" href="#home">留言版</a></li>
-    <li><a data-toggle="tab" href="#menu1" onclick="initWebSocket1(0)">聊天室-公頻</a></li>
-    <li><a data-toggle="tab" href="#menu2">聊天室-房間</a></li>
+    <li><a data-toggle="tab" href="#menu1" onclick="initWebSocket1(0)">公頻</a></li>
+    <li><a data-toggle="tab" href="#menu2">房間</a></li>
     <li><a data-toggle="tab" href="#menu3">好友</a></li>
 </ul>
 <div class="tab-content">
@@ -232,6 +230,5 @@
         </div>
     </div>
 </div>
-<div class="row" style="height:80px">
-</div>
+
 <jsp:include page="/WEB-INF/subviews/footer.jsp" />
