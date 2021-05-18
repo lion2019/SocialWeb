@@ -2,16 +2,10 @@
 <jsp:include page="/WEB-INF/subviews/header.jsp" >
     <jsp:param name="subtitle" value="主頁"/>
 </jsp:include>
-<div id="myCarousel" class="carousel slide" data-ride="carousel">
-    <div class="row" style="height: 100px">
-        <div class="col-md-12"></div>
-    </div>
-</div>
-<div class="container">
-    <label class="col-sm-8" id="headtext">會員註冊</label>
 
+<div class="container">
     <div class="row">
-        <div class="col-sm-12"></div>
+        <label class="col-sm-8" id="headtext">會員註冊</label>
     </div>
     <form class="form-horizontal" action="${pageContext.request.contextPath}/register.do" method="post">
         <div class="form-group"><!--required必填欄位-->
@@ -60,7 +54,6 @@
                        value="<%=request.getParameter("nickname") ==null ? "":request.getParameter("nickname")%>">
             </div>
         </div>
-
         <div class="row">
             <div class="col-xs-8">
                 <div class="text-center">
@@ -70,13 +63,7 @@
         </div>
     </form>
 </div>
-<script type="text/javascript">
-
-    let errMsg = "${requestScope.errorMsg}";
-    if(errMsg){
-        alert(errMsg);
-    }
-</script>
-
+<div class="row" style="height:80px">
+</div>
 <jsp:include page="/WEB-INF/subviews/footer.jsp" />
 

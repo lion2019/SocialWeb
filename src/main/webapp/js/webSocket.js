@@ -111,8 +111,10 @@ function closeWs() {
     webSocket.close();
 };
 
-//留言版表格
+
 $(document).ready(function() {
+
+    //留言版表格
     $('#board').DataTable( {// 和<table>的id對應，指定初始化datatables。
         // 在初始表格的左上有個可選擇的每頁列數的選單設定
         lengthChange: true,   // 呈現選單
@@ -163,7 +165,7 @@ $(document).ready(function() {
         // 在初始表格的左上有個可選擇的每頁列數的選單設定
         lengthChange: true,   // 呈現選單
         lengthMenu: [5, 10, 25, 50],   // 選單值設定
-        pageLength: 25,   // 不用選單設定也可改用固定每頁列數
+        pageLength: 20,   // 不用選單設定也可改用固定每頁列數
 
         searching: true,   // 搜索功能
         ordering: true,   // 開啟排序

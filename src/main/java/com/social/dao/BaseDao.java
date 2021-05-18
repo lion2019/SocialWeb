@@ -69,12 +69,12 @@ public abstract class BaseDao<T> {
 		String tableName = t.getClass().getSimpleName().toLowerCase();
 
 		/*
-		返回一個Field對像數組，該數組反映由該Class對象表示的類或接口聲明的所有字段。
+		取得class 屬性，返回一個Field對像數組，該數組反映由該Class對象表示的類或接口聲明的所有字段。
 		這包括公共，受保護，默認（程序包）訪問和私有字段，但不包括繼承的字段。
 		 */
 		Field[] fields = t.getClass().getDeclaredFields();
 
-		// 依照屬性名組成欄位名字串 e.g. (column1,column2,column3,...)
+		// 依照屬性名組成欄位名字串 e.g. (column1,column2,column3,...), java8陣列轉String
 		String columnStr = Stream.of(fields).map(Field::getName).collect(Collectors.joining(",", "(", ")"));
 		// 依照屬性名組成動態SQL(?的部份)  e.g. (?,?,?,...)
 		String values = Stream.of(fields).map(o -> "?").collect(Collectors.joining(",", "(", ")"));

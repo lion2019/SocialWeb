@@ -45,7 +45,7 @@ public class BoardController extends BaseController {
 
             boardService.addBoard(board);
 
-            response.sendRedirect(request.getContextPath()+"/main.jsp");
+            //response.sendRedirect(request.getContextPath()+"/main.jsp");
 
             // FIXME ServletException 內容可調使用 enum
 //			User output = user.filter(registerService::addUser).orElseThrow(()->new ServletException("user add error!!"));
@@ -62,7 +62,7 @@ public class BoardController extends BaseController {
             e.printStackTrace();
             String errorMsg = e.getErrorCode() == 23506? "user 不存在!":ResponseEnum.insert_error.getMessage();
             request.setAttribute("errorMsg", errorMsg);
-            request.getRequestDispatcher("/board.jsp").forward(request, response);
+            //request.getRequestDispatcher("/main.jsp").forward(request, response);
             return;
 //			System.err.println("err code:"+e.getCode());
 //			System.err.println("err msg:"+e.getMessage());

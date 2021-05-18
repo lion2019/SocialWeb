@@ -9,20 +9,25 @@
         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
         <li data-target="#myCarousel" data-slide-to="1"></li>
         <li data-target="#myCarousel" data-slide-to="2"></li>
+        <li data-target="#myCarousel" data-slide-to="3"></li>
     </ol>
 
     <!-- Wrapper for slides -->
     <div class="carousel-inner" role="listbox">
         <div class="item active">
-            <img src="images/social.jpg" alt="socia">
+            <img src="images/board.jpg" alt="board">
         </div>
 
         <div class="item">
-            <img src="images/game.jpg" alt="game">
+            <img src="images/openRoom.jpg" alt="openRoom">
         </div>
 
         <div class="item">
-            <img src="images/la.jpg" alt="Los Angeles">
+            <img src="images/board.jpg" alt="room">
+        </div>
+
+        <div class="item">
+            <img src="images/board.jpg" alt="friend">
         </div>
     </div>
 
@@ -36,6 +41,7 @@
         <span class="sr-only">Next</span>
     </a>
 </div>
+
 <jsp:include page="/WEB-INF/subviews/footer.jsp" />
 
 

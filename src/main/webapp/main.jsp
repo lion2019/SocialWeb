@@ -17,11 +17,43 @@
     }
     /*------------------------------------*/
 </style>
-<div id="myCarousel" class="carousel slide" data-ride="carousel">
-    <div class="row" style="height: 100px">
-        <div class="col-md-12"></div>
-    </div>
-</div>
+<script>
+    //從後端取得錯誤訊息
+
+
+    function insert(){
+        let room_number = $("#room_number").val();
+        let message = $("#message").val();
+        if(room_number.trim() == null || ((room_number.trim()).length <0 || (room_number.trim()).length >5)){
+            alert('房號不得為空及數字長度限制5字，請輸入正確格式！')
+        }
+        if(message == null || (message.length >100)){
+            alert('訊息不得為空及長度限制100字，請輸入正確格式！')
+        }
+        $.ajax({
+            url:'${pageContext.request.contextPath}/board.do',
+            type:'POST',
+            data:{
+                room_number:room_number,
+                message:message,
+            },
+            dataType:'json',
+            success:function (response){
+                //0為新增成功
+                if(response == 0){
+                    alert('新增成功')
+                }else{
+                    //300用戶不存在.201新增error
+                    alert('新增失敗:' +  response)
+                }
+            },
+            error:function (xhr, textStatus, errorThrown){
+                alert('新增失敗:' + xhr.status + ',' + textStatus + errorThrown)
+            }
+        });
+    }
+</script>
+
 <ul class="nav nav-tabs">
     <li class="active"><a data-toggle="tab" href="#home">留言版</a></li>
     <li><a data-toggle="tab" href="#menu1" onclick="initWebSocket1(0)">聊天室-公頻</a></li>
@@ -32,20 +64,20 @@
     <div id="home" class="tab-pane fade in active">
         <br>
         <div class="container-fluid">
-        <form class="form-horizontal" action="${pageContext.request.contextPath}/board.do" method="post">
-            <div class="form-group">
-                <div class="col-sm-3">
-                    <label for="room_number">房號:</label>
-                    <input type="number" id="room_number" name="room_number" size="10%"
-                           oninput="if(value.length>5)value=value.slice(0,5)" placeholder="請輸入數字-限制5碼">
+            <form class="form1">
+                <div class="form-group">
+                    <div class="col-sm-3">
+                        <label for="room_number">房號:</label>
+                        <input type="number" id="room_number" name="room_number" size="10%"
+                               oninput="if(value.length>5)value=value.slice(0,5)" placeholder="請輸入數字-限制5碼">
+                    </div>
+                    <div class="col-sm-8">
+                        <label for="message">訊息:</label>
+                        <input id="message" name="message" size="70%" maxlength="100" required placeholder="請輸入留言訊息">
+                        <input type="button" id="message_btn" onclick="insert()" value="新增留言"/><br>
+                    </div>
                 </div>
-                <div class="col-sm-8">
-                    <label for="message">訊息:</label>
-                    <input id="message" name="message" size="70%" maxlength="100" required placeholder="請輸入留言訊息">
-                    <input type="submit" value="新增留言"/><br>
-                </div>
-            </div>
-        </form>
+            </form>
         </div>
         <div class="container-fluid">
             <table id="board" class="display">
@@ -95,18 +127,16 @@
     <div id="menu1" class="tab-pane fade">
         <div class="container-fluid">
             <div class="row">
-                <div class="form-group">
-                    <div class="col-sm-9 offset-3">
-                        <div class="msg_board1"></div>
-                    </div>
+                <div class="col-sm-9 offset-3">
+                     <div class="msg_board1"></div>
                 </div>
-                <div class="form-group">
-                    <div class="col-sm-8">
-                        <input type="text" class="form-control" id="openroom_msg" name="openroom_msg" maxlength="40">
-                    </div>
-                    <div class="col-sm-2">
-                        <input type="button" value="傳送" onclick="send_msg(1)">
-                    </div>
+            </div><br>
+            <div class="row">
+                <div class="col-sm-8">
+                     <input type="text" class="form-control" id="openroom_msg" name="openroom_msg" maxlength="40">
+                </div>
+                <div class="col-sm-2">
+                     <input type="button" value="傳送" onclick="send_msg(1)">
                 </div>
             </div>
         </div>
@@ -115,28 +145,25 @@
     <div id="menu2" class="tab-pane fade">
         <div class="container-fluid">
             <div class="row">
-                <div class="form-group">
-                    <div class="col-sm-8">
-                        <label for="input_roomName">房號:</label>
-                        <input type="number" id="input_roomName" name="input_roomName" size="10%"
-                               oninput="if(value.length>5)value=value.slice(0,5)" placeholder="請輸入數字-限制5碼">
-                        <input type="button"  value="進入聊天室" onclick="initWebSocket2()" />
-                        <input type="button" value="退出聊天室" onclick="closeWs()" /><br>
-                    </div>
+                <div class="col-sm-8">
+                     <label for="input_roomName">房號:</label>
+                     <input type="number" id="input_roomName" name="input_roomName" size="10%"
+                            oninput="if(value.length>5)value=value.slice(0,5)" placeholder="請輸入數字-限制5碼">
+                     <input type="button"  value="進入聊天室" onclick="initWebSocket2()" />
+                     <input type="button" value="退出聊天室" onclick="closeWs()" /><br>
                 </div>
-                <div class="form-group">
-                    <div class="col-sm-9 offset-3">
-                        <div class="msg_board2"></div>
-                    </div>
+            </div>
+            <div class="row">
+                 <div class="col-sm-9 offset-3">
+                      <div class="msg_board2"></div>
+                 </div>
+            </div><br>
+            <div class="row">
+                <div class="col-sm-8">
+                     <input type="text" class="form-control" id="nameroom_msg" name="nameroom_msg" maxlength="40">
                 </div>
-
-                <div class="form-group">
-                    <div class="col-sm-8">
-                        <input type="text" class="form-control" id="nameroom_msg" name="nameroom_msg" maxlength="40">
-                    </div>
-                    <div class="col-sm-2">
-                        <input type="button" value="傳送" onclick="send_msg(2)">
-                    </div>
+                <div class="col-sm-2">
+                     <input type="button" value="傳送" onclick="send_msg(2)">
                 </div>
             </div>
         </div>
@@ -147,13 +174,9 @@
                 <tr>
                     <td width="45%">&nbsp;</td>
                     <td>&nbsp;</td>
-                    <td width="45%" align="center">
-                        <form class="form-horizontal" action="${pageContext.request.contextPath}/friend.do" method="post">
-                            <div class="form-group">
-                                <input id="insert_friend" name="insert_friend" size="30%" maxlength="20" required placeholder="請輸入好友暱名">
-                                <input type="submit" value="新增好友"/><br>
-                            </div>
-                        </form>
+                    <td width="45%" align="right">
+                        <input id="insert_friend" name="insert_friend" size="30%" maxlength="20" required placeholder="請輸入好友暱名">
+                        <input type="submit" value="新增好友"/><br><br>
                     </td>
                 </tr>
                 <tr>
@@ -209,5 +232,6 @@
         </div>
     </div>
 </div>
-
+<div class="row" style="height:80px">
+</div>
 <jsp:include page="/WEB-INF/subviews/footer.jsp" />

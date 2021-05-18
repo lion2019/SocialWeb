@@ -43,8 +43,16 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <img src="images/Logo.jpg" alt="logo" class="img-thumbnail" style="width: 100px;height: 50px">
-            <a class="navbar-brand" href="index.jsp">TH Chatroom</a>
+            <div class="row">
+                <div class="col-sm-4">
+                        <%--img-responsive圖片縮放RWD--%>
+                    <img src="images/Logo.jpg" alt="logo" id="logo" class="img-responsive" >
+                </div>
+                <div class="col-sm-8">
+                    <a class="navbar-brand" href="index.jsp">TH Chatroom</a>
+                </div>
+            </div>
+
         </div>
         <div>
             <div class="collapse navbar-collapse" id="myNavbar">
@@ -71,3 +79,5 @@
         </div>
     </div>
 </nav>
+<div class="row" style="height:95px">
+</div>

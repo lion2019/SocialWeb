@@ -2,16 +2,12 @@
 <jsp:include page="/WEB-INF/subviews/header.jsp" >
     <jsp:param name="subtitle" value="會員登入"/>
 </jsp:include>
-<div id="myCarousel" class="carousel slide" data-ride="carousel">
-    <div class="row" style="height: 100px">
-        <div class="col-md-12"></div>
-    </div>
-</div>
-<div class="container">
-    <label class="col-sm-8" id="headtext">會員登入</label>
 
+<div class="container">
     <div class="row">
-        <div class="col-sm-12"></div>
+        <div class="form-group">
+            <label class="col-sm-8" id="headtext">會員登入</label>
+        </div>
     </div>
     <form class="form-horizontal" action="${pageContext.request.contextPath}/login.do" method="post">
         <div class="form-group">
@@ -34,7 +30,6 @@
                 </div>
             </div>
         </div>
-
     </form>
 </div>
 
