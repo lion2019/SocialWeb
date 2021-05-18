@@ -1,9 +1,6 @@
 package com.social.controller;
 
-import com.social.domain.Board;
-import com.social.domain.BoardRequest;
-import com.social.domain.RegisterRequest;
-import com.social.domain.User;
+import com.social.domain.*;
 import com.social.exception.BaseException;
 import com.social.exception.ResponseEnum;
 import com.social.service.BoardService;
@@ -17,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.beans.IntrospectionException;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -35,6 +33,12 @@ public class BoardController extends BaseController {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
+        response.setContentType("application/json;");
+        response.setCharacterEncoding(StandardCharsets.UTF_8.name());
+
+        BaseResponse baseResponse = null;
+
         try {
             BoardRequest boardRequest = reqParam2Bean(request, BoardRequest.class)
                     .orElseThrow(() -> new BaseException(ResponseEnum.parameter_empty));
@@ -43,27 +47,25 @@ public class BoardController extends BaseController {
             boardRequest.setNickname(userInfo.getNickname());
             Board board = boardRequest.convert2Entity();
 
-            boardService.addBoard(board);
+            if(boardService.addBoard(board)){
+                baseResponse = new BaseResponse(ResponseEnum.OK);
+            }else{
+                baseResponse = new BaseResponse(ResponseEnum.insert_error);
+            }
 
-            //response.sendRedirect(request.getContextPath()+"/main.jsp");
-
-            // FIXME ServletException 內容可調使用 enum
-//			User output = user.filter(registerService::addUser).orElseThrow(()->new ServletException("user add error!!"));
-
-//			user.ifPresent(registerService::addUser);
-//			req.setAttribute("userInfo", user);
-
-//			resp.setContentType("application/json;");
-//			resp.setCharacterEncoding(StandardCharsets.UTF_8.name());
-
-//			JSONObject output = JSONObject.fromObject(user);
-//			resp.getWriter().println(output);
+            //            response.sendRedirect(request.getContextPath()+"/main.jsp");
+//            JSONObject jsonObject = new JSONObject();
+//            jsonObject.put("code",ResponseEnum.OK.getCode());
+//            jsonObject.put("message",ResponseEnum.OK.getCode());
         } catch (SQLException e){
             e.printStackTrace();
-            String errorMsg = e.getErrorCode() == 23506? "user 不存在!":ResponseEnum.insert_error.getMessage();
-            request.setAttribute("errorMsg", errorMsg);
-            //request.getRequestDispatcher("/main.jsp").forward(request, response);
-            return;
+//            String errorMsg = e.getErrorCode() == 23506? "user 不存在!":ResponseEnum.insert_error.getMessage();
+//            request.setAttribute("errorMsg", errorMsg);
+            //FIXME  duplicate 未判斷
+            ResponseEnum responseEnum = e.getErrorCode() == 23506 ? ResponseEnum.user_not_found : ResponseEnum.insert_error;
+            baseResponse = new BaseResponse(responseEnum);
+
+//            request.getRequestDispatcher("/board.jsp").forward(request, response);
 //			System.err.println("err code:"+e.getCode());
 //			System.err.println("err msg:"+e.getMessage());
 //			throw e;
@@ -71,6 +73,9 @@ public class BoardController extends BaseController {
                 | IntrospectionException | InvocationTargetException e) {
             e.printStackTrace();
             throw new ServletException(e);
+        }finally{
+            JSONObject output = JSONObject.fromObject(baseResponse);
+            response.getWriter().println(output);
         }
     }
 
