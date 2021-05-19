@@ -7,15 +7,7 @@
 </jsp:include>
 <fmt:formatDate type="both" value="${date}" var="nowDate"/>
 <style>
-    /*input type=number裏上下箭頭隱藏*/
-    input::-webkit-outer-spin-button,
-    input::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-    }
-    input[type="number"]{
-        -moz-appearance: textfield;
-    }
-    /*------------------------------------*/
+
 </style>
 <script>
 
@@ -67,7 +59,7 @@
                     <div class="col-sm-3">
                         <label for="room_number">房號:</label>
                         <input type="number" id="room_number" name="room_number" size="10%"
-                               oninput="if(value.length>5)value=value.slice(0,5)" placeholder="請輸入數字-限制5碼">
+                               oninput="if(value.length>5 || value<=0)value=value.slice(0,5)" placeholder="請輸入數字-限制5碼">
                     </div>
                     <div class="col-sm-8">
                         <label for="message">訊息:</label>
@@ -146,7 +138,7 @@
                 <div class="col-sm-8">
                      <label for="input_roomName">房號:</label>
                      <input type="number" id="input_roomName" name="input_roomName" size="10%"
-                            oninput="if(value.length>5)value=value.slice(0,5)" placeholder="請輸入數字-限制5碼">
+                            oninput="if(value.length>5 || value<=0)value=value.slice(0,5)" placeholder="請輸入數字-限制5碼">
                      <input type="button"  value="進入聊天室" onclick="initWebSocket2()" />
                      <input type="button" value="退出聊天室" onclick="closeWs()" /><br>
                 </div>

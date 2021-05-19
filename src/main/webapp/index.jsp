@@ -3,43 +3,6 @@
     <jsp:param name="subtitle" value="首頁"/>
 </jsp:include>
 
-<style type="text/css">
-    /*廣告輪播視窗設定<h3>*/
-    .full-screen {
-
-
-    }
-    /*廣告輪播超連結<h3>*/
-    .item>a{
-        display: block;
-        height: 100%;
-    }
-
-    /*廣告輪播的文字說明設定<h3>*/
-    .carousel-caption {
-        margin-bottom: 150px;
-        color: black;
-    }
-    /*圖片計數器圓圈外框設定*/
-    .carousel-indicators {
-        position: absolute; /*整個計數區域絕對定位*/
-        bottom: 170px; /*距容器carousel底部10px*/
-        z-index: 15; /*設定其在Z軸的層級*/
-        /*讓整個計數區水平居中*/
-        left: 50%;
-        width: 60%;
-        padding-left: 0;
-        margin-left: -30%;
-        text-align: center;
-        list-style: none;
-    }
-    /*圖片計數器圓圈設定*/
-    .carousel-indicators li{
-        padding: 8px; /*圈圈大小*/
-        margin: 0 8px;/*y=0,x=5*/
-    }
-
-</style>
 </head>
 <body>
 
@@ -57,8 +20,8 @@
     <div class="carousel-inner" role="listbox">
         <!--第三步：設計輪播圖片播放區,使用 carousel-inner 樣式來控制-->
         <div class="item active">
-            <a href="register.jsp">
-                <img src="images/board.jpg" data-color="#eee">
+            <a href="http://www.hwh.edu.tw/bin/hwhhome.php">
+                <img src="images/Haw_Hsia.jpg" data-color="#eee">
                 <div class="carousel-caption">
                     <h3>廣告1</h3>
                     <p>&nbsp;</p>
@@ -66,8 +29,8 @@
             </a>
         </div>
         <div class="item">
-            <a href="login.jsp">
-                <img src="images/board.jpg" data-color="#eee">
+            <a href="https://cahh.hwh.edu.tw/">
+                <img src="images/Haw_Yun.jpg" data-color="#eee">
                 <div class="carousel-caption">
                     <h3>廣告2</h3>
                     <p>&nbsp;</p>
@@ -75,8 +38,8 @@
             </a>
         </div>
         <div class="item">
-            <a href="main.jsp">
-                <img src="images/board.jpg" data-color="#eee">
+            <a href="http://student.hwh.edu.tw/student/">
+                <img src="images/Student_Parent.jpg" data-color="#eee">
                 <div class="carousel-caption">
                     <h3>廣告3</h3>
                     <p>&nbsp;</p>
@@ -84,8 +47,8 @@
             </a>
         </div>
         <div class="item">
-            <a href="">
-                <img src="images/board.jpg" data-color="#eee">
+            <a href="https://www.cdc.gov.tw/">
+                <img src="images/CDC.jpg" data-color="#eee">
                 <div class="carousel-caption">
                     <h3>廣告4</h3>
                     <p>&nbsp;</p>
@@ -120,8 +83,9 @@
             $(this).parent().css({
                 'background-image' : 'url(' + $src + ')',
                 'background-color' : $color,
-                'background-size': 'cover',/*背景圖片小於容器時，將背景圖片的大小放大至容器大小並填滿文章*/
+                // 'background-size': 'cover',/*背景圖片小於容器時，將背景圖片的大小放大至容器大小並填滿文章*/
                 'background-position': 'center',
+                'height': '100%',
                 'background-repeat': 'no-repeat',
             });
             $(this).remove();

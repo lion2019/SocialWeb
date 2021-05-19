@@ -5,11 +5,12 @@ body {
     background-color: #ece8e8;
 }
 
+/*logo圖片*/
 #logo{
     width: 80px;
     height: 40px;
 }
-
+/*footer頁腳*/
 footer {
     background-color: #2d2d30;
     color: #f5f5f5;
@@ -22,18 +23,26 @@ footer a:hover {
     color: #0040ff;
     text-decoration: none;
 }
+/*註冊、登入必填欄位*號*/
 .star{
     color: red;
 }
+/*註冊、登入標題*/
 #headtext{
     font-size: 40px;
     text-align: center;
 }
+/*註冊、登入輸入框*/
 .form-group label{
     font-size: 20px;
     text-align: right;
 }
 /*------------------------------------*/
+/*圖片計數器圓圈設定*/
+.carousel-indicators li{
+    padding: 8px; /*圈圈大小*/
+    margin: 0 8px;/*y=0,x=5*/
+}
 
 /*聊天室對話框*/
 .msg_board1,.msg_board2{
@@ -46,7 +55,7 @@ footer a:hover {
  /*文字長度大於div寬度時換行顯示*/
 word-break: break-all;
 }
-/*set srcoll start*/
+/*聊天室set srcoll start*/
 ::-webkit-scrollbar
 {
     width: 10px;
@@ -67,5 +76,35 @@ word-break: break-all;
     background-color: #89D7F7;
 }
 /*------------------------------------*/
-
-
+/*房號input type=number裏上下箭頭隱藏*/
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+input[type="number"]{
+    -moz-appearance: textfield;
+}
+/*------------------------------------*/
+/*廣告輪播超連結<h3>*/
+.item > a{
+    display: block;
+    height: 100%;
+}
+/*廣告輪播的文字說明設定<h3>*/
+.carousel-caption {
+    margin-bottom: 150px;
+    /*color: black;*/
+}
+/*圖片計數器圓圈外框設定*/
+.carousel-indicators {
+    position: absolute; /*整個計數區域絕對定位*/
+    bottom: 170px; /*距容器carousel底部10px*/
+    z-index: 15; /*設定其在Z軸的層級*/
+    /*讓整個計數區水平居中*/
+    left: 50%;
+    width: 60%;
+    padding-left: 0;
+    margin-left: -30%;
+    text-align: center;
+    list-style: none;
+}
