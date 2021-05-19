@@ -45,29 +45,29 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <div class="row">
-                <div class="col-sm-4">
-                        <%--img-responsive圖片縮放RWD--%>
-                    <img src="images/Logo.jpg" alt="logo" id="logo" class="img-responsive" >
-                </div>
-                <div class="col-sm-8">
+<%--            <div class="row">--%>
+<%--                <div class="col-sm-4">--%>
+<%--                        &lt;%&ndash;img-responsive圖片縮放RWD&ndash;%&gt;--%>
+<%--                    <img src="images/Logo.jpg" alt="logo" id="logo" class="img-responsive" >--%>
+<%--                </div>--%>
+<%--                <div class="col-sm-8">--%>
                     <a class="navbar-brand" href="index.jsp">TH Chatroom</a>
-                </div>
-            </div>
-
+<%--                </div>--%>
+<%--            </div>--%>
         </div>
         <div>
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav navbar-right">
                     <c:choose>
                         <c:when test="${sessionScope.userInfo == null}">
-                            <li><a href="register.jsp">註冊</a></li>
-                            <li><a href="login.jsp">登入</a></li>
+                            <li><a class="glyphicon glyphicon-user" href="register.jsp">註冊</a></li>
+                            <li><a class="glyphicon glyphicon-log-in" href="login.jsp">登入</a></li>
                         </c:when>
 
                         <c:otherwise>
-                            <li><a href="${pageContext.request.contextPath}/main.jsp">聊天室</a></li>
-                            <li><a href="${pageContext.request.contextPath}/logout.do">登出</a></li>
+                            <li><a href="${pageContext.request.contextPath}/main.jsp">主頁</a></li>
+                            <li><a class="glyphicon glyphicon-log-out" href="${pageContext.request.contextPath}/logout.do">登出</a></li>
+                            <li><a class="glyphicon glyphicon-user" href="#">${sessionScope.userInfo.nickname}</a></li>
                         </c:otherwise>
 
                     </c:choose>
@@ -81,5 +81,5 @@
         </div>
     </div>
 </nav>
-<div class="row" style="height:95px">
+<div class="row" style="height:70px">
 </div>

@@ -43,11 +43,12 @@
         });
     }
 </script>
-
+<div class="row" style="height:35px">
+</div>
 <ul class="nav nav-tabs">
     <li class="active"><a data-toggle="tab" href="#home">留言版</a></li>
-    <li><a data-toggle="tab" href="#menu1" onclick="initWebSocket1(0)">公頻</a></li>
-    <li><a data-toggle="tab" href="#menu2">房間</a></li>
+    <li><a data-toggle="tab" href="#menu1" onclick="initWebSocket1(0)">聊天室-公頻</a></li>
+    <li><a data-toggle="tab" href="#menu2">聊天室-房間</a></li>
     <li><a data-toggle="tab" href="#menu3">好友</a></li>
 </ul>
 <div class="tab-content">
@@ -199,7 +200,7 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>好友</th>
+                                        <th>好友清單</th>
                                         <th>登入時間</th>
                                     </tr>
                                 </thead>

@@ -5,7 +5,7 @@
 
 <div class="container">
     <div class="row">
-        <label class="col-sm-8" id="headtext">會員註冊</label>
+        <label class="col-sm-8 headtext">會員註冊</label>
     </div>
     <form class="form-horizontal" action="${pageContext.request.contextPath}/register.do" method="post">
         <div class="form-group"><!--required必填欄位-->

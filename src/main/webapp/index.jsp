@@ -3,9 +3,6 @@
     <jsp:param name="subtitle" value="首頁"/>
 </jsp:include>
 
-</head>
-<body>
-
 <div id="mycarousel" class="carousel slide" data-ride="carousel">
     <!--第一步：設計輪播圖片的容器。-->
     <!-- #slidershow 層新增 slide 樣式，使用圖片與圖片切換效果有平滑感-->
@@ -20,10 +17,19 @@
     <div class="carousel-inner" role="listbox">
         <!--第三步：設計輪播圖片播放區,使用 carousel-inner 樣式來控制-->
         <div class="item active">
+            <a href="https://www.cdc.gov.tw/" target="_blank">
+                <img src="images/CDC.jpg" data-color="#eee">
+                <div class="carousel-caption">
+                    <h3>廣告1</h3>
+                    <p>&nbsp;</p>
+                </div>
+            </a>
+        </div>
+        <div class="item">
             <a href="http://www.hwh.edu.tw/bin/hwhhome.php" target="_blank">
                 <img src="images/Haw_Hsia.jpg" data-color="#eee">
                 <div class="carousel-caption">
-                    <h3>廣告1</h3>
+                    <h3>廣告2</h3>
                     <p>&nbsp;</p>
                 </div>
             </a>
@@ -32,7 +38,7 @@
             <a href="https://cahh.hwh.edu.tw/" target="_blank">
                 <img src="images/Haw_Yun.jpg" data-color="#eee">
                 <div class="carousel-caption">
-                    <h3>廣告2</h3>
+                    <h3>廣告3</h3>
                     <p>&nbsp;</p>
                 </div>
             </a>
@@ -40,15 +46,6 @@
         <div class="item">
             <a href="http://student.hwh.edu.tw/student/" target="_blank">
                 <img src="images/Student_Parent.jpg" data-color="#eee">
-                <div class="carousel-caption">
-                    <h3>廣告3</h3>
-                    <p>&nbsp;</p>
-                </div>
-            </a>
-        </div>
-        <div class="item">
-            <a href="https://www.cdc.gov.tw/" target="_blank">
-                <img src="images/CDC.jpg" data-color="#eee">
                 <div class="carousel-caption">
                     <h3>廣告4</h3>
                     <p>&nbsp;</p>
@@ -85,7 +82,7 @@
                 'background-color' : $color,
                 // 'background-size': 'cover',/*背景圖片小於容器時，將背景圖片的大小放大至容器大小並填滿文章*/
                 'background-position': 'center',
-                'height': '100%',
+                'height':'100%',
                 'background-repeat': 'no-repeat',
             });
             $(this).remove();

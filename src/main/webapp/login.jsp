@@ -5,20 +5,18 @@
 
 <div class="container">
     <div class="row">
-        <div class="form-group">
-            <label class="col-sm-8" id="headtext">會員登入</label>
-        </div>
+         <label class="col-sm-8 headtext">會員登入</label>
     </div>
     <form class="form-horizontal" action="${pageContext.request.contextPath}/login.do" method="post">
         <div class="form-group">
-            <label class="col-sm-2" for="email"><span class="star">*&nbsp;&nbsp;</span>會員帳號:</label>
+            <label class="col-sm-2" for="email">會員帳號:</label>
             <div class="col-sm-4">
                 <input type="text" class="form-control" id="email" name="email" required placeholder="請輸入email"
                        value="<%=request.getParameter("email") ==null ? "":request.getParameter("email")%>">
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-2" for="password"><span class="star">*&nbsp;&nbsp;</span>會員密碼:</label>
+            <label class="col-sm-2" for="password">會員密碼:</label>
             <div class="col-sm-4">
                 <input type="password" class="form-control" id="password" name="password" required  placeholder="請輸入密碼">
             </div>
