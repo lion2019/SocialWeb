@@ -20,7 +20,7 @@
     <div class="carousel-inner" role="listbox">
         <!--第三步：設計輪播圖片播放區,使用 carousel-inner 樣式來控制-->
         <div class="item active">
-            <a href="http://www.hwh.edu.tw/bin/hwhhome.php">
+            <a href="http://www.hwh.edu.tw/bin/hwhhome.php" target="_blank">
                 <img src="images/Haw_Hsia.jpg" data-color="#eee">
                 <div class="carousel-caption">
                     <h3>廣告1</h3>
@@ -29,7 +29,7 @@
             </a>
         </div>
         <div class="item">
-            <a href="https://cahh.hwh.edu.tw/">
+            <a href="https://cahh.hwh.edu.tw/" target="_blank">
                 <img src="images/Haw_Yun.jpg" data-color="#eee">
                 <div class="carousel-caption">
                     <h3>廣告2</h3>
@@ -38,7 +38,7 @@
             </a>
         </div>
         <div class="item">
-            <a href="http://student.hwh.edu.tw/student/">
+            <a href="http://student.hwh.edu.tw/student/" target="_blank">
                 <img src="images/Student_Parent.jpg" data-color="#eee">
                 <div class="carousel-caption">
                     <h3>廣告3</h3>
@@ -47,7 +47,7 @@
             </a>
         </div>
         <div class="item">
-            <a href="https://www.cdc.gov.tw/">
+            <a href="https://www.cdc.gov.tw/" target="_blank">
                 <img src="images/CDC.jpg" data-color="#eee">
                 <div class="carousel-caption">
                     <h3>廣告4</h3>
