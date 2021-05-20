@@ -82,5 +82,5 @@
         </div>
     </div>
 </nav>
-<div class="row" style="height:70px">
+<div class="row" style="height:90px">
 </div>

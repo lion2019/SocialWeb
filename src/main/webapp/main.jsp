@@ -6,9 +6,7 @@
     <jsp:param name="subtitle" value="主頁"/>
 </jsp:include>
 <fmt:formatDate type="both" value="${date}" var="nowDate"/>
-<style>
 
-</style>
 <script>
 
     function insert(){
@@ -43,7 +41,7 @@
         });
     }
 </script>
-<div class="row" style="height:35px">
+<div class="row" style="height:25px">
 </div>
 <ul class="nav nav-tabs">
     <li class="active"><a data-toggle="tab" href="#home">留言版</a></li>
@@ -71,44 +69,31 @@
             </form>
         </div>
         <div class="container-fluid">
-            <table id="board" class="display">
+            <table id="board" class="display" cellspacing="0" width="100%">
                 <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>暱名</th>
-                        <th>房號</th>
-                        <th>訊息</th>
-                        <th>編輯</th>
-                        <th>日期</th>
-                    </tr>
+<%--                    <tr>--%>
+<%--                        <th>#</th>--%>
+<%--                        <th>暱名</th>--%>
+<%--                        <th>房號</th>--%>
+<%--                        <th>訊息</th>--%>
+<%--                        <th>編輯</th>--%>
+<%--                        <th>日期</th>--%>
+<%--                    </tr>--%>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>會員a</td>
-                        <td>1</td>
-                        <td>聊聊台灣新冠肺炎疫情怎麼了</td>
-                        <td>
-                            <c:if test="${sessionScope.userInfo.nickname == '會員a'}">
-                                <input type = 'button' id = 'updata' value = '修改'>
-                                <input type = 'button' id = 'delete' value = '刪除'>
-                            </c:if>
-                        </td>
-                        <td>${nowDate}</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>會員b</td>
-                        <td>2</td>
-                        <td>bootstrap RWD技術交流</td>
-                        <td>
-                            <c:if test="${sessionScope.userInfo.nickname eq '會員b'}">
-                                <input type = 'button' id = 'updata' value = '修改'>
-                                <input type = 'button' id = 'delete' value = '刪除'>
-                            </c:if>
-                        </td>
-                        <td>${nowDate}</td>
-                    </tr>
+<%--                    <tr>--%>
+<%--                        <td>2</td>--%>
+<%--                        <td>會員b</td>--%>
+<%--                        <td>2</td>--%>
+<%--                        <td>bootstrap RWD技術交流</td>--%>
+<%--                        <td>--%>
+<%--                            <c:if test="${sessionScope.userInfo.nickname eq '會員b'}">--%>
+<%--                                <input type = 'button' id = 'updata' value = '修改'>--%>
+<%--                                <input type = 'button' id = 'delete' value = '刪除'>--%>
+<%--                            </c:if>--%>
+<%--                        </td>--%>
+<%--                        <td>${nowDate}</td>--%>
+<%--                    </tr>--%>
                 </tbody>
             </table>
         </div>

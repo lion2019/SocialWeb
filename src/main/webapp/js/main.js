@@ -147,30 +147,60 @@ $(document).ready(function() {
         // [指定的列 , 排序方向] 。
         // 預設 [[0, 'asc']] ，asc 升冪排列、desc 降冪排列。
         order: [[ 1, 'asc' ], [ 2, 'asc' ]],
-
-        // 鎖定行//給table內自定義按鈕
-        columnDefs: [{
-            // targets用於指定操作的列，從第0列開始，-1為最後一列，這裡第六列
-            targets: [4],
-            // return後邊是我們希望在指定列填入的按鈕程式碼
-            render: function ( data, type, full, meta ) {
-                return "<input type = 'button' id = 'updata' value = '修改'>" +
-                       "<input type = 'button' id = 'delete' value = '刪除'>"
+        language: {
+            "processing": "處理中...",
+            "loadingRecords": "載入中...",
+            "lengthMenu": "顯示 _MENU_ 項結果",
+            "zeroRecords": "沒有符合的結果",
+            "info": "顯示第 _START_ 至 _END_ 項結果，共 _TOTAL_ 項",
+            "infoEmpty": "顯示第 0 至 0 項結果，共 0 項",
+            "infoFiltered": "(從 _MAX_ 項結果中過濾)",
+            "infoPostFix": "",
+            "search": "搜尋:",
+            "paginate": {
+                "first": "第一頁",
+                "previous": "上一頁",
+                "next": "下一頁",
+                "last": "最後一頁"
             },
-            // 禁止排序
-            orderable: false,
-        }],
+            "aria": {
+                "sortAscending": ": 升冪排列",
+                "sortDescending": ": 降冪排列"
+            },
+        },
+        // 鎖定行//給table內自定義按鈕
+        // columnDefs: [{
+        //     // targets用於指定操作的列，從第0列開始，-1為最後一列，這裡第六列
+        //     targets: [4],
+        //     // return後邊是我們希望在指定列填入的按鈕程式碼，也可寫在"columns"裡
+        //     render: function ( data, type, full, meta ) {
+        //         return "<input type = 'button' id = 'updata' value = '修改'>" +
+        //                "<input type = 'button' id = 'delete' value = '刪除'>"
+        //     },
+        //     // 禁止排序
+        //     orderable: false,
+        // }],
 
         //給列賦值，這裡的列名需要和data的資料名對應
         //注意這裡第六列資料指定為null，用來存放我們加入的按鈕
         "columns": [
-            { "data": null,
+            { "data": null,"title":"#",
               "sClass" : "text-center"
             },
             { "data": "nickname" ,"title":"暱名"},
             { "data": "message" ,"title":"訊息"},
-            { "data": "room_number" ,"title":"房間號碼"},
-            { "data": null},
+            { "data": "room_number" ,"title":"房碼"},
+            { "data": "nickname","title":"編輯",
+              "render":function ( data, type, row, meta ) {
+                //render方法有四個引數，分別為data、type、row、meta，其中主要是使用data和row來進行操作，
+                //data是對應當前cell的值，row是對應當前行中的所有cell的值。
+                if(nickname == row.nickname){
+                let button = "<input type = 'button' id = 'updata' value = '修改'>" +
+                             "<input type = 'button' id = 'delete' value = '刪除'>";
+                    return button;
+                }
+                    return "";
+                },},
             { "data": "createDateStr" ,"title":"創建時間"}
         ]
     } );
