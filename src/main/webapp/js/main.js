@@ -116,7 +116,7 @@ $(document).ready(function() {
 
     console.log("contextPath:"+contextPath)
     //留言版表格
-    $('#board').DataTable( {// 和<table>的id對應，指定初始化datatables。
+    let t = $('#board').DataTable( {// 和<table>的id對應，指定初始化datatables。
         ajax: {
             url: contextPath + '/board.do',
             type: "GET",
@@ -171,10 +171,16 @@ $(document).ready(function() {
             { "data": "message" ,"title":"訊息"},
             { "data": "room_number" ,"title":"房間號碼"},
             { "data": null},
-            { "data": "create_date" ,"title":"創建時間"}
+            { "data": "createDateStr" ,"title":"創建時間"}
         ]
     } );
-
+    t.on('order.dt search.dt',function (){
+        t.column(0,{search: 'applied',
+            order: 'applied'
+        }).nodes().each(function (cell,i){
+            cell.innerHTML = i+1;
+        })
+    }).draw();
 
     //好友表格
     $('#login_member,#friend').DataTable( {// 和<table>的id對應，指定初始化datatables。

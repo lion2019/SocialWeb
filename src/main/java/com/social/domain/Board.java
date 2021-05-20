@@ -6,7 +6,7 @@ import java.sql.Timestamp;
  * 留言板
  */
 public class Board {
-    @Id
+    @AutoIncrement
     private Integer id;
     private String nickname;
     private String message;
@@ -51,6 +51,10 @@ public class Board {
 
     public void setRoom_number(Integer room_number) {
         this.room_number = room_number;
+    }
+
+    public String getCreateDateStr(){
+        return create_date.toString();
     }
 
     @Override

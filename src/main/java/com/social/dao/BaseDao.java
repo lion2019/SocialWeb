@@ -1,7 +1,7 @@
 package com.social.dao;
 
 import com.social.datasource.ConnectionPool;
-import com.social.domain.Id;
+import com.social.domain.AutoIncrement;
 
 import javax.servlet.ServletException;
 import javax.sql.DataSource;
@@ -108,7 +108,7 @@ public abstract class BaseDao<T> {
 				Object value = method.invoke(obj);
 
 				// 判斷該屬性是否有 ID Annotation
-				if(fields[i].isAnnotationPresent(Id.class) || value == null)
+				if(fields[i].isAnnotationPresent(AutoIncrement.class) || value == null)
 					ps.setNull(i+1, java.sql.Types.NULL);
 				else
 					ps.setObject(i+1, value);
