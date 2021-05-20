@@ -1,27 +1,24 @@
 package com.social.dao;
 
+import com.social.datasource.ConnectionPool;
+import com.social.domain.Id;
+
+import javax.servlet.ServletException;
+import javax.sql.DataSource;
 import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;
 import java.io.IOException;
-import java.lang.reflect.*;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.ParameterizedType;
 import java.sql.*;
-import java.sql.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
-
-import javax.servlet.ServletException;
-import javax.sql.DataSource;
-
-import com.social.domain.Id;
-import com.social.domain.User;
-import org.junit.platform.commons.function.Try;
-
-import com.social.datasource.ConnectionPool;
 
 /**
  * 如何在執行前自動取得 connection ?

@@ -19,6 +19,7 @@
 
     <title>首頁</title>
     <script>
+        let contextPath = "${pageContext.request.contextPath}";
         //跑馬燈
         function changeColor(){
             var color="#f00|#0f0|#00f|#880|#808|#088|yellow|green|blue|gray";

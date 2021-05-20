@@ -3,12 +3,15 @@ package com.social.controller;
 import java.beans.IntrospectionException;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.social.domain.OnlineUser;
 import com.social.domain.User;
 import com.social.exception.BaseException;
 import com.social.exception.ResponseEnum;
@@ -16,36 +19,51 @@ import com.social.service.LoginService;
 
 @WebServlet(urlPatterns = "/login.do")
 public class Login extends BaseController {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	private LoginService loginService = new LoginService();
-	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		try {
-			User user = reqParam2Bean(request, User.class)
-					.orElseThrow(()->new BaseException(ResponseEnum.parameter_empty));
-			
-			loginService.login(user, request);
-			
+    private LoginService loginService = new LoginService();
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        try {
+            User user = reqParam2Bean(request, User.class)
+                    .orElseThrow(() -> new BaseException(ResponseEnum.parameter_empty));
+
+            User loginUser = loginService.login(user, request);
+
+            List<OnlineUser> sessionList = (List<OnlineUser>) getServletContext()
+                    .getAttribute("onlineUser");
+
+            boolean noneMatch = sessionList.stream()
+                    .noneMatch(o -> o.getNickname().equals(loginUser.getNickname()));
+
+            if(noneMatch){
+                OnlineUser onlineUser = new OnlineUser();
+                onlineUser.setNickname(loginUser.getNickname());
+                onlineUser.setLoginDateTime(LocalDateTime.now());
+
+                sessionList.add(onlineUser);
+            }
+            System.out.println(sessionList);
+
 //			JSONObject output = JSONObject.fromObject(userInfo);
-			
+
 //			HttpSession session = request.getSession();
 //			session.setAttribute("userInfo", output);
 
 //			response.setContentType("application/json;");
 //			response.setCharacterEncoding(StandardCharsets.UTF_8.name());
-			
+
 //			response.getWriter().println(output);
-			response.sendRedirect(request.getContextPath()+"/main.jsp");
-			
-		} catch (InstantiationException | IllegalAccessException | InvocationTargetException | IOException
-				| ServletException | IntrospectionException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			request.setAttribute("errorMsg", e.getMessage());
-			request.getRequestDispatcher("/login.jsp").forward(request, response);
-			return;
-		}
-	}
+            response.sendRedirect(request.getContextPath() + "/main.jsp");
+
+        } catch (InstantiationException | IllegalAccessException | InvocationTargetException | IOException
+                | ServletException | IntrospectionException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            request.setAttribute("errorMsg", e.getMessage());
+            request.getRequestDispatcher("/login.jsp").forward(request, response);
+            return;
+        }
+    }
 
 }
