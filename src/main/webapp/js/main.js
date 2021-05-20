@@ -114,8 +114,24 @@ function closeWs() {
 
 $(document).ready(function() {
 
+    console.log("contextPath:"+contextPath)
     //留言版表格
     $('#board').DataTable( {// 和<table>的id對應，指定初始化datatables。
+        ajax: {
+            url: contextPath + '/board.do',
+            type: "GET",
+            dataType: "json",
+            'dataSrc': function (data){
+                return data;
+            },
+            // "success": function(){
+            //     console.log("你是右邊!!")
+            // }, //成功取得回傳時的事件
+            // "error": function(){
+            //     console.log("資料取得失敗 回去檢討檢討")
+            // } //失敗事件
+        },
+
         // 在初始表格的左上有個可選擇的每頁列數的選單設定
         lengthChange: true,   // 呈現選單
         lengthMenu: [5, 10, 25, 50],   // 選單值設定
@@ -133,30 +149,30 @@ $(document).ready(function() {
         order: [[ 1, 'asc' ], [ 2, 'asc' ]],
 
         // 鎖定行//給table內自定義按鈕
-        // columnDefs: [{
-        //     // targets用於指定操作的列，從第0列開始，-1為最後一列，這裡第六列
-        //     targets: [4],
-        //     // return後邊是我們希望在指定列填入的按鈕程式碼
-        //     render: function ( data, type, full, meta ) {
-        //         return "<input type = 'button' id = 'updata' value = '修改'>" +
-        //                "<input type = 'button' id = 'delete' value = '刪除'>"
-        //     },
-        //     // 禁止排序
-        //     orderable: false,
-        // }],
+        columnDefs: [{
+            // targets用於指定操作的列，從第0列開始，-1為最後一列，這裡第六列
+            targets: [4],
+            // return後邊是我們希望在指定列填入的按鈕程式碼
+            render: function ( data, type, full, meta ) {
+                return "<input type = 'button' id = 'updata' value = '修改'>" +
+                       "<input type = 'button' id = 'delete' value = '刪除'>"
+            },
+            // 禁止排序
+            orderable: false,
+        }],
 
         //給列賦值，這裡的列名需要和data的資料名對應
         //注意這裡第六列資料指定為null，用來存放我們加入的按鈕
-        // "columns": [
-        //     { "data": "編號",
-        //       "sClass" : "text-center"
-        //     },
-        //     { "data": "暱名" },
-        //     { "data": "房號" },
-        //     { "data": "留言" },
-        //     { "data": null},
-        //     { "data": "日期" },
-        // ],
+        "columns": [
+            { "data": null,
+              "sClass" : "text-center"
+            },
+            { "data": "nickname" ,"title":"暱名"},
+            { "data": "message" ,"title":"訊息"},
+            { "data": "room_number" ,"title":"房間號碼"},
+            { "data": null},
+            { "data": "create_date" ,"title":"創建時間"}
+        ]
     } );
 
 

@@ -60,12 +60,12 @@ public class BoardRequest {
      * @return
      */
     public Board convert2Entity() {
-        Board board = new Board();
-        board.setMessage(message);
-        board.setNickname(nickname);
-        board.setRoom_number(room_number==null?null:Integer.parseInt(room_number));
-        board.setCreate_date(Timestamp.valueOf(LocalDateTime.now()));
-        return board;
+        Board bean = new Board();
+        bean.setMessage(message);
+        bean.setNickname(nickname);
+        bean.setRoom_number(room_number==null?null:Integer.parseInt(room_number));
+        bean.setCreate_date(Timestamp.valueOf(LocalDateTime.now()));
+        return bean;
     }
 
     public void valid() throws ValidException {

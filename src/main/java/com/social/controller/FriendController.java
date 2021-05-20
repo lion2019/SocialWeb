@@ -3,8 +3,7 @@ package com.social.controller;
 import com.social.domain.*;
 import com.social.exception.BaseException;
 import com.social.exception.ResponseEnum;
-import com.social.service.BoardService;
-import net.sf.json.JSONArray;
+import com.social.service.FriendService;
 import net.sf.json.JSONObject;
 
 import javax.servlet.ServletException;
@@ -16,38 +15,29 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
-import java.util.List;
 
-@WebServlet(urlPatterns = {"/board.do"})
-public class BoardController extends BaseController {
+@WebServlet(urlPatterns = {"/friend.do"})
+public class FriendController extends BaseController {
 
-    private BoardService boardService = new BoardService();
+    private FriendService friendService = new FriendService();
 
-    /**
-     * 新增留言
-     * @param request
-     * @param response
-     * @throws ServletException
-     * @throws IOException
-     */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("application/json;");
         response.setCharacterEncoding(StandardCharsets.UTF_8.name());
 
         BaseResponse baseResponse = null;
 
         try {
-            BoardRequest requestBean = reqParam2Bean(request, BoardRequest.class)
+            Friend friend = reqParam2Bean(request, Friend.class)
                     .orElseThrow(() -> new BaseException(ResponseEnum.parameter_empty));
+//            Friend friend = requestBean.convert2Entity();
 
             User userInfo = (User) request.getSession().getAttribute("userInfo");
-            requestBean.setNickname(userInfo.getNickname());
-            Board board = requestBean.convert2Entity();
+            friend.setNickname_from(userInfo.getNickname());
 
-            if(boardService.addBoard(board)){
+
+            if(friendService.addFriend(friend)){
                 baseResponse = new BaseResponse(ResponseEnum.OK);
             }else{
                 baseResponse = new BaseResponse(ResponseEnum.insert_error);
@@ -79,22 +69,8 @@ public class BoardController extends BaseController {
         }
     }
 
-    /**
-     * 留言板清單
-     * @param request
-     * @param response
-     * @throws ServletException
-     * @throws IOException
-     */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try {
-            List<Board> list = boardService.findAll();
-            JSONArray jsonObject = JSONArray.fromObject(list);
-            response.setContentType("application/json;charset=utf-8");
-            response.getWriter().print(jsonObject.toString());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        super.doGet(req, resp);
     }
 }

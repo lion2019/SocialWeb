@@ -44,3 +44,19 @@ comment on column BOARD.ROOM_NUMBER is '聊天室房號';
 comment on column BOARD.CREATE_DATE is '訊息建立時間';
 create unique index BOARD_ROOM_NUMBER_UINDEX
 	on BOARD (ROOM_NUMBER);
+
+create table FRIEND
+(
+    NICKNAME_FROM VARCHAR(20) not null,
+    NICKNAME_TO   VARCHAR(20) not null,
+    CREATE_DATE   TIMESTAMP default CURRENT_TIMESTAMP,
+    constraint FRIEND_PK
+        unique (NICKNAME_FROM, NICKNAME_TO),
+    constraint FRIEND_USER_NICKNAME_FK
+        foreign key (NICKNAME_FROM) references USER (NICKNAME),
+    constraint FRIEND_USER_NICKNAME_FK_2
+        foreign key (NICKNAME_TO) references USER (NICKNAME)
+);
+comment on table FRIEND is '好友';
+comment on column FRIEND.NICKNAME_FROM is '發起者';
+comment on column FRIEND.CREATE_DATE is '建立時間';

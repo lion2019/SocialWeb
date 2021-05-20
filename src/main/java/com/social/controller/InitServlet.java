@@ -1,21 +1,24 @@
 package com.social.controller;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
+import com.social.datasource.ConnectionPool;
+import com.social.domain.OnlineUser;
+import com.zaxxer.hikari.HikariDataSource;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
-
-import com.social.datasource.ConnectionPool;
-import com.zaxxer.hikari.HikariDataSource;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.List;
+import java.util.Properties;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * Servlet implementation class InitServlet
  */
 public class InitServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    
+	private static final List<OnlineUser> sessionList = new CopyOnWriteArrayList();
+
 	@Override
 	public void init() throws ServletException {
 		try {
@@ -43,6 +46,10 @@ public class InitServlet extends HttpServlet {
 			hikariDataSource.setJdbcUrl(jdbcUrl);
 			hikariDataSource.setDriverClassName(driver);
 			ConnectionPool.setDataSource(hikariDataSource);
+
+			// 記錄登入的使用者
+			getServletContext().setAttribute("onlineUser", sessionList);
+
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
