@@ -16,6 +16,7 @@ function initWebSocket1(openroom) {
         webSocket.onopen = function () {
             alert("已進入聊天室...");
             document.getElementsByClassName("msg_board1")[0].innerHTML = nickname + "加入聊天室<br>";
+
         };
         webSocket.onmessage = function (evt) {
             let msg_board1 = document.getElementsByClassName("msg_board1")[0];
@@ -115,8 +116,9 @@ function closeWs() {
 $(document).ready(function() {
 
     console.log("contextPath:"+contextPath)
+
     //留言版表格
-    let t = $('#board').DataTable( {// 和<table>的id對應，指定初始化datatables。
+    let board = $('#board').DataTable( {// 和<table>的id對應，指定初始化datatables。
         ajax: {
             url: contextPath + '/board.do',
             type: "GET",
@@ -136,14 +138,13 @@ $(document).ready(function() {
         lengthChange: true,   // 呈現選單
         lengthMenu: [5, 10, 25, 50],   // 選單值設定
         pageLength: 25,   // 不用選單設定也可改用固定每頁列數
-
         searching: true,   // 搜索功能
         ordering: true,   // 開啟排序
-
         // 下列 2 個一起用，就可以設定列出全部資料、可滑動又固定尺寸的表格
         paging: false,   // 是否建立分頁
         scrollY: 400,   // 固定可以上下滑動的高度
-
+        // sScrollX : 820, //DataTables的宽
+        bStateSave: true,//刪除返回時，保留在同一頁上
         // [指定的列 , 排序方向] 。
         // 預設 [[0, 'asc']] ，asc 升冪排列、desc 降冪排列。
         order: [[ 1, 'asc' ], [ 2, 'asc' ]],
@@ -189,7 +190,7 @@ $(document).ready(function() {
             },
             { "data": "nickname" ,"title":"暱名"},
             { "data": "message" ,"title":"訊息"},
-            { "data": "room_number" ,"title":"房碼"},
+            { "data": "room_number" ,"title":"房號"},
             { "data": "nickname","title":"編輯",
               "render":function ( data, type, row, meta ) {
                 //render方法有四個引數，分別為data、type、row、meta，其中主要是使用data和row來進行操作，
@@ -204,8 +205,10 @@ $(document).ready(function() {
             { "data": "createDateStr" ,"title":"創建時間"}
         ]
     } );
-    t.on('order.dt search.dt',function (){
-        t.column(0,{search: 'applied',
+
+    //留言版第1欄流水號
+    board.on('order.dt search.dt',function (){
+        board.column(0,{search: 'applied',
             order: 'applied'
         }).nodes().each(function (cell,i){
             cell.innerHTML = i+1;
@@ -213,7 +216,16 @@ $(document).ready(function() {
     }).draw();
 
     //好友表格
-    $('#login_member,#friend').DataTable( {// 和<table>的id對應，指定初始化datatables。
+    let friend = $('#friend').DataTable( {
+        ajax: {
+            url: contextPath + '/friend.do',
+            type: "GET",
+            dataType: "json",
+            'dataSrc': function (data){
+                return data;
+            },
+        },
+
         // 在初始表格的左上有個可選擇的每頁列數的選單設定
         lengthChange: true,   // 呈現選單
         lengthMenu: [5, 10, 25, 50],   // 選單值設定
@@ -230,7 +242,58 @@ $(document).ready(function() {
         // 預設 [[0, 'asc']] ，asc 升冪排列、desc 降冪排列。
         order: [[ 1, 'asc' ], [ 2, 'asc' ]],
 
+        "columns": [
+            { "data": null,"title":"#",
+                "sClass" : "text-center"
+            },
+            { "data": "nickname_to" ,"title":"好友清單"},
+            { "title":"加入時間"}
+        ]
+
     } );
+    friend.on('order.dt search.dt',function (){
+        friend.column(0,{search: 'applied',
+            order: 'applied'
+        }).nodes().each(function (cell,i){
+            cell.innerHTML = i+1;
+        })
+    }).draw();
+
+    let login_member = $('#login_member').DataTable( {
+        // 在初始表格的左上有個可選擇的每頁列數的選單設定
+        lengthChange: true,   // 呈現選單
+        lengthMenu: [5, 10, 25, 50],   // 選單值設定
+        pageLength: 20,   // 不用選單設定也可改用固定每頁列數
+
+        searching: true,   // 搜索功能
+        ordering: true,   // 開啟排序
+
+        // 下列 2 個一起用，就可以設定列出全部資料、可滑動又固定尺寸的表格
+        paging: false,   // 是否建立分頁
+        scrollY: 400,   // 固定可以上下滑動的高度
+
+        // [指定的列 , 排序方向] 。
+        // 預設 [[0, 'asc']] ，asc 升冪排列、desc 降冪排列。
+        order: [[ 1, 'asc' ], [ 2, 'asc' ]],
+
+        "columns": [
+            { "data": null,"title":"#",
+                "sClass" : "text-center"
+            },
+            { "data": "nickname" ,"title":"上線成員"},
+            { "title":"上線時間"}
+        ]
+
+    } );
+
+    login_member.on('order.dt search.dt',function (){
+        login_member.column(0,{search: 'applied',
+            order: 'applied'
+        }).nodes().each(function (cell,i){
+            cell.innerHTML = i+1;
+        })
+    }).draw();
+
 
     //表頭擠在一起時
     $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {

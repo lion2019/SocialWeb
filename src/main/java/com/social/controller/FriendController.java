@@ -4,6 +4,7 @@ import com.social.domain.*;
 import com.social.exception.BaseException;
 import com.social.exception.ResponseEnum;
 import com.social.service.FriendService;
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 import javax.servlet.ServletException;
@@ -15,6 +16,7 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
+import java.util.List;
 
 @WebServlet(urlPatterns = {"/friend.do"})
 public class FriendController extends BaseController {
@@ -70,7 +72,14 @@ public class FriendController extends BaseController {
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doGet(req, resp);
+    protected void doGet(HttpServletRequest req, HttpServletResponse response) throws ServletException, IOException {
+        try {
+            List<Friend> list = friendService.findAll();
+            JSONArray jsonObject = JSONArray.fromObject(list);
+            response.setContentType("application/json;charset=utf-8");
+            response.getWriter().print(jsonObject.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

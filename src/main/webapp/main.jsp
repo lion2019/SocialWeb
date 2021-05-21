@@ -1,3 +1,4 @@
+<%@ page import="com.social.domain.User" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -8,8 +9,8 @@
 <fmt:formatDate type="both" value="${date}" var="nowDate"/>
 
 <script>
-
-    function insert(){
+    //新增留言版
+    function insertBoard(){
         let room_number = $("#room_number").val();
         let message = $("#message").val();
         if(room_number.trim() == null || ((room_number.trim()).length <0 || (room_number.trim()).length >5)){
@@ -34,12 +35,42 @@
                     //300用戶不存在.201新增error
                     alert('新增失敗:' +  response)
                 }
+                window.location.reload();
             },
             error:function (xhr, textStatus, errorThrown){
                 alert('新增失敗:' + xhr.status + ',' + textStatus + errorThrown)
             }
         });
     }
+
+    //新增好友
+    function insertFriend(){
+        var nickname_to = $('#nickname_to').val();
+
+        $.ajax({
+            url:'${pageContext.request.contextPath}/friend.do',
+            type:'POST',
+            data:{
+                nickname_to:nickname_to,
+            },
+            dataType:'json',
+            success:function (response){
+                //0為新增成功
+                if(response.code == 0){
+                    alert('新增成功')
+                }else{
+                    //300用戶不存在.201新增error
+                    alert('新增失敗:' +  response)
+                }
+                window.location.reload();
+                $('#menu3').attr('class','tab-pane fade in active');
+            },
+            error:function (xhr, textStatus, errorThrown){
+                alert('新增失敗:' + xhr.status + ',' + textStatus + errorThrown)
+            }
+        });
+    }
+
 </script>
 <div class="row" style="height:25px">
 </div>
@@ -63,7 +94,7 @@
                     <div class="col-sm-8">
                         <label for="message">訊息:</label>
                         <input id="message" name="message" size="70%" maxlength="100" required placeholder="請輸入留言訊息">
-                        <input type="button" id="message_btn" onclick="insert()" value="新增留言"/><br>
+                        <input type="button" id="message_btn" onclick="insertBoard()" value="新增留言"/><br>
                     </div>
                 </div>
             </form>
@@ -151,8 +182,8 @@
                     <td width="45%">&nbsp;</td>
                     <td>&nbsp;</td>
                     <td width="45%" align="right">
-                        <input id="insert_friend" name="insert_friend" size="30%" maxlength="20" required placeholder="請輸入好友暱名">
-                        <input type="submit" value="新增好友"/><br><br>
+                        <input id="nickname_to" name="nickname_to" size="30%" maxlength="20" required placeholder="請輸入好友暱名">
+                        <input type="button" onclick="insertFriend()" value="新增好友"/><br><br>
                     </td>
                 </tr>
                 <tr>
@@ -160,22 +191,21 @@
                         <table id="login_member" class="display">
                             <thead>
                                 <tr>
-                                    <th>#</th>
-                                    <th>上線成員</th>
-                                    <th>登入時間</th>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                             </thead>
                             <tbody>
+
+                            <c:forEach var="i" begin="1" end="${sessionScope.userInfo.nickname.length()}" varStatus="loop">
+<%--                                <c:out escapeXml="false" value="<p>${i}</p>" />--%>
                                 <tr>
-                                    <td>1</td>
-                                    <td>aa</td>
+                                    <td></td>
+                                    <td>${sessionScope.userInfo.nickname}</td>
                                     <td>${nowDate}</td>
                                 </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>bb</td>
-                                    <td>${nowDate}</td>
-                                </tr>
+                            </c:forEach>
                             </tbody>
                         </table>
                     </td>
@@ -183,23 +213,18 @@
                         <td>
                             <table id="friend" class="display">
                                 <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>好友清單</th>
-                                        <th>登入時間</th>
-                                    </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>cc</td>
-                                        <td>${nowDate}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>dd</td>
-                                        <td>${nowDate}</td>
-                                    </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td>${nowDate}</td>
+                                </tr>
                                 </tbody>
                             </table>
                         </td>
