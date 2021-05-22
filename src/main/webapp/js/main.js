@@ -80,7 +80,6 @@ function initWebSocket2() {
             // 關閉 websocket，清空資訊板
             // alert("連線已關閉...");
             webSocket2 = null;
-            document.getElementsByClassName("msg_board1")[0].innerHTML = "";
             document.getElementsByClassName("msg_board2")[0].innerHTML = "";
         };
     }
@@ -97,6 +96,7 @@ function send_msg(num) {
         let roomNo_msg = document.getElementById("roomNo_msg").value.trim();
 
         if (openroom_msg == "" && roomNo_msg == "") {
+            alert('請輸入訊息')
             return;
         }else{
             if(num == 1){
@@ -117,6 +117,7 @@ function send_msg(num) {
 //關閉連線
 function closeWs() {
     webSocket2.close();
+    alert('退出房間')
 };
 
 
