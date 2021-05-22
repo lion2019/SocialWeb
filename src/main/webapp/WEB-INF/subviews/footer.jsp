@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<div class="row" style="height:90px">
+<div class="row" style="height:95px">
 </div>
 <footer class="text-center navbar-fixed-bottom">
     <a class="up-arrow" href="#myPage" data-toggle="tooltip" title="TO TOP">

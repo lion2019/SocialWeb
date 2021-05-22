@@ -9,74 +9,14 @@
 <fmt:formatDate type="both" value="${date}" var="nowDate"/>
 
 <script>
-    //新增留言版
-    function insertBoard(){
-        let room_number = $("#room_number").val();
-        let message = $("#message").val();
-        if(room_number.trim() == null || ((room_number.trim()).length <0 || (room_number.trim()).length >5)){
-            alert('房號不得為空及數字長度限制5字，請輸入正確格式！')
-        }
-        if(message == null || (message.length >100)){
-            alert('訊息不得為空及長度限制100字，請輸入正確格式！')
-        }
-        $.ajax({
-            url:'${pageContext.request.contextPath}/board.do',
-            type:'POST',
-            data:{
-                room_number:room_number,
-                message:message,
-            },
-            dataType:'json',
-            success:function (response){
-                //0為新增成功
-                if(response.code == 0){
-                    alert('新增成功')
-                }else{
-                    //300用戶不存在.201新增error
-                    alert('新增失敗:' +  response)
-                }
-                window.location.reload();
-            },
-            error:function (xhr, textStatus, errorThrown){
-                alert('新增失敗:' + xhr.status + ',' + textStatus + errorThrown)
-            }
-        });
-    }
 
-    //新增好友
-    function insertFriend(){
-        var nickname_to = $('#nickname_to').val();
-
-        $.ajax({
-            url:'${pageContext.request.contextPath}/friend.do',
-            type:'POST',
-            data:{
-                nickname_to:nickname_to,
-            },
-            dataType:'json',
-            success:function (response){
-                //0為新增成功
-                if(response.code == 0){
-                    alert('新增成功')
-                }else{
-                    //300用戶不存在.201新增error
-                    alert('新增失敗:' +  response)
-                }
-                window.location.reload();
-                $('#menu3').attr('class','tab-pane fade in active');
-            },
-            error:function (xhr, textStatus, errorThrown){
-                alert('新增失敗:' + xhr.status + ',' + textStatus + errorThrown)
-            }
-        });
-    }
 
 </script>
 <div class="row" style="height:25px">
 </div>
 <ul class="nav nav-tabs">
     <li class="active"><a data-toggle="tab" href="#home">留言版</a></li>
-    <li><a data-toggle="tab" href="#menu1" onclick="initWebSocket1(0)">聊天室-公頻</a></li>
+    <li><a data-toggle="tab" href="#menu1" onclick="initWebSocket1()">聊天室-公頻</a></li>
     <li><a data-toggle="tab" href="#menu2">聊天室-房間</a></li>
     <li><a data-toggle="tab" href="#menu3">好友</a></li>
 </ul>
@@ -143,7 +83,7 @@
                      <input type="text" class="form-control" id="openroom_msg" name="openroom_msg" maxlength="40">
                 </div>
                 <div class="col-sm-2">
-                     <input type="button" value="傳送" onclick="send_msg(1)">
+                     <input type="button" id="openroom_btn" name="openroom_btn" value="傳送" onclick="send_msg(1)">
                 </div>
             </div>
         </div>
@@ -153,11 +93,11 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-8">
-                     <label for="input_roomName">房號:</label>
-                     <input type="number" id="input_roomName" name="input_roomName" size="10%"
-                            oninput="if(value.length>5 || value<=0)value=value.slice(0,5)" placeholder="請輸入數字-限制5碼">
-                     <input type="button"  value="進入聊天室" onclick="initWebSocket2()" />
-                     <input type="button" value="退出聊天室" onclick="closeWs()" /><br>
+                     <label for="input_roomNo">房號:</label>
+                     <input type="number" id="input_roomNo" name="input_roomNo" size="10%"
+                           oninput="if(value.length>5 || value<=0)value=value.slice(0,5)" placeholder="請輸入數字-限制5碼">
+                     <input type="button"  value="進入房間" onclick="initWebSocket2()" />
+                     <input type="button" value="退出房間" onclick="closeWs()" /><br>
                 </div>
             </div>
             <div class="row">
@@ -167,10 +107,10 @@
             </div><br>
             <div class="row">
                 <div class="col-sm-8">
-                     <input type="text" class="form-control" id="nameroom_msg" name="nameroom_msg" maxlength="40">
+                     <input type="text" class="form-control" id="roomNo_msg" name="roomNo_msg" maxlength="40">
                 </div>
                 <div class="col-sm-2">
-                     <input type="button" value="傳送" onclick="send_msg(2)">
+                     <input type="button" id="roomNo_btn" name="roomNo_btn" value="傳送" onclick="send_msg(2)">
                 </div>
             </div>
         </div>
@@ -213,11 +153,11 @@
                         <td>
                             <table id="friend" class="display">
                                 <thead>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
+<%--                                <tr>--%>
+<%--                                    <td>#</td>--%>
+<%--                                    <td>好友清單</td>--%>
+<%--                                    <td>加入時間</td>--%>
+<%--                                </tr>--%>
                                 </thead>
                                 <tbody>
                                 <tr>
