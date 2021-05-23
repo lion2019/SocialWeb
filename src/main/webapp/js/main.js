@@ -315,7 +315,8 @@ $(document).ready(function() {
                 "sClass" : "text-center"
             },
             { "data": "nickname_to" ,"title":"好友清單"},
-            { "data": "createDateStr" ,"title":"加入時間"},
+            { "data": "create_date" ,"title":"加入時間"},
+            { "data": "status" ,"title":"上線狀態"},
         ]
 
     } );
