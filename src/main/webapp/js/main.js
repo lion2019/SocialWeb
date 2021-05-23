@@ -241,6 +241,14 @@ $(document).ready(function() {
 
     //上線成員表格
     let login_member = $('#login_member').DataTable( {
+        ajax: {
+            url: contextPath + '/onlineUser.do',
+            type: "GET",
+            dataType: "json",
+            'dataSrc': function (data) {
+                return data;
+            }
+        },
         // 在初始表格的左上有個可選擇的每頁列數的選單設定
         lengthChange: true,   // 呈現選單
         lengthMenu: [5, 10, 25, 50],   // 選單值設定
@@ -262,7 +270,7 @@ $(document).ready(function() {
                 "sClass" : "text-center"
             },
             { "data": "nickname" ,"title":"上線成員"},
-            { "data": "","title":"上線時間",},
+            { "data": "loginTimeStr","title":"上線時間",},
         ]
 
     } );
@@ -307,7 +315,7 @@ $(document).ready(function() {
                 "sClass" : "text-center"
             },
             { "data": "nickname_to" ,"title":"好友清單"},
-            { "data": null ,"title":"加入時間"},
+            { "data": "createDateStr" ,"title":"加入時間"},
         ]
 
     } );
@@ -392,7 +400,7 @@ function insertFriend(){
                 alert('新增成功')
             }else{
                 //300用戶不存在.201新增error
-                alert('新增失敗:' +  response.code)
+                alert('新增失敗:' +  response.message)
             }
             window.location.reload();
             $('#home').attr('class','tab-pane fade');

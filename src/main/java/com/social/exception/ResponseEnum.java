@@ -22,7 +22,10 @@ public enum ResponseEnum implements IResponseEnum {
 	// user login
 	user_not_found(300,"用戶不存在"),
 	password_error(301,"密碼錯誤"),
-	
+
+	// friend
+	friend_not_self(400, "好友不可為自己"),
+
 	// sql insert error
 	insert_error(201, "insert error!!");
 	

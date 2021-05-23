@@ -16,6 +16,8 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @WebServlet(urlPatterns = {"/friend.do"})
@@ -36,8 +38,16 @@ public class FriendController extends BaseController {
 //            Friend friend = requestBean.convert2Entity();
 
             User userInfo = (User) request.getSession().getAttribute("userInfo");
-            friend.setNickname_from(userInfo.getNickname());
 
+            // 驗証不可加自己為好友
+            if(friend.getNickname_to().equals(userInfo.getNickname())){
+                baseResponse = new BaseResponse(ResponseEnum.friend_not_self);
+                return;
+//                throw new BaseException(ResponseEnum.friend_not_self);
+            }
+
+            friend.setNickname_from(userInfo.getNickname());
+            friend.setCreate_date(Timestamp.valueOf(LocalDateTime.now()));
 
             if(friendService.addFriend(friend)){
                 baseResponse = new BaseResponse(ResponseEnum.OK);
@@ -61,6 +71,8 @@ public class FriendController extends BaseController {
 //			System.err.println("err code:"+e.getCode());
 //			System.err.println("err msg:"+e.getMessage());
 //			throw e;
+        } catch (BaseException e){
+            e.printStackTrace();
         } catch (InstantiationException | IllegalAccessException | IOException
                 | IntrospectionException | InvocationTargetException e) {
             e.printStackTrace();
@@ -74,7 +86,25 @@ public class FriendController extends BaseController {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse response) throws ServletException, IOException {
         try {
-            List<Friend> list = friendService.findAll();
+            User userInfo = (User) req.getSession().getAttribute("userInfo");
+
+            List<Friend> list = friendService.findByNickname_from(userInfo.getNickname());
+
+            // 線上使用者
+            List<OnlineUser> sessionList = (List<OnlineUser>) getServletContext()
+                    .getAttribute("onlineUser");
+
+            list.forEach(o->{
+                final String friendNickname = o.getNickname_to();
+                boolean b = sessionList.stream().anyMatch(o1 -> o1.getNickname().equals(friendNickname));
+
+                if (b)
+                    o.setNickname_to(o.getNickname_to()+"[上線]");
+                else
+                    o.setNickname_to(o.getNickname_to()+"[下線]");
+
+            });
+
             JSONArray jsonObject = JSONArray.fromObject(list);
             response.setContentType("application/json;charset=utf-8");
             response.getWriter().print(jsonObject.toString());
