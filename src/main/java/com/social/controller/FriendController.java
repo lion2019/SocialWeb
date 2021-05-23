@@ -90,22 +90,20 @@ public class FriendController extends BaseController {
 
             List<Friend> list = friendService.findByNickname_from(userInfo.getNickname());
 
+            List<FriendResponse> output = FriendResponse.convert(list);
+
             // 線上使用者
             List<OnlineUser> sessionList = (List<OnlineUser>) getServletContext()
                     .getAttribute("onlineUser");
 
-            list.forEach(o->{
+            // 判斷朋友上線狀態
+            output.forEach(o->{
                 final String friendNickname = o.getNickname_to();
                 boolean b = sessionList.stream().anyMatch(o1 -> o1.getNickname().equals(friendNickname));
-
-                if (b)
-                    o.setNickname_to(o.getNickname_to()+"[上線]");
-                else
-                    o.setNickname_to(o.getNickname_to()+"[下線]");
-
+                o.setStatus(b? "上線":"下線");
             });
 
-            JSONArray jsonObject = JSONArray.fromObject(list);
+            JSONArray jsonObject = JSONArray.fromObject(output);
             response.setContentType("application/json;charset=utf-8");
             response.getWriter().print(jsonObject.toString());
         } catch (Exception e) {

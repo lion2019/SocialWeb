@@ -1,6 +1,8 @@
 package com.social.domain;
 
-import java.sql.Timestamp;
+import java.sql.Array;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FriendResponse {
     private String nickname_from;
@@ -40,7 +42,7 @@ public class FriendResponse {
         this.status = status;
     }
 
-    public FriendResponse convert(Friend friend){
+    public static FriendResponse convert(Friend friend){
         FriendResponse bean = new FriendResponse();
 
         bean.setNickname_to(friend.getNickname_to());
@@ -48,6 +50,14 @@ public class FriendResponse {
         bean.setCreate_date(friend.getCreateDateStr());
 
         return bean;
+    }
+
+    public static List<FriendResponse> convert(List<Friend> friendList){
+        List<FriendResponse> list = new ArrayList<>();
+
+        friendList.forEach(o -> list.add(convert(o)));
+
+        return list;
     }
 
     @Override
