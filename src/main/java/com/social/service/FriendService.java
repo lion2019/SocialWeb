@@ -13,20 +13,14 @@ public class FriendService {
     private FriendDao dao = new FriendDao();
 
     public boolean addFriend(Friend friend) throws SQLException {
-        try{
-            return dao.insert(friend);
-        }catch (SQLException e){
-            throw e;
-        }
+        return dao.insert(friend);
     }
 
     public List<Friend> findAll() throws Exception {
-        try{
-            return dao.findAll();
-//        }catch (SQLException e){
-//            throw e;
-        } catch (Exception e) {
-            throw e;
-        }
+        return dao.findAll();
+    }
+
+    public List<Friend> findByNickname_from(String nickname_from){
+        return dao.findByNickname_from(nickname_from);
     }
 }

@@ -40,6 +40,10 @@ public class Friend {
         this.create_date = create_date;
     }
 
+    public String getCreateDateStr(){
+        return create_date.toString();
+    }
+
     @Override
     public String toString() {
         return "User [nickname_from=" + nickname_from
