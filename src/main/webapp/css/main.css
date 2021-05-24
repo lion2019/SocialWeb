@@ -6,10 +6,10 @@ body {
 }
 
 /*logo圖片*/
-#logo{
-    width: 95px;
-    height: 50px;
-}
+/*#logo{*/
+/*    width: 95px;*/
+/*    height: 50px;*/
+/*}*/
 /*footer頁腳*/
 footer {
     background-color: #2d2d30;
@@ -39,7 +39,7 @@ footer a:hover {
     text-align: right;
 }
 /*------------------------------------*/
-/*圖片計數器圓圈設定*/
+/*輪播圖片計數器圓圈設定*/
 .carousel-indicators li{
     padding: 8px; /*圈圈大小*/
     margin: 0 8px;/*y=0,x=5*/

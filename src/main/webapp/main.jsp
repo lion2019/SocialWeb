@@ -16,7 +16,7 @@
 </div>
 <ul class="nav nav-tabs">
     <li class="active"><a data-toggle="tab" href="#home">留言版</a></li>
-    <li><a data-toggle="tab" href="#menu1" onclick="initWebSocket1()">聊天室-公頻</a></li>
+    <li><a data-toggle="tab" href="#menu1" onclick="initOpenRoom()">聊天室-公頻</a></li>
     <li><a data-toggle="tab" href="#menu2">聊天室-房間</a></li>
     <li><a data-toggle="tab" href="#menu3">好友</a></li>
 </ul>
@@ -33,7 +33,7 @@
                     </div>
                     <div class="col-sm-8">
                         <label for="message">訊息:</label>
-                        <input id="message" name="message" size="70%" maxlength="100" required placeholder="請輸入留言訊息">
+                        <input id="message" name="message" size="70%" maxlength="100" placeholder="請輸入留言訊息">
                         <input type="button" id="message_btn" onclick="insertBoard()" value="新增留言"/><br>
                     </div>
                 </div>
@@ -42,29 +42,10 @@
         <div class="container-fluid">
             <table id="board" class="display" cellspacing="0" width="100%">
                 <thead>
-<%--                    <tr>--%>
-<%--                        <th>#</th>--%>
-<%--                        <th>暱名</th>--%>
-<%--                        <th>房號</th>--%>
-<%--                        <th>訊息</th>--%>
-<%--                        <th>編輯</th>--%>
-<%--                        <th>日期</th>--%>
-<%--                    </tr>--%>
+
                 </thead>
                 <tbody>
-<%--                    <tr>--%>
-<%--                        <td>2</td>--%>
-<%--                        <td>會員b</td>--%>
-<%--                        <td>2</td>--%>
-<%--                        <td>bootstrap RWD技術交流</td>--%>
-<%--                        <td>--%>
-<%--                            <c:if test="${sessionScope.userInfo.nickname eq '會員b'}">--%>
-<%--                                <input type = 'button' id = 'updata' value = '修改'>--%>
-<%--                                <input type = 'button' id = 'delete' value = '刪除'>--%>
-<%--                            </c:if>--%>
-<%--                        </td>--%>
-<%--                        <td>${nowDate}</td>--%>
-<%--                    </tr>--%>
+
                 </tbody>
             </table>
         </div>
@@ -80,10 +61,10 @@
             </div><br>
             <div class="row">
                 <div class="col-sm-8">
-                     <input type="text" class="form-control" id="openroom_msg" name="openroom_msg" maxlength="40">
+                     <input type="text" class="form-control" id="openRoom_msg" name="openRoom_msg" maxlength="40">
                 </div>
                 <div class="col-sm-2">
-                     <input type="button" id="openroom_btn" name="openroom_btn" value="傳送" onclick="send_msg(1)">
+                     <input type="button" id="openRoom_btn" name="openRoom_btn" value="傳送" onclick="send_msg(1)">
                 </div>
             </div>
         </div>
@@ -96,7 +77,7 @@
                      <label for="input_roomNo">房號:</label>
                      <input type="number" id="input_roomNo" name="input_roomNo" size="10%"
                            oninput="if(value.length>5 || value<=0)value=value.slice(0,5)" placeholder="請輸入數字-限制5碼">
-                     <input type="button"  value="進入房間" onclick="initWebSocket2()" />
+                     <input type="button"  value="進入房間" onclick="initRoomNo()" />
                      <input type="button" value="退出房間" onclick="closeWs()" /><br>
                 </div>
             </div>
@@ -119,16 +100,16 @@
         <div id="menu3" class="tab-pane fade">
             <table align="center" width="90%">
                 <tr>
-                    <td width="45%">&nbsp;</td>
+                    <td width="40%">&nbsp;</td>
                     <td>&nbsp;</td>
-                    <td width="45%" align="right">
-                        <input id="nickname_to" name="nickname_to" size="30%" maxlength="20" required placeholder="請輸入好友暱名">
+                    <td width="50%" align="right">
+                        <input id="nickname_to" name="nickname_to" size="30%" maxlength="20" placeholder="請輸入好友暱名">
                         <input type="button" onclick="insertFriend()" value="新增好友"/><br><br>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <table id="login_member" class="display">
+                        <table id="onlineUser" class="display">
                             <thead>
                                 <tr>
                                     <td></td>
@@ -137,15 +118,11 @@
                                 </tr>
                             </thead>
                             <tbody>
-
-                            <c:forEach var="i" begin="1" end="${sessionScope.userInfo.nickname.length()}" varStatus="loop">
-<%--                                <c:out escapeXml="false" value="<p>${i}</p>" />--%>
                                 <tr>
                                     <td></td>
-                                    <td>${sessionScope.userInfo.nickname}</td>
-                                    <td>${nowDate}</td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
-                            </c:forEach>
                             </tbody>
                         </table>
                     </td>
@@ -153,18 +130,20 @@
                         <td>
                             <table id="friend" class="display">
                                 <thead>
-<%--                                <tr>--%>
-<%--                                    <td>#</td>--%>
-<%--                                    <td>好友清單</td>--%>
-<%--                                    <td>加入時間</td>--%>
-<%--                                </tr>--%>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td>${nowDate}</td>
-                                </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </td>
