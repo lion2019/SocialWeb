@@ -64,7 +64,7 @@
                      <input type="text" class="form-control" id="openRoom_msg" name="openRoom_msg" maxlength="40">
                 </div>
                 <div class="col-sm-2">
-                     <input type="button" id="openRoom_btn" name="openRoom_btn" value="傳送" onclick="send_msg(1)">
+                     <input type="button" id="openRoom_btn" name="openRoom_btn" value="傳送" onclick="send_msg()">
                 </div>
             </div>
         </div>
@@ -91,7 +91,7 @@
                      <input type="text" class="form-control" id="roomNo_msg" name="roomNo_msg" maxlength="40">
                 </div>
                 <div class="col-sm-2">
-                     <input type="button" id="roomNo_btn" name="roomNo_btn" value="傳送" onclick="send_msg(2)">
+                     <input type="button" id="roomNo_btn" name="roomNo_btn" value="傳送" onclick="send_msg()">
                 </div>
             </div>
         </div>

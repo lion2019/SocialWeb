@@ -5,13 +5,12 @@ $(document).ready(function() {
     inputEnter("#roomNo_msg","#roomNo_btn")
     //表格title重整
     titleAdjust()
-    //初始化留言版
+
     initBoard()
     //初始線上成員
     initOnlineUser()
     //初始好友
     initFriend()
-
 
 } );
 
@@ -115,7 +114,7 @@ function initRoomNo() {
 }
 
 //發送訊息
-function send_msg(num) {
+function send_msg() {
     if (webSocket != null) {
         let openRoom_msg = document.getElementById("openRoom_msg").value.trim();
         if (openRoom_msg == null || openRoom_msg == "") {
@@ -178,6 +177,7 @@ function serialNumber(tableName){
     }).draw();
 }
 
+//初始化留言版
 
 function initBoard(){
 
@@ -257,23 +257,42 @@ function initBoard(){
         // "visible": false//隱藏
         "columns": [
             { "data": null,"title":"#",
-                "sClass" : "text-center"
+              "sClass" : "text-center",
             },
-            { "data": "nickname" ,"title":"暱名"},
-            { "data": "message" ,"title":"訊息"},
-            { "data": "room_number" ,"title":"房號"},
+            { "data": "nickname" ,"title":"暱名",
+              "sClass" : "text-center",
+            },
+            { "data": "message", "title": "訊息",
+                "render": function (data, type, row, meta) {
+                    let message =
+                        "<input type='text' id='message' name='message' value='" + row.message + "'>";
+                    return message;
+                },
+            },
+            { "data": "room_number" ,"title":"房號",
+              "sClass" : "text-center",
+              "render": function (data, type, row, meta) {
+                    let room_number =
+                        "<input type='text' id='room_number' name='room_number' value='" + row.room_number + "'>";
+                    return room_number;
+                },
+            },
             { "data": "nickname","title":"編輯",
-                "render":function ( data, type, row, meta ) {
+              "sClass" : "text-center",
+              "render":function ( data, type, row, meta ) {
                     //render方法有四個引數，分別為data、type、row、meta，其中主要是使用data和row來進行操作，
                     //data是對應當前cell的值，row是對應當前行中的所有cell的值。
                     if(nickname == row.nickname){
-                        let button = "<input type='button' id='updata' onclick='updateBoard()' value='修改'>" +
-                            "<input type='button' id='delete' onclick='deleteBoard()()' value='刪除'>";
+                        let button = "<input type='button' id='updata' onclick='updateBoard("+
+                                    row.message+")' value='修改'>"+
+                                     "<input type='button' id='delete' onclick='deleteBoard("+row.room_number+")' value='刪除'>";
                         return button;
                     }
                     return "";
                 },},
-            { "data": "createDateStr" ,"title":"創建時間"}
+            { "data": "createDateStr" ,"title":"創建時間",
+              "sClass" : "text-center",
+            }
         ]
     } );
 
@@ -292,7 +311,7 @@ function insertBoard(){
         alert('房號必須輸入，數字長度限制5字，請輸入正確格式！')
         return;
     }
-
+    //表格有幾列
     let row_lenght = document.getElementById("board").rows.length;
     //有資料才判斷房號，沒資料長度為2比對會出錯
     if(row_lenght != 2){
@@ -327,16 +346,14 @@ function insertBoard(){
             if(response.code == 0){
                 alert('新增成功')
             }else{
-                if(response.code){
-                    //300:用戶不存在
-                    alert('用戶不存在')
-                }else if(response.code){
-                    //201:資料已存在
-                    alert('房號已重複')
+                //300用戶不存在.201資料已重複
+                if(response.code == 300){
+                    alert('新增失敗:' +  response.message)
+                }else if(response.code == 201){
+                    alert('新增失敗:' +  response.message)
                 }else{
-                    alert('新增失敗:' +  response.code)
+                    alert('新增失敗:' +  response.code + ':' + response.message)
                 }
-
             }
         },
         error:function (xhr, textStatus, errorThrown){
@@ -346,14 +363,15 @@ function insertBoard(){
 }
 
 //修改留言版
-function updateBoard(){
+function updateBoard(message){
 
-    $(this).val();
     $.ajax({
         url:contextPath + '/board.do',
         type:'PUT',
         data:{
-            nickname_to:nickname_to,
+            nickname:nickname,
+            message:message,
+            room_number:room_number,
         },
         dataType:'json',
         success:function (response){
@@ -362,7 +380,13 @@ function updateBoard(){
                 alert('修改成功')
             }else{
                 //300用戶不存在.201新增error
-                alert('修改失敗:' +  response.code)
+                if(response.code == 300){
+                    alert('修改失敗:' +  response.message)
+                }else if(response.code == 201){
+                    alert('修改失敗:' +  response.message)
+                }else{
+                    alert('修改失敗:' +  response.code + ':' + response.message)
+                }
             }
         },
         error:function (xhr, textStatus, errorThrown){
@@ -372,14 +396,13 @@ function updateBoard(){
 }
 
 //刪除留言版
-function deleteBoard(){
+function deleteBoard(room_number){
 
-    let nickname_to = $('#nickname_to').val();
     $.ajax({
         url:contextPath + '/board.do',
         type:'DELETE',
         data:{
-            nickname_to:nickname_to,
+            nickname_to:room_number,
         },
         dataType:'json',
         success:function (response){
@@ -388,7 +411,13 @@ function deleteBoard(){
                 alert('刪除成功')
             }else{
                 //300用戶不存在.201新增error
-                alert('刪除失敗:' +  response.code)
+                if(response.code == 300){
+                    alert('刪除失敗:' +  response.message)
+                }else if(response.code == 201){
+                    alert('刪除失敗:' +  response.message)
+                }else{
+                    alert('刪除失敗:' +  response.code + ':' + response.message)
+                }
             }
         },
         error:function (xhr, textStatus, errorThrown){
@@ -554,7 +583,13 @@ function insertFriend(){
                 alert('新增成功')
             }else{
                 //300用戶不存在.201新增error
-                alert('新增失敗:' +  response.code)
+                if(response.code == 300){
+                    alert('新增失敗:' +  response.message)
+                }else if(response.code == 201){
+                    alert('新增失敗:' +  response.message)
+                }else{
+                    alert('新增失敗:' +  response.code + ':' + response.message)
+                }
             }
         },
         error:function (xhr, textStatus, errorThrown){
