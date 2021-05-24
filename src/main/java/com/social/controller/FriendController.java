@@ -63,6 +63,7 @@ public class FriendController extends BaseController {
             e.printStackTrace();
 //            String errorMsg = e.getErrorCode() == 23506? "user 不存在!":ResponseEnum.insert_error.getMessage();
 //            request.setAttribute("errorMsg", errorMsg);
+            // FIXME 未統一針對 db error code 處理
             //FIXME  duplicate 未判斷
             ResponseEnum responseEnum = e.getErrorCode() == 23506 ? ResponseEnum.user_not_found : ResponseEnum.insert_error;
             baseResponse = new BaseResponse(responseEnum);

@@ -163,7 +163,7 @@ function titleAdjust(){
 function reloadData(tableName) {
     setInterval( function () {
         tableName.ajax.reload( null, false ); // user paging is not reset on reload
-    }, 1000 );
+    }, 10*1000 );
 }
 
 //留言版第1欄流水號
@@ -283,8 +283,7 @@ function initBoard(){
                     //render方法有四個引數，分別為data、type、row、meta，其中主要是使用data和row來進行操作，
                     //data是對應當前cell的值，row是對應當前行中的所有cell的值。
                     if(nickname == row.nickname){
-                        let button = "<input type='button' id='updata' onclick='updateBoard("+
-                                    row.message+")' value='修改'>"+
+                        let button = "<input type='button' id='updata' onclick='updateBoard(event)' value='修改'>"+
                                      "<input type='button' id='delete' onclick='deleteBoard("+row.room_number+")' value='刪除'>";
                         return button;
                     }
@@ -344,6 +343,7 @@ function insertBoard(){
         success:function (response){
             //0為新增成功
             if(response.code == 0){
+                $('#board').DataTable().ajax.reload(null, false);
                 alert('新增成功')
             }else{
                 //300用戶不存在.201資料已重複
@@ -363,20 +363,24 @@ function insertBoard(){
 }
 
 //修改留言版
-function updateBoard(message){
-
+function updateBoard(event){
+    let elem = $(event.target).parent().parent();
+    let msg = elem.find("input[name='message']").val();
+    let room_number = elem.find("input[name='room_number']").val();
+    console.log(msg +", "+room_number)
     $.ajax({
         url:contextPath + '/board.do',
         type:'PUT',
         data:{
             nickname:nickname,
-            message:message,
+            message:msg,
             room_number:room_number,
         },
         dataType:'json',
         success:function (response){
-            //0為新增成功
+            //0為修改成功
             if(response.code == 0){
+                $('#board').DataTable().ajax.reload(null, false);
                 alert('修改成功')
             }else{
                 //300用戶不存在.201新增error
@@ -406,8 +410,9 @@ function deleteBoard(room_number){
         },
         dataType:'json',
         success:function (response){
-            //0為新增成功
+            //0為刪除成功
             if(response.code == 0){
+                $('#board').DataTable().ajax.reload(null, false);
                 alert('刪除成功')
             }else{
                 //300用戶不存在.201新增error
@@ -491,7 +496,7 @@ function initOnlineUser(){
     } );
 
     serialNumber(onlineUser);
-    // reloadData(onlineUser);
+    reloadData(onlineUser);
 }
 
 //好友表格
@@ -580,6 +585,7 @@ function insertFriend(){
         success:function (response){
             //0為新增成功
             if(response.code == 0){
+                $('#friend').DataTable().ajax.reload(null, false);
                 alert('新增成功')
             }else{
                 //300用戶不存在.201新增error

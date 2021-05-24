@@ -19,8 +19,8 @@ public class LoginSessionListener implements HttpSessionListener {
 
     @Override
     public void sessionCreated(HttpSessionEvent httpSessionEvent) {
-        User userInfo = (User) httpSessionEvent.getSession().getAttribute("userInfo");
-        System.out.println("sessionCreated...["+userInfo);
+//        User userInfo = (User) httpSessionEvent.getSession().getAttribute("userInfo");
+//        System.out.println("sessionCreated...["+userInfo);
 //        OnlineUser onlineUser = new OnlineUser();
 //        onlineUser.setLoginDateTime(LocalDateTime.now());
 //        onlineUser.setNickName(userInfo.getNickname());

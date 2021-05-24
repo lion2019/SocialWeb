@@ -1,6 +1,9 @@
 package com.social.controller;
 
-import com.social.domain.*;
+import com.social.domain.BaseResponse;
+import com.social.domain.Board;
+import com.social.domain.BoardRequest;
+import com.social.domain.User;
 import com.social.exception.BaseException;
 import com.social.exception.ResponseEnum;
 import com.social.service.BoardService;
