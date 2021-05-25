@@ -3,18 +3,15 @@ $(document).ready(function() {
 
     setInterval("changeColor()",200)//跑馬燈
     Carousel()//輪播
-
     //聊天室訊息送出按鍵可用Enter鍵
     inputEnter("#openRoom_msg","#openRoom_btn")
     inputEnter("#roomNo_msg","#roomNo_btn")
-
     titleAdjust()//表頭thead擠在一起時，自動調整
-
     initBoard()//初始留言版
-
     initOnlineUser()//初始線上成員
-
     initFriend()//初始好友
+
+
 
 } );
 
@@ -246,6 +243,44 @@ function serialNumber(tableName){
     }).draw();
 }
 
+//修改留言版對話框
+function updateBoardDialog(message,room_number){
+    $('#upRoom_number').val(room_number);
+    $('#upMessage').val(message);
+
+    $("#dialog").dialog({
+        autoOpen: false,
+        show: "blind",
+        hide: "explode",
+        buttons: {
+            "確定": function() {
+                let new_room_number = $('#upRoom_number').val();
+                let new_msg = $('#upMessage').val();
+                if(new_room_number != "" && new_msg != ""){
+                    updateBoard(room_number,new_msg,new_room_number)
+                }else{
+                    alert('房號及訊息不得為空，請重新輸入！')
+                    return;
+                }
+            },
+            "取消": function() {
+                $(this).dialog("close");
+            }
+        }
+    });
+    $("#dialog").dialog("open");
+}
+//刪除留言版確認按鈕
+function confirmBtn(room_number){
+    let r=confirm("是否確定要刪除此筆留言版！");
+    if (r==true){
+        deleteBoard(room_number)
+    }
+    else{
+        return;
+    }
+}
+
 //初始化留言版
 function initBoard(){
 
@@ -279,10 +314,10 @@ function initBoard(){
         bPaginate: true, //翻頁功能
         bLengthChange: true, //改變每頁顯示資料數量
         stateSave: true, //表格狀態保存，當頁面刷新時，是否要保存當前表格狀態，不保存狀態便會在刷新時回復到原始狀態
-        autoWidth: true, //是否要自動調整表格寬度
+        autoWidth: false, //是否要自動調整表格寬度
         // [指定的列 , 排序方向] 。
         // 預設 [[0, 'asc']] ，asc 升冪排列、desc 降冪排列。
-        order: [[ 1, 'asc' ], [ 2, 'asc' ]],
+         order: [[ 5, 'desc' ]],
         language: {
             "processing": "處理中...",
             "loadingRecords": "載入中...",
@@ -325,42 +360,49 @@ function initBoard(){
         // "visible": false//隱藏
         "columns": [
             { "data": null,"title":"#",
-              "sClass" : "text-center",
+              "sClass" : "text-center,size",
+              "width":"5%",
             },
             { "data": "nickname" ,"title":"暱名",
               "sClass" : "text-center",
+              "width":"10%",
             },
             { "data": "room_number" ,"title":"房號",
-                "sClass" : "text-center",
-                "render": function (data, type, row, meta) {
-                    let room_number =
-                        "<input type='text' id='room_number' name='room_number' style='text-align:center'" +
-                        "size='7%' oninput='if(value.length>5 || value<=0)value=value.slice(0,5)'" +
-                        "value='" + row.room_number + "'>";
-                    return room_number;
-                },
+              "sClass" : "text-center",
+              "width":"10%",
+              // "render": function (data, type, row, meta) {
+              //       let room_number =
+              //           "<input type='text' style='text-align:center' size='7%'" +
+              //           "oninput='if(value.length>5 || value<=0)value=value.slice(0,5)'" +
+              //           "value='" + row.room_number + "'>";
+              //       return room_number;
+              //   },
             },
             { "data": "message", "title": "訊息",
-                "render": function (data, type, row, meta) {
-                    let message =
-                        "<input type='text' id='message' name='message' size='90%' maxlength='100' value='" + row.message + "'>";
-                    return message;
-                },
+              "width":"35%",
+                // "render": function (data, type, row, meta) {
+                //     let message =
+                //         "<textarea rows='' cols='' maxlength='100'" +
+                //         "style='width:100%;height:100%;'>"+row.message+"</textarea>";
+                //     return message;
+                // },
             },
             { "data": "nickname","title":"編輯",
               "sClass" : "text-center",
+              "width":"20%",
               "render":function ( data, type, row, meta ) {
                     //render方法有四個引數，分別為data、type、row、meta，其中主要是使用data和row來進行操作，
                     //data是對應當前cell的值，row是對應當前行中的所有cell的值。
                     if(nickname == row.nickname){
-                        let button = "<input type='button' id='updata' onclick='updateBoard(even)' value='修改'>"+
-                                     "<input type='button' id='delete' onclick='deleteBoard("+row.room_number+")' value='刪除'>";
+                        let button = "<input type='button' id='updata' onclick='updateBoardDialog(\""+row.message+"\","+row.room_number+")' value='修改'>"+
+                                     "<input type='button' id='delete' onclick='confirmBtn("+row.room_number+")' value='刪除'>";
                         return button;
                     }
                     return "";
                 },},
             { "data": "createDateStr" ,"title":"創建時間",
               "sClass" : "text-center",
+              "width":"20%",
             }
         ]
     } );
@@ -368,7 +410,6 @@ function initBoard(){
     serialNumber(board);
     // reloadData(board);
 }
-
 
 //新增留言版
 function insertBoard(){
@@ -433,18 +474,16 @@ function insertBoard(){
 }
 
 //修改留言版
-function updateBoard(event){
-    let elem = $(event.target).parent().parent();
-    let msg = elem.find("input[name='message']").val();
-    let room_number = elem.find("input[name='room_number']").val();
-    console.log(msg +", "+room_number)
+function updateBoard(room_number,new_msg,new_room_number){
+
     $.ajax({
         url:contextPath + '/board.do',
         type:'PUT',
         data:{
             nickname:nickname,
-            message:msg,
+            message:new_msg,
             room_number:room_number,
+            new_room_number:new_room_number,
         },
         dataType:'json',
         success:function (response){
@@ -557,10 +596,13 @@ function initOnlineUser(){
 
         "columns": [
             { "data": null,"title":"#",
-                "sClass" : "text-center"
+              "sClass" : "text-center"
             },
-            { "data": "nickname" ,"title":"上線成員"},
-            { "data": "loginTimeStr","title":"上線時間",},
+            { "data": "nickname" ,"title":"上線成員",
+              "sClass" : "text-center"
+            },
+            { "data": "loginTimeStr","title":"上線時間",
+            },
         ]
 
     } );
@@ -625,11 +667,15 @@ function initFriend(){
 
         "columns": [
             { "data": null,"title":"#",
-                "sClass" : "text-center"
+              "sClass" : "text-center",
             },
-            { "data": "nickname_to" ,"title":"好友清單"},
+            { "data": "nickname_to" ,"title":"好友清單",
+              "sClass" : "text-center",
+            },
             { "data": "create_date" ,"title":"加入時間"},
-            { "data": "status" ,"title":"上線狀態"},
+            { "data": "status" ,"title":"上線狀態",
+              "sClass" : "text-center",
+            },
         ]
 
     } );

@@ -4,14 +4,18 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link href="${pageContext.request.contextPath}/css/main.css" rel="stylesheet" type="text/css">
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.1.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <!--index.jsp輪播功能需要-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.js"></script>
+<%--    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.js"></script>--%>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <!--引用dataTables.js-->
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
@@ -30,8 +34,7 @@
         }
     </script>
 </head>
-<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="10">
-
+<body id="myPage" data-spy="scroll" data-target=".navbar">
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -40,7 +43,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-                    <a class="navbar-brand" href="index.jsp">TH Chatroom</a>
+            <a class="navbar-brand" href="index.jsp">TH Chatroom</a>
         </div>
         <div>
             <div class="collapse navbar-collapse" id="myNavbar">
@@ -63,7 +66,8 @@
             <div class="row" style="font-size: 20px">
                 <marquee direction="scroll" id="run">
                     ${sessionScope.userInfo != null?sessionScope.userInfo.nickname:''}
-                    您好~歡迎進入聊天室</marquee>
+                    您好~歡迎進入聊天室
+                </marquee>
             </div>
         </div>
     </div>
