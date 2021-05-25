@@ -19,14 +19,8 @@
 
     <title>首頁</title>
     <script>
+        //取得網頁根目錄
         let contextPath = "${pageContext.request.contextPath}";
-        //跑馬燈
-        function changeColor(){
-            var color="#f00|#0f0|#00f|#880|#808|#088|yellow|green|blue|gray";
-            color=color.split("|");
-            document.getElementById("run").style.color=color[parseInt(Math.random() * color.length)];
-        }
-        setInterval("changeColor()",200);
         //登入者暱名，聊天室取值用
         let nickname = "${sessionScope.userInfo.nickname}";
         //從後端取得錯誤訊息
@@ -46,15 +40,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-<%--            <div class="row">--%>
-<%--                <div class="col-sm-4">--%>
-<%--                        &lt;%&ndash;img-responsive圖片縮放RWD&ndash;%&gt;--%>
-<%--                    <img src="images/Logo.jpg" alt="logo" id="logo" class="img-responsive" >--%>
-<%--                </div>--%>
-<%--                <div class="col-sm-8">--%>
                     <a class="navbar-brand" href="index.jsp">TH Chatroom</a>
-<%--                </div>--%>
-<%--            </div>--%>
         </div>
         <div>
             <div class="collapse navbar-collapse" id="myNavbar">

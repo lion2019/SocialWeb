@@ -1,20 +1,89 @@
 $(document).ready(function() {
     console.log("contextPath:"+contextPath)
 
+    setInterval("changeColor()",200)//跑馬燈
+    Carousel()//輪播
+
+    //聊天室訊息送出按鍵可用Enter鍵
     inputEnter("#openRoom_msg","#openRoom_btn")
     inputEnter("#roomNo_msg","#roomNo_btn")
-    //表格title重整
-    titleAdjust()
 
-    initBoard()
-    //初始線上成員
-    initOnlineUser()
-    //初始好友
-    initFriend()
+    titleAdjust()//表頭thead擠在一起時，自動調整
+
+    initBoard()//初始留言版
+
+    initOnlineUser()//初始線上成員
+
+    initFriend()//初始好友
 
 } );
 
-//輸入框傳送按鈕用Enter傳送
+//跑馬燈
+function changeColor(){
+    var color="#f00|#0f0|#00f|#880|#808|#088|yellow|green|blue|gray";
+    color=color.split("|");
+    document.getElementById("run").style.color=color[parseInt(Math.random() * color.length)];
+}
+
+//輪播
+function Carousel(){
+    var $item = $('.carousel .item');
+    var $wHeight = $(window).height();
+    $item.height($wHeight);
+    $item.addClass('full-screen');
+
+    $('.carousel img').each(function() {
+        var $src = $(this).attr('src');
+        var $color = $(this).attr('data-color');
+        $(this).parent().css({
+            'background-image' : 'url(' + $src + ')',
+            'background-color' : $color,
+            // 'background-size': 'cover',/*背景圖片小於容器時，將背景圖片的大小放大至容器大小並填滿文章*/
+            'background-position': 'center',
+            'height':'100%',
+            'background-repeat': 'no-repeat',
+        });
+        $(this).remove();
+    });
+
+    //下方自動加入控制圓鈕
+    var total = $('.carousel .carousel-inner div.item').size();
+    append_li();
+    function append_li()
+    {
+        var li = "";
+        var get_ac = $( ".carousel .active" );
+        var ac =  $( ".carousel .carousel-inner div" ).index( get_ac );
+
+        for (var i=0; i <= total-1; i++){
+            if(i == (ac)/2){
+                li += "<li data-target='#mycarousel' data-slide-to='"+i+"' class='active'></li>";
+            }else{
+                li += "<li data-target='#mycarousel' data-slide-to='"+i+"' class=''></li>";
+            }
+        }
+        $(".carousel-indicators").append(li);
+    }
+
+    //單則隱藏控制鈕
+    if ($('.carousel .carousel-inner div.item').length < 2 ) {
+        $('.carousel-indicators, .carousel-control').hide();
+    }
+
+    //縮放視窗調整視窗高度
+    $(window).on('resize', function (){
+        $wHeight = $(window).height();
+        $item.height($wHeight);
+    });
+
+    //輪播秒數與滑入停止
+    $('.carousel').carousel({
+        interval: 5000,
+        pause: "hover"
+    });
+}
+
+//聊天室訊息送出按鍵可用Enter鍵
 function inputEnter(inputId,btnId){
     $(inputId).keyup(function(event){
         if(event.which == 13){
@@ -26,11 +95,11 @@ function inputEnter(inputId,btnId){
 }
 
 
+//contextPath、nickname宣告在header.jsp
+//大廳連線
 let webSocket;
 let webSocket2;
 let url;
-//contextPath、nickname宣告在header.jsp
-//公頻連線
 function initOpenRoom() {
 
     //不讓前端知道公頻號碼
@@ -70,7 +139,7 @@ function initOpenRoom() {
     }
 }
 
-//房名
+//房間連線
 function initRoomNo() {
 
         let roomNo = document.getElementById("input_roomNo").value;
@@ -113,7 +182,7 @@ function initRoomNo() {
     }
 }
 
-//發送訊息
+//聊天室發送訊息
 function send_msg() {
     if (webSocket != null) {
         let openRoom_msg = document.getElementById("openRoom_msg").value.trim();
@@ -151,7 +220,7 @@ function closeWs() {
     alert('退出房間')
 };
 
-//表頭擠在一起時，自動調整
+//表頭thead擠在一起時，自動調整
 function titleAdjust(){
     $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
         //当切换tab时，强制重新计算列宽
@@ -178,7 +247,6 @@ function serialNumber(tableName){
 }
 
 //初始化留言版
-
 function initBoard(){
 
     let board = $('#board').DataTable( {// 和<table>的id對應，指定初始化datatables。
@@ -262,19 +330,21 @@ function initBoard(){
             { "data": "nickname" ,"title":"暱名",
               "sClass" : "text-center",
             },
+            { "data": "room_number" ,"title":"房號",
+                "sClass" : "text-center",
+                "render": function (data, type, row, meta) {
+                    let room_number =
+                        "<input type='text' id='room_number' name='room_number' style='text-align:center'" +
+                        "size='7%' oninput='if(value.length>5 || value<=0)value=value.slice(0,5)'" +
+                        "value='" + row.room_number + "'>";
+                    return room_number;
+                },
+            },
             { "data": "message", "title": "訊息",
                 "render": function (data, type, row, meta) {
                     let message =
-                        "<input type='text' id='message' name='message' value='" + row.message + "'>";
+                        "<input type='text' id='message' name='message' size='90%' maxlength='100' value='" + row.message + "'>";
                     return message;
-                },
-            },
-            { "data": "room_number" ,"title":"房號",
-              "sClass" : "text-center",
-              "render": function (data, type, row, meta) {
-                    let room_number =
-                        "<input type='text' id='room_number' name='room_number' value='" + row.room_number + "'>";
-                    return room_number;
                 },
             },
             { "data": "nickname","title":"編輯",
@@ -283,7 +353,7 @@ function initBoard(){
                     //render方法有四個引數，分別為data、type、row、meta，其中主要是使用data和row來進行操作，
                     //data是對應當前cell的值，row是對應當前行中的所有cell的值。
                     if(nickname == row.nickname){
-                        let button = "<input type='button' id='updata' onclick='updateBoard(event)' value='修改'>"+
+                        let button = "<input type='button' id='updata' onclick='updateBoard(even)' value='修改'>"+
                                      "<input type='button' id='delete' onclick='deleteBoard("+row.room_number+")' value='刪除'>";
                         return button;
                     }

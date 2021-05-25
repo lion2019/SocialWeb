@@ -8,15 +8,11 @@
 </jsp:include>
 <fmt:formatDate type="both" value="${date}" var="nowDate"/>
 
-<script>
-
-
-</script>
 <div class="row" style="height:25px">
 </div>
 <ul class="nav nav-tabs">
     <li class="active"><a data-toggle="tab" href="#home">留言版</a></li>
-    <li><a data-toggle="tab" href="#menu1" onclick="initOpenRoom()">聊天室-公頻</a></li>
+    <li><a data-toggle="tab" href="#menu1" onclick="initOpenRoom()">聊天室-大廳</a></li>
     <li><a data-toggle="tab" href="#menu2">聊天室-房間</a></li>
     <li><a data-toggle="tab" href="#menu3">好友</a></li>
 </ul>
@@ -41,12 +37,7 @@
         </div>
         <div class="container-fluid">
             <table id="board" class="display" cellspacing="0" width="100%">
-                <thead>
 
-                </thead>
-                <tbody>
-
-                </tbody>
             </table>
         </div>
     </div>
@@ -110,41 +101,13 @@
                 <tr>
                     <td>
                         <table id="onlineUser" class="display">
-                            <thead>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                            </tbody>
+
                         </table>
                     </td>
                         <td>&nbsp;</td>
                         <td>
                             <table id="friend" class="display">
-                                <thead>
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                </tbody>
+
                             </table>
                         </td>
                     </tr>
