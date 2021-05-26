@@ -35,7 +35,7 @@
                 </form>
             </div>
             <div class="container-fluid">
-                <table id="board" class="display">
+                <table id="board" class="display" width="100%">
 
                 </table>
             </div>

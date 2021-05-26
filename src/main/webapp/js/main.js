@@ -314,7 +314,7 @@ function initBoard(){
         bPaginate: true, //翻頁功能
         bLengthChange: true, //改變每頁顯示資料數量
         stateSave: true, //表格狀態保存，當頁面刷新時，是否要保存當前表格狀態，不保存狀態便會在刷新時回復到原始狀態
-        autoWidth: false, //是否要自動調整表格寬度
+        autoWidth: true, //是否要自動調整表格寬度
         // [指定的列 , 排序方向] 。
         // 預設 [[0, 'asc']] ，asc 升冪排列、desc 降冪排列。
          order: [[ 5, 'desc' ]],
@@ -361,15 +361,13 @@ function initBoard(){
         "columns": [
             { "data": null,"title":"#",
               "sClass" : "text-center,size",
-              "width":"5%",
             },
             { "data": "nickname" ,"title":"暱名",
               "sClass" : "text-center",
-              "width":"10%",
             },
             { "data": "room_number" ,"title":"房號",
               "sClass" : "text-center",
-              "width":"10%",
+              // "width":"7%",
               // "render": function (data, type, row, meta) {
               //       let room_number =
               //           "<input type='text' style='text-align:center' size='7%'" +
@@ -379,7 +377,6 @@ function initBoard(){
               //   },
             },
             { "data": "message", "title": "訊息",
-              "width":"35%",
                 // "render": function (data, type, row, meta) {
                 //     let message =
                 //         "<textarea rows='' cols='' maxlength='100'" +
@@ -389,7 +386,6 @@ function initBoard(){
             },
             { "data": "nickname","title":"編輯",
               "sClass" : "text-center",
-              "width":"20%",
               "render":function ( data, type, row, meta ) {
                     //render方法有四個引數，分別為data、type、row、meta，其中主要是使用data和row來進行操作，
                     //data是對應當前cell的值，row是對應當前行中的所有cell的值。
@@ -402,7 +398,6 @@ function initBoard(){
                 },},
             { "data": "createDateStr" ,"title":"創建時間",
               "sClass" : "text-center",
-              "width":"20%",
             }
         ]
     } );
