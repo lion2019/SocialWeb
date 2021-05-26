@@ -191,7 +191,7 @@ function send_msg() {
         }
         document.getElementById("openRoom_msg").value = "";
     }else if(webSocket2 != null){
-        let roomNo_msg = $('#input_roomNo').val().trim();
+        let roomNo_msg = $('#roomNo_msg').val().trim();
         if (roomNo_msg == null || roomNo_msg == "") {
             alert('請輸入訊息')
             return;
