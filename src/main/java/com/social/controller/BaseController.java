@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.nio.charset.StandardCharsets;
 import java.util.Enumeration;
 import java.util.Optional;
 
@@ -80,12 +81,12 @@ public abstract class BaseController extends HttpServlet {
     protected JSONObject requestParse2Json(HttpServletRequest request) throws IOException {
         // 1. get received JSON data from request
         BufferedReader br =
-                new BufferedReader(new InputStreamReader(request.getInputStream()));
+                new BufferedReader(new InputStreamReader(request.getInputStream(), StandardCharsets.UTF_8));
 
         String jsonStr = "";
         if(br != null){
             jsonStr = br.readLine();
-            System.out.println(jsonStr);
+            System.out.println("json data["+jsonStr+"]");
         }
 
         // json parse string
