@@ -266,6 +266,7 @@ function updateBoardDialog(message,room_number){
                 let new_msg = $('#upMessage').val();
                 if(new_room_number != "" && new_msg != ""){
                     updateBoard(room_number,new_msg,new_room_number)
+                    $(this).dialog("close");
                 }else{
                     alert('房號及訊息不得為空，請重新輸入！')
                     return;
