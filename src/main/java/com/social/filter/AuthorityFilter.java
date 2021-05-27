@@ -60,7 +60,7 @@ public class AuthorityFilter implements Filter {
 	 */
 	private boolean isExcludeUrl(HttpServletRequest req) {
 		String servletPath = req.getServletPath();
-		System.out.println("servletPath:"+servletPath);
+//		System.out.println("servletPath:"+servletPath);
 		return Arrays.stream(excludeUrlPath).anyMatch(k -> servletPath.matches(k));
 	}
 
