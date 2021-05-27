@@ -3,7 +3,6 @@ package com.social.dao;
 import com.social.datasource.ConnectionPool;
 import com.social.domain.AutoIncrement;
 
-import javax.servlet.ServletException;
 import javax.sql.DataSource;
 import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;
@@ -21,10 +20,8 @@ import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 /**
- * 如何在執行前自動取得 connection ?
- * @author 2291
- *
- * @param <T>
+ * 基礎 DAO
+ * 取得 db connection
  */
 public abstract class BaseDao<T> {
 	protected DataSource dataSource;
@@ -38,15 +35,6 @@ public abstract class BaseDao<T> {
 	 * @param t
 	 */
 	public boolean insert(T t) throws SQLException {
-//		String tableName = t.getClass().getSimpleName().toLowerCase();
-//		// 取得 private fields
-//		Field[] fields = t.getClass().getDeclaredFields();
-//		
-//		String columnStr = Stream.of(fields).map(Field::getName).collect(Collectors.joining(",", "(", ")"));
-//		String values = Stream.of(fields).map(o -> "?").collect(Collectors.joining(",", "(", ")"));
-//
-//		String sql = "insert into " + tableName + columnStr + " values" + values + ";";
-//
 		String sql = genInsertSql(t);
 		try(Connection conn = dataSource.getConnection();
 				PreparedStatement ps = conn.prepareStatement(sql);){
@@ -119,18 +107,6 @@ public abstract class BaseDao<T> {
 				e.printStackTrace();
 			}
 		});
-//		Stream.of(fields).map(Field::getName).forEach(o -> {
-//			try {
-//				PropertyDescriptor propertyDescriptor = new PropertyDescriptor(o, obj.getClass());
-//				Method method = propertyDescriptor.getReadMethod();
-//				Object value = method.invoke(obj);
-//				ps.setString(0, value.toString());
-//			} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException
-//					| IntrospectionException | SQLException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//		});;
 	}
 
 	/**
@@ -139,12 +115,12 @@ public abstract class BaseDao<T> {
 	 * @param cls
 	 */
 	protected Optional<T> resultSet2Bean(ResultSet rs, Class<T> cls)
-			throws IOException, ServletException, IntrospectionException, InstantiationException,
+			throws IOException, IntrospectionException, InstantiationException,
 			IllegalAccessException, InvocationTargetException, SQLException {
 
 		// 動態生成 object
 		T obj = cls.newInstance();
-//		T obj =  t.getClass().newInstance();
+
 		/*
 		返回一個Field對像數組，該數組反映由該Class對象表示的類或接口聲明的所有字段。
 		這包括公共，受保護，默認（程序包）訪問和私有字段，但不包括繼承的字段。
@@ -189,9 +165,9 @@ public abstract class BaseDao<T> {
 	/**
 	 * find all
 	 */
-	public List<T> findAll() throws InstantiationException, IllegalAccessException, SQLException {
+	public List<T> findAll() throws InstantiationException, IllegalAccessException,
+			SQLException, IntrospectionException, IOException, InvocationTargetException {
 
-//		Object o = t.getClass().newInstance();
 		List<T> list = new ArrayList<>();
 
 		ParameterizedType genericSuperclass = (ParameterizedType) getClass().getGenericSuperclass();
@@ -200,7 +176,6 @@ public abstract class BaseDao<T> {
 		String tableName = cls.getSimpleName().toLowerCase();
 		System.out.println(tableName);
 
-//		String tableName = cls.getSimpleName().toLowerCase();
 		String sql = "select * from "+ tableName;
 		try(Connection conn = dataSource.getConnection();
 			PreparedStatement ps = conn.prepareStatement(sql);){
@@ -212,15 +187,6 @@ public abstract class BaseDao<T> {
 				list.add(resultSet2Bean(resultSet, cls).get());
 			}
 			return list;
-		} catch (ServletException e) {
-			e.printStackTrace();
-		} catch (IntrospectionException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			e.printStackTrace();
 		}
-		return list;
 	}
 }

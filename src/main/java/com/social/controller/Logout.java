@@ -11,7 +11,10 @@ import javax.servlet.http.HttpSession;
 @WebServlet(urlPatterns = "/logout.do")
 public class Logout extends BaseController {
 	private static final long serialVersionUID = 1L;
-	
+
+	/**
+	 * 登出
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		// 銷毀 session
@@ -20,7 +23,7 @@ public class Logout extends BaseController {
 		response.sendRedirect(request.getContextPath()+"/login.jsp");
 	}
 	
-	protected void dopost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
 }

@@ -8,15 +8,12 @@ import com.social.exception.ResponseEnum;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+/**
+ * 登入服務
+ */
 public class LoginService {
     private UserDao userDao = new UserDao();
 
-    /**
-     * @param user
-     * @param request
-     * @return
-     * @throws BaseException user.email not found or password error
-     */
     public User login(User user, HttpServletRequest request) throws BaseException {
         User userInfo = userDao.findByEmail(user.getEmail())
                 .orElseThrow(() -> new BaseException(ResponseEnum.user_not_found));
@@ -32,7 +29,9 @@ public class LoginService {
         }
     }
 
-
+    /**
+     * 檢查密碼是否正確
+     */
     public boolean checkPassword(User userRequest, User userInfo) {
         return userRequest.getPassword().equals(userInfo.getPassword());
     }

@@ -25,6 +25,9 @@ public class RegisterController extends BaseController {
 	private RegisterService registerService = new RegisterService();
 	private LoginService loginService = new LoginService();
 
+	/**
+	 * 會員註冊
+	 */
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		System.out.println(getServletName());
@@ -44,31 +47,12 @@ public class RegisterController extends BaseController {
 			loginService.login(user, req);
 
 			resp.sendRedirect(req.getContextPath()+"/main.jsp");
-//			user.ofNullable(null)
-			
-//			System.out.println("name["+user.map(User::getName).orElse("name is empty"));
-			
-			
-			// FIXME ServletException 內容可調使用 enum  
-//			User output = user.filter(registerService::addUser).orElseThrow(()->new ServletException("user add error!!"));
-			
-//			user.ifPresent(registerService::addUser);
-//			req.setAttribute("userInfo", user);
-			
-//			resp.setContentType("application/json;");
-//			resp.setCharacterEncoding(StandardCharsets.UTF_8.name());
-			
-//			JSONObject output = JSONObject.fromObject(user);
-//			resp.getWriter().println(output);
+
 		} catch (BaseException e){
 			e.printStackTrace();
 			String errorMsg = e.getCode() == 23505? "email 已存在!":ResponseEnum.insert_error.getMessage();
 			req.setAttribute("errorMsg", errorMsg);
 			req.getRequestDispatcher("/register.jsp").forward(req, resp);
-			return;
-//			System.err.println("err code:"+e.getCode());
-//			System.err.println("err msg:"+e.getMessage());
-//			throw e;
 		} catch (InstantiationException | IllegalAccessException | IOException
 				| IntrospectionException | InvocationTargetException e) {
 			e.printStackTrace();

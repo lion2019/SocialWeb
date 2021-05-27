@@ -11,6 +11,9 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * 聊天室
+ */
 @ServerEndpoint("/webSocket/chat/{roomName}")
 public class WsServer {
 

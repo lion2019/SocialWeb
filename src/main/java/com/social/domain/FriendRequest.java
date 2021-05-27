@@ -5,6 +5,9 @@ import com.social.exception.ValidException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
+/**
+ * 未用到 (保留)
+ */
 public class FriendRequest {
     private String nickname_to;
 

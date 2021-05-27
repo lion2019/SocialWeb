@@ -1,20 +1,22 @@
 package com.social.controller;
 
+import net.sf.json.JSONObject;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
 import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Enumeration;
 import java.util.Optional;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-
 /**
- * 基礎 controller 給所有 controller
- *
+ * 基礎 controller 給所有 controller 繼承
  */
 public abstract class BaseController extends HttpServlet {
     private static final long serialVersionUID = 1L;
@@ -25,11 +27,8 @@ public abstract class BaseController extends HttpServlet {
 
     /**
      * FIXME 未驗証 param 輸入的值
+     * 將前端傳來的的值放入 java 物件
      * 若 request parameter key 和 bean field name 相同時，則可使用
-     * @param <T>
-     * @param req
-     * @param cls
-     * @return
      */
     protected <T> Optional<T> reqParam2Bean(HttpServletRequest req, Class<T> cls) throws IOException, ServletException,
             IntrospectionException, InstantiationException, IllegalAccessException, InvocationTargetException {
@@ -75,9 +74,22 @@ public abstract class BaseController extends HttpServlet {
         return Optional.ofNullable(obj);
     }
 
+    /**
+     * 從 request 取值解析成 json 物件
+     */
+    protected JSONObject requestParse2Json(HttpServletRequest request) throws IOException {
+        // 1. get received JSON data from request
+        BufferedReader br =
+                new BufferedReader(new InputStreamReader(request.getInputStream()));
 
-//	// FIXME 動態驗証?
-//	private boolean checkParam(HttpServletRequest req) {
-//		
-//	}
+        String jsonStr = "";
+        if(br != null){
+            jsonStr = br.readLine();
+            System.out.println(jsonStr);
+        }
+
+        // json parse string
+        return JSONObject.fromObject(jsonStr);
+    }
+
 }

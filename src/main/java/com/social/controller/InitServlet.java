@@ -34,11 +34,6 @@ public class InitServlet extends HttpServlet {
 			String userName = properties.getProperty("userName");
 			String password = properties.getProperty("password");
 			
-//			String jdbcUrl = config.getInitParameter("jdbcUrl");
-//			String driver = config.getInitParameter("driver-class-name");
-//			String userName = config.getInitParameter("userName");
-//			String password = config.getInitParameter("password");
-
 			// 設定 連線池
 			HikariDataSource hikariDataSource = new HikariDataSource();
 			hikariDataSource.setUsername(userName);

@@ -17,18 +17,21 @@ import java.util.List;
 @WebServlet(urlPatterns = {"/onlineUser.do"})
 public class OnlineUserController extends BaseController {
 
+    /**
+     * 線上使用老清單
+     */
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         try {
             List<OnlineUser> sessionList = (List<OnlineUser>) getServletContext()
                     .getAttribute("onlineUser");
 
-//            List<Board> list = boardService.findAll();
             JSONArray jsonObject = JSONArray.fromObject(sessionList);
             resp.setContentType("application/json;charset=utf-8");
             resp.getWriter().print(jsonObject.toString());
         } catch (Exception e) {
             e.printStackTrace();
+            throw e;
         }
     }
 }

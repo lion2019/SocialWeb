@@ -27,8 +27,8 @@ public enum ResponseEnum implements IResponseEnum {
 	friend_not_self(400, "好友不可為自己"),
 
 	// sql insert error
-	insert_error(201, "insert error!!");
-	
+	insert_error(201, "insert error!!"),
+	delete_error(202, "delete error!!");
 	
 	
 	ResponseEnum(int code, String message) {

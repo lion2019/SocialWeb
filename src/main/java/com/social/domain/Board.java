@@ -3,14 +3,19 @@ package com.social.domain;
 import java.sql.Timestamp;
 
 /**
- * 留言板
+ * 留言板 entity
  */
 public class Board {
+    /** 流水號 */
     @AutoIncrement
     private Integer id;
+    /** 暱名 */
     private String nickname;
+    /** 訊息 */
     private String message;
+    /** 創建日期 */
     private Timestamp create_date;
+    /** 房號 */
     private Integer room_number;
 
     public Integer getId() {

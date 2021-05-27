@@ -1,13 +1,14 @@
 package com.social.service;
 
-import com.social.dao.BoardDao;
 import com.social.dao.FriendDao;
-import com.social.domain.Board;
 import com.social.domain.Friend;
 
 import java.sql.SQLException;
 import java.util.List;
 
+/**
+ * 好友服務
+ */
 public class FriendService {
 
     private FriendDao dao = new FriendDao();

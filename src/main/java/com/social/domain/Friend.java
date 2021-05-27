@@ -2,9 +2,15 @@ package com.social.domain;
 
 import java.sql.Timestamp;
 
+/**
+ * 好友 entity
+ */
 public class Friend {
+    /** 發起者 */
     private String nickname_from;
+    /** 好友 */
     private String nickname_to;
+    /** 創連日期 */
     private Timestamp create_date;
 
     public Friend() {

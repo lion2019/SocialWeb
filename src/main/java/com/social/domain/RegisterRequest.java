@@ -4,14 +4,23 @@ import com.social.exception.ResponseEnum;
 import com.social.exception.UserException;
 import com.social.exception.ValidException;
 
+/**
+ * 註冊 前端傳入的值放入此物件
+ */
 public class RegisterRequest {
 
+    /** 姓名 */
     private String name;
+    /** 暱名 */
     private String nickname;
+    /** 密碼 */
     private String password1;
+    /** 再次確認的密碼 */
     private String password2;
     private String email;
-    /** 基本型別 無法帶入 null 和 資料表結構不符, 盡量別用基本型別 */
+    /**
+     * 性別<br/>
+     * 注意：基本型別 無法帶入 null 和 資料表結構不符, 盡量別用基本型別 */
     private Character gender;
 
     public String getName() {
@@ -96,7 +105,11 @@ public class RegisterRequest {
         return user;
     }
 
+    /**
+     * 驗証用
+     */
     public void valid() throws ValidException {
+        // 驗証 密碼和再次確認的密碼一致
         if(!password1.equals(password2))
             throw new ValidException(ResponseEnum.password_not_match);
     }

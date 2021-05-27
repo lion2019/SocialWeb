@@ -18,6 +18,5 @@ public class RegisterService {
         } catch (SQLException e) {
             throw new UserException(e.getErrorCode(), e.getMessage());
         }
-//		return true;
     }
 }

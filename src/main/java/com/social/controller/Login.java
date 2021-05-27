@@ -23,6 +23,9 @@ public class Login extends BaseController {
 
     private LoginService loginService = new LoginService();
 
+    /**
+     * 登入
+     */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             User user = reqParam2Bean(request, User.class)
@@ -47,13 +50,6 @@ public class Login extends BaseController {
 
 //			JSONObject output = JSONObject.fromObject(userInfo);
 
-//			HttpSession session = request.getSession();
-//			session.setAttribute("userInfo", output);
-
-//			response.setContentType("application/json;");
-//			response.setCharacterEncoding(StandardCharsets.UTF_8.name());
-
-//			response.getWriter().println(output);
             response.sendRedirect(request.getContextPath() + "/main.jsp");
 
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException | IOException

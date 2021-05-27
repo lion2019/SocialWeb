@@ -2,6 +2,9 @@ package com.social.domain;
 
 import com.social.exception.IResponseEnum;
 
+/**
+ * 定義 json 回傳格式
+ */
 public class BaseResponse {
     private int code;
     private String message;
