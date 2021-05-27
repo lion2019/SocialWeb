@@ -46,7 +46,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-sm-9 offset-3">
-                        <div class="msg_board1"></div>
+                        <div id="open_board" class="msg_board1"></div>
                     </div>
                 </div><br>
                 <div class="row">
@@ -54,7 +54,7 @@
                         <input type="text" class="form-control" id="openRoom_msg" name="openRoom_msg" maxlength="100">
                     </div>
                     <div class="col-sm-2">
-                        <input type="button" id="openRoom_btn" name="openRoom_btn" value="傳送" onclick="send_msg()">
+                        <input type="button" id="openRoom_btn" name="openRoom_btn" value="傳送" onclick="send_msg(1)">
                     </div>
                 </div>
             </div>
@@ -73,7 +73,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-9 offset-3">
-                        <div class="msg_board2"></div>
+                        <div id="room_board" class="msg_board2"></div>
                     </div>
                 </div><br>
                 <div class="row">

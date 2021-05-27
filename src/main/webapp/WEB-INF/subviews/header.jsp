@@ -14,12 +14,13 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.1.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <!--index.jsp輪播功能需要-->
-<%--    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.js"></script>--%>
+    <!--index.jsp輪播功能需要, 跟ajax.googleapis.com有衝突-->
+    <%--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.js"></script>--%>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <!--引用dataTables.js-->
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/main.js"></script>
+    <script src="${pageContext.request.contextPath}/js/jquery.linkify.js"></script>
 
     <title>首頁</title>
     <script>
@@ -64,6 +65,7 @@
                 </ul>
             </div>
             <div class="row" style="font-size: 20px">
+                <%--跑馬燈--%>
                 <marquee direction="scroll" id="run">
                     ${sessionScope.userInfo != null?sessionScope.userInfo.nickname:''}
                     您好~歡迎進入聊天室

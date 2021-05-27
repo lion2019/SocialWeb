@@ -111,17 +111,23 @@ function initOpenRoom() {
 
         webSocket.onopen = function () {
             alert("加入公共頻道...");
-            document.getElementsByClassName("msg_board1")[0].innerHTML = nickname + "加入聊天室<br>";
+            //將加入聊天室的訊息發到頻到去
+            webSocket.send(nickname + "加入聊天室");
 
         };
-        webSocket.onmessage = function (evt) {
-            let msg_board1 = document.getElementsByClassName("msg_board1")[0];
-            let received_msg1 = nickname + ":" +evt.data;
-            let old_msg1 = msg_board1.innerHTML;
-            msg_board1.innerHTML = old_msg1 + received_msg1 + "<br>";
+        //send出去的訊息會傳到evt裡
+        webSocket.onmessage = function (sendmsg) {
 
+            let open_board = document.getElementsByClassName("msg_board1")[0];
+            let received_open_msg;
+            if(open_board.innerHTML == "") received_open_msg = sendmsg.data;
+            else received_open_msg = sendmsg.data;
+            let old_open_msg = open_board.innerHTML;
+            open_board.innerHTML = old_open_msg + received_open_msg + "<br>";
+            //訊息有URL字串時，變超連結可以點選
+            $('#open_board').linkify();
             // 讓滾動塊往下移動
-            msg_board1.scrollTop = msg_board1.scrollTop + 40;
+            open_board.scrollTop = open_board.scrollTop + 40;
         };
         webSocket.onclose = function () {
             // 關閉 websocket，清空資訊板
@@ -148,23 +154,25 @@ function initRoomNo() {
     if ("WebSocket" in window) {
 //            alert("您的瀏覽器支援 WebSocket!");
         if (webSocket2 == null) {
-            url = "ws://192.168.50.62:900/SocialWeb/webSocket/chat/" + roomNo;
+            url = "ws://127.0.0.1:900/SocialWeb/webSocket/chat/" + roomNo;
             // 開啟一個 web socket
             webSocket2 = new WebSocket(url);
         }
 
         webSocket2.onopen = function () {
             alert("加入房間頻道...");
-            document.getElementsByClassName("msg_board2")[0].innerHTML = nickname + "加入聊天室<br>";
+            webSocket2.send(nickname + "加入聊天室")
         };
-        webSocket2.onmessage = function (evt) {
-            let msg_board2 = document.getElementsByClassName("msg_board2")[0];
-            let received_msg2 = nickname + ":" +evt.data;
-            let old_msg2 = msg_board2.innerHTML;
-            msg_board2.innerHTML = old_msg2 + received_msg2 + "<br>";
-
+        webSocket2.onmessage = function (sendmsg) {
+            let room_board = document.getElementsByClassName("msg_board2")[0];
+            let received_room_msg;
+            if(room_board.innerHTML == "") received_room_msg = sendmsg.data;
+            else received_room_msg = sendmsg.data;
+            let old_room_msg = room_board.innerHTML;
+            room_board.innerHTML = old_room_msg + received_room_msg + "<br>";
+            $('#room_board').linkify();
             // 讓滾動塊往下移動
-            msg_board2.scrollTop = msg_board2.scrollTop + 40;
+            room_board.scrollTop = room_board.scrollTop + 40;
         };
         webSocket2.onclose = function () {
             // 關閉 websocket，清空資訊板
@@ -180,34 +188,34 @@ function initRoomNo() {
 }
 
 //聊天室發送訊息
-function send_msg() {
-    if (webSocket != null) {
+function send_msg(num) {
+    if (num == 1) {
+        if(webSocket == null){
+            alert("您未連線，請重新重理頁面進入聊天室...");
+            return;
+        }
         let openRoom_msg = document.getElementById("openRoom_msg").value.trim();
-        if (openRoom_msg == null || openRoom_msg == "") {
+        if (openRoom_msg == "") {
              alert('請輸入訊息')
               return;
         }else{
-             webSocket.send(openRoom_msg);
+             webSocket.send(nickname + ":" + openRoom_msg);
         }
         document.getElementById("openRoom_msg").value = "";
-    }else if(webSocket2 != null){
+    }else{
+        if(webSocket2 == null){
+            alert("您未連線，請重新輸入房號後按進入房間加入聊天室...");
+            return;
+        }
+
         let roomNo_msg = $('#roomNo_msg').val().trim();
-        if (roomNo_msg == null || roomNo_msg == "") {
+        if (roomNo_msg == "") {
             alert('請輸入訊息')
             return;
         }else{
-            webSocket2.send(roomNo_msg);
+            webSocket2.send(nickname + ":" + roomNo_msg);
         }
         document.getElementById("roomNo_msg").value = "";
-    }else {
-        alert("您未連線，請重新進入聊天室...");
-        if(webSocket2 == null){
-            let roomNo = $('#input_roomNo').val().trim();
-            if(roomNo == null || roomNo == ''){
-                alert('請輸入房號')
-                return;
-            }
-        }
     }
 };
 
