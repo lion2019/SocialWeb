@@ -1,19 +1,22 @@
 package com.social.domain;
 
-import com.social.exception.UserException;
-
 /**
- * 會員
+ * 會員<br/>
+ * 若屬性名稱和資料表欄位名稱不同反射機制出錯
  */
 public class User {
-    /** 屬性名稱和資料表欄位名稱不同反射機制出錯 */
+
+    /** 姓名 */
     private String name;
+    /** 密碼 */
     private String password;
     private String email;
     /**
-     * 基本型別 無法帶入 null 和 資料表結構不符, 盡量別用基本型別
+     * 性別
+     * 注意：基本型別 無法帶入 null 和 資料表結構不符, 盡量別用基本型別
      */
     private Character gender;
+    /** 暱名 */
     private String nickname;
 
     public User() {

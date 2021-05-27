@@ -39,7 +39,7 @@ public class AuthorityFilter implements Filter {
 		HttpServletRequest req = (HttpServletRequest)request;
 		HttpServletResponse resp = (HttpServletResponse)response;
 
-		System.out.println("getContextPath:"+req.getContextPath());
+//		System.out.println("getContextPath:"+req.getContextPath());
 		// 判斷需要驗証權限的功能 (url)
 		if(!isExcludeUrl(req)) {
 
@@ -47,7 +47,6 @@ public class AuthorityFilter implements Filter {
 			if(!isLogin(req)) {
 				// 是否要先記錄當下請求的url在session?? 若在登入成功後即直接導頁過去
 				resp.sendRedirect(req.getContextPath()+"/login.jsp");
-//				req.getRequestDispatcher("/login.jsp").forward(request, response);
 				return;
 			}
 		}

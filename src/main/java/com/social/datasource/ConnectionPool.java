@@ -2,6 +2,9 @@ package com.social.datasource;
 
 import javax.sql.DataSource;
 
+/**
+ * 連線池
+ */
 public class ConnectionPool {
 
 	private static DataSource dataSource;

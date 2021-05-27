@@ -470,16 +470,16 @@ function insertBoard(){
 
 //修改留言版
 function updateBoard(room_number,new_msg,new_room_number){
-
+    let data = {
+        nickname:nickname,
+        message:new_msg,
+        orig_room_number:room_number,
+        room_number:new_room_number,
+    };
     $.ajax({
         url:contextPath + '/board.do',
         type:'PUT',
-        data:{
-            nickname:nickname,
-            message:new_msg,
-            room_number:room_number,
-            new_room_number:new_room_number,
-        },
+        data:JSON.stringify(data),
         dataType:'json',
         success:function (response){
             //0為修改成功
@@ -505,13 +505,13 @@ function updateBoard(room_number,new_msg,new_room_number){
 
 //刪除留言版
 function deleteBoard(room_number){
-
+    let data = {
+        room_number: room_number
+    };
     $.ajax({
         url:contextPath + '/board.do',
         type:'DELETE',
-        data:{
-            nickname_to:room_number,
-        },
+        data:JSON.stringify(data),
         dataType:'json',
         success:function (response){
             //0為刪除成功

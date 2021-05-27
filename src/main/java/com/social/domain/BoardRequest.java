@@ -6,23 +6,12 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 /**
- * 留言板
+ * 留言板 前端傳入的值放入此物件
  */
 public class BoardRequest {
-    //    private Integer id;
     private String nickname;
     private String message;
     private String room_number;
-
-//    private String create_date;
-
-//    public Integer getId() {
-//        return id;
-//    }
-
-//    public void setId(Integer id) {
-//        this.id = id;
-//    }
 
     public String getNickname() {
         return nickname;
@@ -47,13 +36,6 @@ public class BoardRequest {
     public void setRoom_number(String room_number) {
         this.room_number = room_number;
     }
-//    public String getCreate_date() {
-//        return create_date;
-//    }
-
-//    public void setCreate_date(String create_date) {
-//        this.create_date = create_date;
-//    }
 
     /**
      * request bean convert to entity

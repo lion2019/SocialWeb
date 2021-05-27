@@ -2,6 +2,9 @@ package com.social.exception;
 
 import javax.servlet.ServletException;
 
+/**
+ * 定義此系統基礎 Exception 格式
+ */
 public class BaseException extends ServletException {
 
 	private static final long serialVersionUID = 1L;

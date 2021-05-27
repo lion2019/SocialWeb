@@ -2,10 +2,14 @@ package com.social.domain;
 
 import java.time.LocalDateTime;
 
+/**
+ * 儲存線上使用者資訊
+ */
 public class OnlineUser {
+    /** 暱名 */
     private String nickname;
+    /** 登入時間 */
     private LocalDateTime loginDateTime;
-    private String status;
 
     public String getNickname() {
         return nickname;
@@ -21,14 +25,6 @@ public class OnlineUser {
 
     public void setLoginDateTime(LocalDateTime loginDateTime) {
         this.loginDateTime = loginDateTime;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
     }
 
     public String getLoginTimeStr(){

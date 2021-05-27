@@ -4,10 +4,17 @@ import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 回傳好友清單
+ */
 public class FriendResponse {
+    /** 發起者 */
     private String nickname_from;
+    /** 好友 */
     private String nickname_to;
+    /** 創連日期 */
     private String create_date;
+    /** 上線狀態 */
     private String status;
 
     public String getNickname_from() {

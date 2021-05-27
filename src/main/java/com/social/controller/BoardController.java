@@ -28,16 +28,14 @@ public class BoardController extends BaseController {
 
     /**
      * 新增留言
-     * @param request
-     * @param response
-     * @throws ServletException
-     * @throws IOException
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        // 設定 ContentType 格式
         response.setContentType("application/json;");
+        // 設定 response 編碼
         response.setCharacterEncoding(StandardCharsets.UTF_8.name());
 
         BaseResponse baseResponse = null;
@@ -46,8 +44,11 @@ public class BoardController extends BaseController {
             BoardRequest requestBean = reqParam2Bean(request, BoardRequest.class)
                     .orElseThrow(() -> new BaseException(ResponseEnum.parameter_empty));
 
+            // 取得 user 登入資料
             User userInfo = (User) request.getSession().getAttribute("userInfo");
             requestBean.setNickname(userInfo.getNickname());
+
+            // 將接收前端資料的物件轉換成 dao 使用的物件
             Board board = requestBean.convert2Entity();
 
             if(boardService.addBoard(board)){
@@ -56,22 +57,11 @@ public class BoardController extends BaseController {
                 baseResponse = new BaseResponse(ResponseEnum.insert_error);
             }
 
-            //            response.sendRedirect(request.getContextPath()+"/main.jsp");
-//            JSONObject jsonObject = new JSONObject();
-//            jsonObject.put("code",ResponseEnum.OK.getCode());
-//            jsonObject.put("message",ResponseEnum.OK.getCode());
         } catch (SQLException e){
             e.printStackTrace();
-//            String errorMsg = e.getErrorCode() == 23506? "user 不存在!":ResponseEnum.insert_error.getMessage();
-//            request.setAttribute("errorMsg", errorMsg);
             //FIXME  duplicate 未判斷
             ResponseEnum responseEnum = e.getErrorCode() == 23506 ? ResponseEnum.user_not_found : ResponseEnum.insert_error;
             baseResponse = new BaseResponse(responseEnum);
-
-//            request.getRequestDispatcher("/board.jsp").forward(request, response);
-//			System.err.println("err code:"+e.getCode());
-//			System.err.println("err msg:"+e.getMessage());
-//			throw e;
         } catch (InstantiationException | IllegalAccessException | IOException
                 | IntrospectionException | InvocationTargetException e) {
             e.printStackTrace();
@@ -84,10 +74,6 @@ public class BoardController extends BaseController {
 
     /**
      * 留言板清單
-     * @param request
-     * @param response
-     * @throws ServletException
-     * @throws IOException
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -98,6 +84,88 @@ public class BoardController extends BaseController {
             response.getWriter().print(jsonObject.toString());
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    /**
+     * 修改留言板
+     */
+    @Override
+    protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // 設定 ContentType 格式
+        response.setContentType("application/json;");
+        // 設定 response 編碼
+        response.setCharacterEncoding(StandardCharsets.UTF_8.name());
+
+        BaseResponse baseResponse = null;
+
+        try {
+            // 取得 user 登入資料
+            User userInfo = (User) request.getSession().getAttribute("userInfo");
+
+            // 取得前端輸入的json資料
+            JSONObject jsonObject = requestParse2Json(request);
+
+            Board board = new Board();
+            board.setNickname(userInfo.getNickname());
+            board.setRoom_number(jsonObject.getInt("room_number"));
+            board.setMessage(jsonObject.getString("message"));
+
+
+            int orig_room_number = jsonObject.getInt("orig_room_number");
+
+            System.out.println("room_number:"+orig_room_number);
+            if(boardService.update(board, orig_room_number)){
+                baseResponse = new BaseResponse(ResponseEnum.OK);
+            }else{
+                baseResponse = new BaseResponse(ResponseEnum.delete_error);
+            }
+
+        } catch (SQLException e){
+            e.printStackTrace();
+            baseResponse = new BaseResponse(ResponseEnum.delete_error);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new ServletException(e);
+        }finally{
+            JSONObject output = JSONObject.fromObject(baseResponse);
+            response.getWriter().println(output);
+        }
+    }
+
+    /**
+     * 刪除 board
+     */
+    @Override
+    protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // 設定 ContentType 格式
+        response.setContentType("application/json;");
+        // 設定 response 編碼
+        response.setCharacterEncoding(StandardCharsets.UTF_8.name());
+
+        BaseResponse baseResponse = null;
+
+        try {
+            JSONObject jsonObject = requestParse2Json(request);
+
+            int room_number = jsonObject.getInt("room_number");
+
+            System.out.println("room_number:"+room_number);
+            if(boardService.delete(room_number)){
+                baseResponse = new BaseResponse(ResponseEnum.OK);
+            }else{
+                baseResponse = new BaseResponse(ResponseEnum.delete_error);
+            }
+
+        } catch (SQLException e){
+            e.printStackTrace();
+            baseResponse = new BaseResponse(ResponseEnum.delete_error);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new ServletException(e);
+        }finally{
+            JSONObject output = JSONObject.fromObject(baseResponse);
+            response.getWriter().println(output);
         }
     }
 }
