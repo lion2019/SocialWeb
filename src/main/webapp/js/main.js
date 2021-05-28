@@ -125,7 +125,7 @@ function initOpenRoom() {
             let old_open_msg = open_board.innerHTML;
             open_board.innerHTML = old_open_msg + received_open_msg + "<br>";
             //訊息有URL字串時，變超連結可以點選
-            $('#open_board').linkify();
+            // $('#open_board').linkify();
             // 讓滾動塊往下移動
             open_board.scrollTop = open_board.scrollTop + 40;
         };
@@ -170,7 +170,7 @@ function initRoomNo() {
             else received_room_msg = sendmsg.data;
             let old_room_msg = room_board.innerHTML;
             room_board.innerHTML = old_room_msg + received_room_msg + "<br>";
-            $('#room_board').linkify();
+            // $('#room_board').linkify();
             // 讓滾動塊往下移動
             room_board.scrollTop = room_board.scrollTop + 40;
         };
