@@ -51,7 +51,7 @@ create table FRIEND
     NICKNAME_TO   VARCHAR(20) not null,
     CREATE_DATE   TIMESTAMP default CURRENT_TIMESTAMP,
     constraint FRIEND_PK
-        unique (NICKNAME_FROM, NICKNAME_TO),
+        primary key (NICKNAME_FROM, NICKNAME_TO),
     constraint FRIEND_USER_NICKNAME_FK
         foreign key (NICKNAME_FROM) references USER (NICKNAME),
     constraint FRIEND_USER_NICKNAME_FK_2
