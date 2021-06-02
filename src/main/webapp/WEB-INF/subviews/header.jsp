@@ -20,7 +20,7 @@
     <!--引用dataTables.js-->
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/main.js"></script>
-    <script src="${pageContext.request.contextPath}/js/jquery.linkify.js"></script>
+<%--    <script src="${pageContext.request.contextPath}/js/jquery.linkify.js"></script>--%>
 
     <title>首頁</title>
     <script>
