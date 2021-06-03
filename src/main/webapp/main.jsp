@@ -92,7 +92,7 @@
                 <tr>
                     <td width="40%">&nbsp;</td>
                     <td>&nbsp;</td>
-                    <td width="50%" align="right">
+                    <td width="55%" align="right">
                         <input id="nickname_to" name="nickname_to" size="30%" maxlength="20" placeholder="請輸入好友暱名">
                         <input type="button" onclick="insertFriend()" value="新增好友"/><br><br>
                     </td>
