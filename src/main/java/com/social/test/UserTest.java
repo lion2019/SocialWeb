@@ -1,6 +1,6 @@
 package com.social.test;
 
-import com.social.domain.User;
+import com.social.model.domain.User;
 import org.junit.jupiter.api.Test;
 
 public class UserTest {

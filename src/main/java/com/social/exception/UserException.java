@@ -1,5 +1,10 @@
 package com.social.exception;
 
+/**
+ * 會員有關的錯誤類
+ * 會員註冊前端接收參數後驗証失敗時使用
+ * 新增會員失敗時使用
+ */
 public class UserException extends BaseException {
     public UserException() {
     }

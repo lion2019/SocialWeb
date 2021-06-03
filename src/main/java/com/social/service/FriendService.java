@@ -1,7 +1,7 @@
 package com.social.service;
 
-import com.social.dao.FriendDao;
-import com.social.domain.Friend;
+import com.social.model.FriendDao;
+import com.social.model.domain.Friend;
 
 import java.sql.SQLException;
 import java.util.List;

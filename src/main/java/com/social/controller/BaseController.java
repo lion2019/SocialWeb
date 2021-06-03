@@ -83,14 +83,15 @@ public abstract class BaseController extends HttpServlet {
         BufferedReader br =
                 new BufferedReader(new InputStreamReader(request.getInputStream(), StandardCharsets.UTF_8));
 
-        String jsonStr = "";
-        if(br != null){
-            jsonStr = br.readLine();
-            System.out.println("json data["+jsonStr+"]");
+        StringBuilder jsonStr = new StringBuilder();
+        String temp;
+        while((temp = br.readLine()) != null){
+            jsonStr.append(temp);
         }
+        System.out.println("json data["+jsonStr+"]");
 
         // json parse string
-        return JSONObject.fromObject(jsonStr);
+        return JSONObject.fromObject(jsonStr.toString());
     }
 
 }

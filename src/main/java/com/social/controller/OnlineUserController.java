@@ -1,10 +1,8 @@
 package com.social.controller;
 
-import com.social.domain.Board;
-import com.social.domain.OnlineUser;
+import com.social.model.domain.OnlineUser;
 import net.sf.json.JSONArray;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

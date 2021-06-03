@@ -1,7 +1,7 @@
 package com.social.controller;
 
-import com.social.domain.RegisterRequest;
-import com.social.domain.User;
+import com.social.model.domain.RegisterRequest;
+import com.social.model.domain.User;
 import com.social.exception.BaseException;
 import com.social.exception.ResponseEnum;
 import com.social.service.LoginService;

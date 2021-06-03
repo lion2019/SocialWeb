@@ -1,7 +1,7 @@
 package com.social.service;
 
-import com.social.dao.UserDao;
-import com.social.domain.User;
+import com.social.model.UserDao;
+import com.social.model.domain.User;
 import com.social.exception.BaseException;
 import com.social.exception.ResponseEnum;
 

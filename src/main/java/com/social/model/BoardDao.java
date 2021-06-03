@@ -1,6 +1,6 @@
-package com.social.dao;
+package com.social.model;
 
-import com.social.domain.Board;
+import com.social.model.domain.Board;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

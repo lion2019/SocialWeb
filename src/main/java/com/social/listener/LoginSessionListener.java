@@ -1,7 +1,7 @@
 package com.social.listener;
 
-import com.social.domain.OnlineUser;
-import com.social.domain.User;
+import com.social.model.domain.OnlineUser;
+import com.social.model.domain.User;
 
 import javax.servlet.annotation.WebListener;
 import javax.servlet.http.HttpSessionEvent;

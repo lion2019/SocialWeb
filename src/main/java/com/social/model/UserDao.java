@@ -1,11 +1,11 @@
-package com.social.dao;
+package com.social.model;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Optional;
 
-import com.social.domain.User;
+import com.social.model.domain.User;
 
 public class UserDao extends BaseDao<User> {
 

@@ -1,9 +1,9 @@
 package com.social.controller;
 
-import com.social.domain.BaseResponse;
-import com.social.domain.Board;
-import com.social.domain.BoardRequest;
-import com.social.domain.User;
+import com.social.model.domain.BaseResponse;
+import com.social.model.domain.Board;
+import com.social.model.domain.BoardRequest;
+import com.social.model.domain.User;
 import com.social.exception.BaseException;
 import com.social.exception.ResponseEnum;
 import com.social.service.BoardService;
@@ -21,6 +21,9 @@ import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
 import java.util.List;
 
+/**
+ * 留言板
+ */
 @WebServlet(urlPatterns = {"/board.do"})
 public class BoardController extends BaseController {
 
@@ -76,7 +79,7 @@ public class BoardController extends BaseController {
      * 留言板清單
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException {
         try {
             List<Board> list = boardService.findAll();
             JSONArray jsonObject = JSONArray.fromObject(list);
@@ -84,6 +87,7 @@ public class BoardController extends BaseController {
             response.getWriter().print(jsonObject.toString());
         } catch (Exception e) {
             e.printStackTrace();
+            throw new ServletException(e);
         }
     }
 
