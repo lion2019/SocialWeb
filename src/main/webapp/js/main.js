@@ -1,7 +1,7 @@
 $(document).ready(function() {
     console.log("contextPath:"+contextPath)
 
-    setInterval("changeColor()",200)//跑馬燈
+    setInterval("changeColor()",200)//跑馬燈顏色變換
     Carousel()//輪播
     //聊天室訊息送出按鍵可用Enter鍵
     inputEnter("#openRoom_msg","#openRoom_btn")
@@ -11,11 +11,9 @@ $(document).ready(function() {
     initOnlineUser()//初始線上成員
     initFriend()//初始好友
 
-
-
 } );
 
-//跑馬燈
+//跑馬燈顏色變換
 function changeColor(){
     var color="#f00|#0f0|#00f|#880|#808|#088|yellow|green|blue|gray";
     color=color.split("|");
