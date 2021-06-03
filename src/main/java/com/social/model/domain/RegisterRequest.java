@@ -1,4 +1,4 @@
-package com.social.domain;
+package com.social.model.domain;
 
 import com.social.exception.ResponseEnum;
 import com.social.exception.UserException;

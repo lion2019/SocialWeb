@@ -1,6 +1,5 @@
-package com.social.domain;
+package com.social.model.domain;
 
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
 

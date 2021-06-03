@@ -19,8 +19,7 @@ create unique index USER_NICKNAME_UINDEX
 
 alter table USER
     add nickname varchar(20);
-create unique index USER_NICKNAME_UINDEX
-	on USER (nickname);
+
 
 -- auto-generated definition
 

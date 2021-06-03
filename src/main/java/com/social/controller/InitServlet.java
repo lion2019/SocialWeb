@@ -1,7 +1,7 @@
 package com.social.controller;
 
 import com.social.datasource.ConnectionPool;
-import com.social.domain.OnlineUser;
+import com.social.model.domain.OnlineUser;
 import com.zaxxer.hikari.HikariDataSource;
 
 import javax.servlet.ServletException;

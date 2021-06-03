@@ -1,5 +1,10 @@
 package com.social.exception;
 
+/**
+ * 驗証的錯誤類
+ * 接收請求參數後，驗証失敗時使用
+ * 在 XXXRequest 裡實作驗証邏輯
+ */
 public class ValidException extends BaseException {
     public ValidException() {
     }

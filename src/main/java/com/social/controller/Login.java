@@ -11,8 +11,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.social.domain.OnlineUser;
-import com.social.domain.User;
+import com.social.model.domain.OnlineUser;
+import com.social.model.domain.User;
 import com.social.exception.BaseException;
 import com.social.exception.ResponseEnum;
 import com.social.service.LoginService;

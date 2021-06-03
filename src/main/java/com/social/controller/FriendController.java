@@ -1,8 +1,8 @@
 package com.social.controller;
 
-import com.social.domain.*;
 import com.social.exception.BaseException;
 import com.social.exception.ResponseEnum;
+import com.social.model.domain.*;
 import com.social.service.FriendService;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;

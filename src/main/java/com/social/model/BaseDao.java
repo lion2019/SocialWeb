@@ -1,7 +1,7 @@
-package com.social.dao;
+package com.social.model;
 
 import com.social.datasource.ConnectionPool;
-import com.social.domain.AutoIncrement;
+import com.social.annotation.AutoIncrement;
 
 import javax.sql.DataSource;
 import java.beans.IntrospectionException;

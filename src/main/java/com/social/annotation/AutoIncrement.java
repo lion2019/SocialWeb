@@ -1,4 +1,4 @@
-package com.social.domain;
+package com.social.annotation;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
