@@ -22,6 +22,7 @@ public class WsServer {
     private static final Map<String, Set<Session>> rooms = new ConcurrentHashMap();
     private static final String openRoom="-1";//公頻號碼
 
+    //開啟連線時候執行監聽方法
     @OnOpen
     public void connect(@PathParam("roomName") String roomName, Session session) throws Exception {
 
@@ -40,18 +41,17 @@ public class WsServer {
         System.out.println("a client has connected!");
     }
 
+    //關閉連線時執行監聽方法
     @OnClose
     public void disConnect(@PathParam("roomName") String roomName, Session session) {
         rooms.get(roomName).remove(session);
         System.out.println("a client has disconnected!");
     }
 
+    //接收到訊息執行監聽方法
     @OnMessage
     public void receiveMsg(@PathParam("roomName") String roomName,
                            String msg, Session session) throws Exception {
-        // 此處應該有html過濾
-        //msg = session.getId() + ":" + msg;
-        System.out.println(msg);
         // 接收到資訊後進行廣播
         broadcast(roomName, msg);
     }

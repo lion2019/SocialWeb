@@ -1,22 +1,19 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<jsp:useBean id="date" class="java.util.Date" />
 <jsp:include page="/WEB-INF/subviews/header.jsp" >
     <jsp:param name="subtitle" value="主頁"/>
 </jsp:include>
-<fmt:formatDate type="both" value="${date}" var="nowDate"/>
 
 <div class="row" style="height:25px">
 </div>
 <div class="container" style="width:100%">
     <ul class="nav nav-tabs">
-        <li class="active"><a data-toggle="tab" href="#home">留言版</a></li>
+        <li class="active"><a data-toggle="tab" href="#home">留言板</a></li>
         <li><a data-toggle="tab" href="#menu1" onclick="initOpenRoom()">聊天室-大廳</a></li>
         <li><a data-toggle="tab" href="#menu2">聊天室-房間</a></li>
         <li><a data-toggle="tab" href="#menu3">好友</a></li>
     </ul>
     <div class="tab-content">
+        <%--留言板--%>
         <div id="home" class="tab-pane fade in active">
             <div class="container-fluid">
                 <form class="form1">
@@ -35,13 +32,14 @@
                 </form>
             </div>
             <div class="container-fluid">
+                <%--留言板表格--%>
                 <table id="board" class="display" width="100%">
-
+                    <%--jQuery datatable API 導入--%>
                 </table>
             </div>
         </div>
         <br>
-
+        <%--聊天室-大廳--%>
         <div id="menu1" class="tab-pane fade">
             <div class="container-fluid">
                 <div class="row">
@@ -59,7 +57,7 @@
                 </div>
             </div>
         </div>
-
+        <%--聊天室-房間--%>
         <div id="menu2" class="tab-pane fade">
             <div class="container-fluid">
                 <div class="row">
@@ -86,7 +84,7 @@
                 </div>
             </div>
         </div>
-
+        <%--好友--%>
         <div id="menu3" class="tab-pane fade">
             <table align="center" width="90%">
                 <tr>
@@ -99,21 +97,24 @@
                 </tr>
                 <tr>
                     <td>
+                        <%--線上成員表格--%>
                         <table id="onlineUser" class="display">
-
+                            <%--jQuery datatable API 導入--%>
                         </table>
                     </td>
                         <td>&nbsp;</td>
                         <td>
+                            <%--好友清單表格--%>
                             <table id="friend" class="display">
-
+                                <%--jQuery datatable API 導入--%>
                             </table>
                         </td>
-                    </tr>
-                </table>
-            </div>
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>
 </div>
+<%--套用Dialog--%>
 <jsp:include page="DialogDIV.jsp" />
 <jsp:include page="/WEB-INF/subviews/footer.jsp" />

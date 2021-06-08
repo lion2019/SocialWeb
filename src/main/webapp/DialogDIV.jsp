@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%--修改留言版對話框--%>
-<div id="dialog" title="修改留言版訊息" hidden>
+<%--修改留言板對話框內容--%>
+<div id="dialog" title="修改留言板訊息" hidden>
     <div class="container-fluid">
         <form class="form_updata">
             <div class="form-group">

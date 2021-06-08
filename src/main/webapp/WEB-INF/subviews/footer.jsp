@@ -7,6 +7,5 @@
     </a><br><br>
     <p>Copyright &COPY; TH Chatroom</p>
 </footer>
-
 </body>
 </html>

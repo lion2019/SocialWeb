@@ -16,7 +16,7 @@ import java.util.List;
 public class OnlineUserController extends BaseController {
 
     /**
-     * 線上使用老清單
+     * 線上使用者清單
      */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {

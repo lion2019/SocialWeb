@@ -23,22 +23,20 @@ public class Login extends BaseController {
 
     private LoginService loginService = new LoginService();
 
-    /**
-     * 登入
-     */
+    //登入
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             User user = reqParam2Bean(request, User.class)
                     .orElseThrow(() -> new BaseException(ResponseEnum.parameter_empty));
-
+            //由LoginService驗證密碼後將userInfo 存入 session
             User loginUser = loginService.login(user, request);
-
+            //InitServlet 存入 sessionlist
             List<OnlineUser> sessionList = (List<OnlineUser>) getServletContext()
                     .getAttribute("onlineUser");
-
+            //判斷o.getNickname()裡都沒有loginUser.getNickname()的暱名就返回true
             boolean noneMatch = sessionList.stream()
                     .noneMatch(o -> o.getNickname().equals(loginUser.getNickname()));
-
+            //不存在就建立線上使用者
             if(noneMatch){
                 OnlineUser onlineUser = new OnlineUser();
                 onlineUser.setNickname(loginUser.getNickname());

@@ -7,7 +7,7 @@ $(document).ready(function() {
     inputEnter("#openRoom_msg","#openRoom_btn")
     inputEnter("#roomNo_msg","#roomNo_btn")
     titleAdjust()//表頭thead擠在一起時，自動調整
-    initBoard()//初始留言版
+    initBoard()//初始留言板
     initOnlineUser()//初始線上成員
     initFriend()//初始好友
 
@@ -90,30 +90,31 @@ function inputEnter(inputId,btnId){
 }
 
 
-//contextPath、nickname宣告在header.jsp
+
 //大廳連線
+//contextPath、nickname宣告在header.jsp
 let webSocket;
 let webSocket2;
 let url;
 function initOpenRoom() {
 
-    //不讓前端知道公頻號碼
+    //不讓前端知道公頻預設房間號碼
     let openroom = "null";
     if ("WebSocket" in window) {
 //            alert("您的瀏覽器支援 WebSocket!");
         if (webSocket == null) {
-            url = "ws://192.168.50.62:900/SocialWeb/webSocket/chat/" + openroom;
+            url = "ws://127.0.0.1:900/SocialWeb/webSocket/chat/" + openroom;
             // 開啟一個 web socket
             webSocket = new WebSocket(url);
         }
-
+        //當連線成功時會呼叫這個方法，對應後端的@OnOpen。
         webSocket.onopen = function () {
             alert("加入公共頻道...");
             //將加入聊天室的訊息發到頻到去
             webSocket.send(nickname + "加入聊天室");
 
         };
-        //send出去的訊息會傳到evt裡
+        //送出訊息會對應後端的@OnMessage，轉發的訊息會傳到sendmsg裡
         webSocket.onmessage = function (sendmsg) {
 
             let open_board = document.getElementsByClassName("msg_board1")[0];
@@ -126,12 +127,6 @@ function initOpenRoom() {
             // $('#open_board').linkify();
             // 讓滾動塊往下移動
             open_board.scrollTop = open_board.scrollTop + 40;
-        };
-        webSocket.onclose = function () {
-            // 關閉 websocket，清空資訊板
-            alert("連線已關閉...");
-            webSocket = null;
-            document.getElementsByClassName("msg_board1")[0].innerHTML = "";
         };
     }
     else {
@@ -226,7 +221,7 @@ function closeWs() {
 //表頭thead擠在一起時，自動調整
 function titleAdjust(){
     $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-        //当切换tab时，强制重新计算列宽
+        //當切换tab時，强制重新計算列寬
         $.fn.dataTable.tables( {visible: true, api: true} ).columns.adjust();
     } );
 }
@@ -238,7 +233,7 @@ function reloadData(tableName) {
     }, 10*1000 );
 }
 
-//留言版第1欄流水號
+//留言板第1欄流水號
 function serialNumber(tableName){
     tableName.on('order.dt search.dt',function (){
         tableName.column(0,{search: 'applied',
@@ -249,7 +244,7 @@ function serialNumber(tableName){
     }).draw();
 }
 
-//修改留言版對話框
+//修改留言板對話框
 function updateBoardDialog(message,room_number){
     $('#upRoom_number').val(room_number);
     $('#upMessage').val(message);
@@ -277,9 +272,9 @@ function updateBoardDialog(message,room_number){
     });
     $("#dialog").dialog("open");
 }
-//刪除留言版確認按鈕
+//刪除留言板確認按鈕
 function confirmBtn(room_number){
-    let r=confirm("是否確定要刪除此筆留言版！");
+    let r=confirm("是否確定要刪除此筆留言板！");
     if (r==true){
         deleteBoard(room_number)
     }
@@ -288,10 +283,10 @@ function confirmBtn(room_number){
     }
 }
 
-//初始化留言版
+//初始化留言板
 function initBoard(){
-
-    let board = $('#board').DataTable( {// 和<table>的id對應，指定初始化datatables。
+    //引用jQuery DataTable API，和<table>的id對應，指定初始化datatables。
+    let board = $('#board').DataTable( {
         ajax: {
             url: contextPath + '/board.do',
             type: "GET",
@@ -413,7 +408,7 @@ function initBoard(){
     // reloadData(board);
 }
 
-//新增留言版
+//新增留言板
 function insertBoard(){
 
     let room_number = $("#room_number").val().trim();
@@ -475,7 +470,7 @@ function insertBoard(){
     });
 }
 
-//修改留言版
+//修改留言板
 function updateBoard(room_number,new_msg,new_room_number){
     let data = {
         nickname:nickname,
@@ -510,7 +505,7 @@ function updateBoard(room_number,new_msg,new_room_number){
     });
 }
 
-//刪除留言版
+//刪除留言板
 function deleteBoard(room_number){
     let data = {
         room_number: room_number

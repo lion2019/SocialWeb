@@ -26,7 +26,7 @@ public class BoardDao extends BaseDao<Board> {
     }
 
     /**
-     * 刪除留言版, 條件：room_number
+     * 刪除留言板, 條件：room_number
      */
     public int deleteByRoomNumber(Integer room_number) throws SQLException {
         String sql = "delete board where room_number = ?";
