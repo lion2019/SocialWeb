@@ -30,33 +30,14 @@ public class Login extends BaseController {
                     .orElseThrow(() -> new BaseException(ResponseEnum.parameter_empty));
             //由LoginService驗證密碼後將userInfo 存入 session
             User loginUser = loginService.login(user, request);
-            //InitServlet 存入 sessionlist
-            List<OnlineUser> sessionList = (List<OnlineUser>) getServletContext()
-                    .getAttribute("onlineUser");
-            //判斷o.getNickname()裡都沒有loginUser.getNickname()的暱名就返回true
-            boolean noneMatch = sessionList.stream()
-                    .noneMatch(o -> o.getNickname().equals(loginUser.getNickname()));
-            //不存在就建立線上使用者
-            if(noneMatch){
-                OnlineUser onlineUser = new OnlineUser();
-                onlineUser.setNickname(loginUser.getNickname());
-                onlineUser.setLoginDateTime(LocalDateTime.now());
-
-                sessionList.add(onlineUser);
-            }
-            System.out.println(sessionList);
-
-//			JSONObject output = JSONObject.fromObject(userInfo);
 
             response.sendRedirect(request.getContextPath() + "/main.jsp");
-
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException | IOException
                 | ServletException | IntrospectionException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
             request.setAttribute("errorMsg", e.getMessage());
             request.getRequestDispatcher("/login.jsp").forward(request, response);
-            return;
         }
     }
 
